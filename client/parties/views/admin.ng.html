@@ -1,0 +1,91 @@
+
+<a href="/logout"> Log ut </a>
+
+  <br>
+  <br>
+<div class="form">
+  <div ng-controller="AddPhotoCtrl">
+
+
+
+    <!-- Image drop rectangle -->
+    <div ng-hide="imgSrc" ngf-drop ngf-select
+         ngf-change="addImages($files)"
+         ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box tall-rectangle"
+         ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'"
+         ngf-drop-available="dropAvailable">
+      <div class="drop-image" ng-show="dropAvailable">Klikk eller dra bilde på meg</div>
+    </div>
+
+    <div ng-show="imgSrc" class="ng-crop-container">
+        <button ng-click="saveCroppedImage()" ng-disabled="!imgSrc"> Save Image</button>
+        <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.588" result-image="myCroppedImage" result-image-size='{w: 400,h: 680}'> </img-crop>
+    </div>
+
+    <!-- Image drop tall rectangle -->
+<!--     <div ng-hide="imgSrc" ngf-drop ngf-select
+         ngf-change="addImages($files)"
+         ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box tall-rectangle"
+         ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'"
+         ngf-drop-available="dropAvailable">
+      <div class="drop-image" ng-show="dropAvailable">Klikk eller dra bilde på meg</div>
+    </div>
+
+    <div ng-show="imgSrc" class="ng-crop-container">
+        <button ng-click="saveCroppedImage()" ng-disabled="!imgSrc"> Save Image</button>
+        <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="1.7" result-image="myCroppedImage" result-image-size='{w: 400,h: 680}'> </img-crop>
+    </div> -->
+
+
+
+
+    <div sv-root sv-part="newPartyImage">
+      <div sv-element ng-repeat="image in newPartyImages">
+        <div class="main-image" ng-show="$index === 0">Main Image</div>
+        <img draggable="false" ng-src="{{image.url()}}" />
+        <br>
+        <a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Klikk her for å legge inn fotokred' }}</a>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <label for="nameInput">Name</label>
+  <input ng-model="newParty.name" id="nameInput" type="text">
+  <label for="description">Description</label>
+  <input ng-model="newParty.description" id="description" type="text">
+  <label for="public">Public</label>
+  <input type="checkbox" ng-model="newParty.public" id="public">
+  <button ng-click="addNewParty()">Add </button>
+</div> <!-- form -->
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <hr>
+  <br>
+
+  <h1>Forsiden</h1>
+  <div>
+    <input type="search" ng-model="search" placeholder="Search">
+    <select ng-model="orderProperty">
+      <option value="1">Ascending</option>
+      <option value="-1">Descending</option>
+    </select>
+  </div>
+
+  <br>
+  
+  <div dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count">
+    <div class="post">
+      <div ng-if="party.images && party.images.length > 0" ng-style="getMainImage(party.images)" class="party-image">
+      </div>
+      <a href="/admin/{{party._id}}">{{party.name}}</a>
+      <p>{{party.description}}</p>
+      <button ng-click="remove(party)">X</button>
+    </div>
+  </div>
+
+<dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>

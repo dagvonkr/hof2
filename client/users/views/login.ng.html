@@ -1,0 +1,24 @@
+<h3> Sign in </h3>
+
+<form name="loginForm">
+	<label> Email </label>
+	<input type="text" ng-model="lc.credentials.email" aria-label="email" required/>
+
+	<label> Password </label>
+	<input type="text" ng-model="lc.credentials.password" aria-label="password" required/>
+
+	<a href="/resetPassword">Forgot password?</a>
+
+	<br>
+	<br>
+
+	<div>
+	  <button ng-click="lc.login()" aria-label="login"
+	          ng-disabled="lc.loginForm.$invalid()">Sign In
+	  </button>
+    </div>
+</form>
+
+<div ng-show="lc.error">
+	<p> {{lc.error}} </p>
+</div>    
