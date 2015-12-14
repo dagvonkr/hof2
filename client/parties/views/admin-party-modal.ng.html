@@ -1,5 +1,10 @@
-<div class="post">
+<div class="settings-modal">
+	
+	{{party.description}}
+	{{party.style.header.color}}
 
+	<br>
+	
 	<label>Is public</label>
 	<input type="checkbox" ng-model="party.public">
 	<div class="cms">
@@ -31,23 +36,5 @@
 		<option value="right"> Right </option>
 		</select>
   	</div>
-	
 
 </div>
-
-	<div class="article-editor">
-	
-		<h3> <textarea class="post-header" 
-		ng-style="{
-		'font-size' : party.style.header.fontSize,
-		'color' : party.style.header.color,
-		'text-align' : party.style.header.textAlign
-	}" ng-model="party.name" id="nameInput" type="text"> </textarea> </h3>
-
-
-		<textarea ng-model="party.description" class="article-text">  </textarea>
-
-
-	</div>
-
-

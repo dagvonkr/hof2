@@ -1,11 +1,20 @@
-angular.module("hof2").controller("adminPartyCtrl", function ($scope, $meteor, $rootScope, $state, $filter) {
+angular.module("hof2").controller("adminPartyCtrl", function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal) {
+
+  // Dette er for å prø veå få til modal med data inni seg. 
+  var partyId = $meteor.object(Parties, $stateParams.partyId);
+
+  console.log('partyId', partyId);
+
+  $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
+  $scope.$meteorSubscribe('parties');
+
 
   // add/remove new post (or party...) and add image
 
   $scope.newParty = {};  
   $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
+
   $scope.newPartyImages = [];
-  console.log('newPartyImages', $scope.newPartyImages)
 
   $scope.addNewParty = function () {
     if($scope.newParty.name) {
@@ -48,6 +57,37 @@ angular.module("hof2").controller("adminPartyCtrl", function ($scope, $meteor, $
   $scope.users = $meteor.collection(Meteor.users, false).subscribe('users'); // hææ? skal denne være med?!?!?!?!?
 
 
+  // Settings modal 
+
+  $scope.openSettingsModal = function() {
+    var modalInstance = $modal.open({
+      templateUrl: 'client/parties/views/admin-party-modal.ng.html',
+      controller: 'adminPartyDetailsCtrl',
+      resolve: {
+        'currentUser': function($meteor) {
+          return $meteor.requireUser();
+        }
+      }
+    })
+
+    console.log('modalInstnce', modalInstance)
+
+     modalInstance.result.then(function () {
+      }, function () {
+      });
+  }
+
+
+
+
+  // getting the main image
+  $scope.getMainImage = function(images) {
+     if (images && images.length && images[0] && images[0].id) {
+      var urlMainImage = $filter('filter')($scope.images, {_id: images[0].id})[0].url();
+      // console.log('url main img', url);
+      return  urlMainImage 
+    }
+  };
 
 
 
@@ -65,15 +105,6 @@ angular.module("hof2").controller("adminPartyCtrl", function ($scope, $meteor, $
     });
   });
 
-  $scope.getMainImage = function(images) {
-    if (images && images.length && images[0] && images[0].id) {
-      var url = $filter('filter')($scope.images, {_id: images[0].id})[0].url();
- 
-      return {
-        'background-image': 'url("' + url + '")'
-      }
-    }
-  };
 
   $meteor.autorun($scope, function() {
     $meteor.subscribe('parties', {

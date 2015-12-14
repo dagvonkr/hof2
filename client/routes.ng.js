@@ -46,6 +46,7 @@ angular.module("hof2").config(function ($urlRouterProvider, $stateProvider, $loc
       }
     })
 
+
     // all the auth views:
 
     .state('login', {
