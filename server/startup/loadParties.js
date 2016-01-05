@@ -1,7 +1,8 @@
 Meteor.startup(function () {
   if (Parties.find().count() === 0) {
     var parties = [
-      {'name': 'Dubstep-Free Zone',
+      { 
+        'name': 'Dubstep-Free Zone',
         'description': 'Fast just got faster with Nexus S.',
         'style' : {
           'header' : {
@@ -13,6 +14,9 @@ Meteor.startup(function () {
       }
     ];
     for (var i = 0; i < parties.length; i++)
-      Parties.insert({name: parties[i].name, description: parties[i].description});
+      Parties.insert({
+        name: parties[i].name, 
+        description: parties[i].description
+      });
   }
 });

@@ -11,7 +11,9 @@ angular.module("hof2").controller("adminPartyCtrl", function ($scope, $meteor, $
 
   // add/remove new post (or party...) and add image
 
-  $scope.newParty = {};  
+  $scope.newParty = {
+    'createdAt' : new Date()
+  };  
   $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
 
   $scope.newPartyImages = [];
@@ -29,6 +31,8 @@ angular.module("hof2").controller("adminPartyCtrl", function ($scope, $meteor, $
           $scope.newParty.images.push({id: image._id});
         });
       }
+
+
   
     // Saving the party to parties 
     $scope.parties.push($scope.newParty);
