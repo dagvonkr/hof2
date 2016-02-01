@@ -6,6 +6,9 @@
 <div class="form">
   <div ng-controller="AddPhotoCtrl">
 
+    <input class="post-header-pre" ng-model="newParty.name" id="nameInput" type="text">
+    <br>
+
   <div class="image-upload">
 
     <!-- Image drop tall rectangle -->
@@ -20,7 +23,7 @@
 
     <div ng-show="imgSrc" class="ng-crop-container-tall-rectangle">
         <button ng-click="saveTallRectangleImage()" ng-disabled="!imgSrc"> Save Image</button>
-        <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.735" result-image="myCroppedImageTallRectangle" result-image-size='{w: 500,h: 680}'> </img-crop>
+        <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.735" result-image="myCroppedImageTallRectangle" result-image-size='{w: 375,h: 450}'> </img-crop>
     </div>
 
 
@@ -37,7 +40,7 @@
 
     <div ng-show="imgSrc2" class="ng-crop-container-rectangle">
         <button ng-click="saveRectangleImage()" ng-disabled="!imgSrc2"> Save Image</button>
-        <img-crop image="imgSrc2" area-type="rectangle" aspect-ratio="2.5" result-image="myCroppedImage" result-image-size='{w: 1000,h: 400}'> </img-crop>
+        <img-crop image="imgSrc2" area-type="rectangle" aspect-ratio="2.5" result-image="myCroppedImage" result-image-size='{w: 750,h: 300}'> </img-crop>
     </div>
 
 
@@ -54,19 +57,15 @@
 
     <div ng-show="imgSrc3" class="ng-crop-container-square">
         <button ng-click="saveSquareImage()" ng-disabled="!imgSrc3"> Save Image</button>
-        <img-crop image="imgSrc3" area-type="square" aspect-ratio="1" result-image="myCroppedImage" result-image-size='{w: 500,h: 500}'> </img-crop>
+        <img-crop image="imgSrc3" area-type="square" aspect-ratio="1" result-image="myCroppedImage" result-image-size='{w: 375,h: 375}'> </img-crop>
     </div>
 
-
-
-    <br>
-      <input class="post-header" placeholder="Overskrift" ng-model="newParty.name" id="nameInput" type="text">
-    <br>
-    <br>
-    <br>
     <br>
 
-    <div sv-root sv-part="newPartyImage">
+    </div> <!-- class="image-upload" -->
+    
+
+    <div class="main-image-preview" sv-root sv-part="newPartyImage">
       <div sv-element ng-repeat="image in newPartyImages">
         <div class="main-image" ng-show="$index === 0"></div>
         <img draggable="false" ng-src="{{image.url()}}" />
@@ -75,24 +74,20 @@
 
         <a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Klikk her for å legge inn fotokred' }}</a>
 
-
       </div>
     </div>
-  </div>
 
-
-  
-
-  </div> <!-- image upload -->
+  </div> <!-- AddPhotoCtrl -->
 
 
   <br>
   <br>  
 
   <input placeholder="Brøtekst (må ikke være med)" ng-model="newParty.description" id="description" type="text" class="description">
-  <label for="public">Public</label>
-  <input type="checkbox" ng-model="newParty.public" id="public">
-  <button ng-click="addNewParty()">Add </button>
+
+  <br>
+
+  <button class="add-btn" ng-click="addNewParty()">Add </button>
 
 
 </div> <!-- form -->
@@ -130,11 +125,6 @@
           }">{{party.name}}     
           </div> </a>
 
-
-      <!-- Settings Modal -->
-
-<!--       <button id="settings-button" ng-click="openSettingsModal()">Settings</button> -->
-  
       
         <img ng-src="{{ getMainImage(party.images) }}" class="main-image">          
         <!-- <div ng-if="party.images && party.images.length > 0" ng-style="getMainImage(party.images)" class="main-image">
@@ -145,8 +135,11 @@
         <p class="description">{{party.description}}</p>
 
         <button ng-click="remove(party)">X</button>
- 
-
+        <!-- Settings Modal -->
+        <button id="settings-button" ng-click="openSettingsModal()">Settings</button>
+        
+        
+  
     </div>
 
   </div>  

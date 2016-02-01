@@ -6,6 +6,7 @@
     <input type="search" ng-model="search" placeholder="Search">
   </div>
   
+
   <div dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
     <div class="post">
       <a href="/parties/{{party._id}}">{{party.name}}</a>

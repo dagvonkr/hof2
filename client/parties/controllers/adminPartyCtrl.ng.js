@@ -72,16 +72,16 @@ angular.module("hof2").controller("adminPartyCtrl", function ($scope, $meteor, $
           return $meteor.requireUser();
         }
       }
-    })
+    });
 
-    console.log('modalInstnce', modalInstance)
+    console.log('modalInstance', modalInstance)
 
-     modalInstance.result.then(function () {
-      }, function () {
-      });
+    modalInstance.result.then(function() {
+      $modal.close()
+      }, function() {
+        
+    });
   }
-
-
 
 
   // getting the main image
