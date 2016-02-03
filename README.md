@@ -20,9 +20,11 @@ admin.ng.html - the view, <br>  admin-party-modal.ng.html - the modal view, <br>
 <br>
 
 !! NBNB !! <br>
-There is a file in the meteor packagde folder ( .meteor --> local --> build --> web.browser --> package ) called "correpw_ng-img-crop-full-extended.js". The file has an error, and is chaging back all the time. So if the program is borken this may be why. <br>
+There is a file in the meteor packagde folder ( .meteor --> local --> build --> web.browser --> package ) called "correpw_ng-img-crop-full-extended.js". The file has an error, and I fix it, but it writes back to it's original all the time. So if the program is broken and throw this error:  <br>
+Error: [$injector:strictdi] function($scope ) is not using explicit annotation and cannot be invoked in strict mode
+<br>
 
-So on line 2613 the code must be: <br>
+Line 2613 must look like this: <br>
 
         controller: ['$scope', function($scope /*, $attrs, $element*/ ) {                                                        
             $scope.events = new CropPubSub();               
