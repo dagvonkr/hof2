@@ -18,7 +18,6 @@ The files involved are: <br>
 admin.ng.html - the view, <br>  admin-party-modal.ng.html - the modal view, <br> adminPartyCtrl.ng.js - the controller --> on line 66 is the modal function.
 
 <br>
-<br>
 
 !! NBNB !! <br>
 There is a file in the meteor packagde folder ( .meteor --> local --> build --> web.browser --> package ) called "correpw_ng-img-crop-full-extended.js". The file has an error, and is chaging back all the time. So if the program is borken this may be why. <br>
