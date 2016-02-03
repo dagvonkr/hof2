@@ -1,18 +1,16 @@
-
 <a href="/logout"> Log ut </a>
 
   <br>
   <br>
+
 <div class="form">
   <div ng-controller="AddPhotoCtrl">
-
     <input class="post-header-pre" ng-model="newParty.name" id="nameInput" type="text">
     <br>
 
   <div class="image-upload">
 
-    <!-- Image drop tall rectangle -->
-
+    <!-- Image upload tall rectangle -->
     <div ng-hide="imgSrc" ngf-drop ngf-select
          ngf-change="addImagesTallRectangle($files)"
          ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box tall-rectangle"
@@ -27,8 +25,7 @@
     </div>
 
 
-  
-    <!-- Image drop rectangle -->
+    <!-- Image upload rectangle -->
     <div ng-hide="imgSrc2" ngf-drop ngf-select
          ngf-change="addImagesRectangle($files)"
          ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box rectangle"
@@ -44,8 +41,7 @@
     </div>
 
 
-
-    <!-- Image drop square -->
+    <!-- Image upload square -->
     <div ng-hide="imgSrc3" ngf-drop ngf-select
          ngf-change="addImagesSquare($files)"
          ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box square"
@@ -53,7 +49,6 @@
          ngf-drop-available="dropAvailable">
       <div class="drop-image-square" ng-show="dropAvailable"></div>
     </div>
-
 
     <div ng-show="imgSrc3" class="ng-crop-container-square">
         <button ng-click="saveSquareImage()" ng-disabled="!imgSrc3"> Save Image</button>
@@ -70,10 +65,7 @@
         <div class="main-image" ng-show="$index === 0"></div>
         <img draggable="false" ng-src="{{image.url()}}" />
         <br>
-        
-
         <a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Klikk her for å legge inn fotokred' }}</a>
-
       </div>
     </div>
 
@@ -82,7 +74,8 @@
 
   <br>
   <br>  
-
+  
+  <!-- Short description of post -->
   <input placeholder="Brøtekst (må ikke være med)" ng-model="newParty.description" id="description" type="text" class="description">
 
   <br>
@@ -92,56 +85,50 @@
 
 </div> <!-- form -->
 
-  <br>
-  <br>
-  <br>
-  <br>
-  <hr>
-  <br>
+<br>
+<br>
+<br>
+<br>
+<hr>
+<br>
 
   
-  <div class="forsiden">
-    <h1>Forsiden</h1>
-    <input type="search" ng-model="search" placeholder="Search">
-    <select ng-model="orderProperty">
-      <option value="1">Ascending</option>
-      <option value="-1">Descending</option>
-    </select>
-  </div>
+<div class="front-page">
+  <h1>Forsiden</h1>
+  <input type="search" ng-model="search" placeholder="Search">
+  <select ng-model="orderProperty">
+    <option value="1">Ascending</option>
+    <option value="-1">Descending</option>
+  </select>
+</div>
 
-  <br>
+<br>
   
-  <div class="post-wrapper">
-
-    <div  class="post" dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
-        
-        <a href="/admin/{{party._id}}"> <div class="post-header"  ng-style="{
-            'top' : party.style.header.top,
-            'left' : party.style.header.left,
-            'width' : party.style.header.width,
-            'font-size' : party.style.header.fontSize,
-            'color' : party.style.header.color,
-            'text-align' : party.style.header.textAlign
-          }">{{party.name}}     
-          </div> </a>
-
+<div class="post-wrapper">
+  <div  class="post" dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
       
-        <img ng-src="{{ getMainImage(party.images) }}" class="main-image">          
-        <!-- <div ng-if="party.images && party.images.length > 0" ng-style="getMainImage(party.images)" class="main-image">
-        </div> -->
+    <a href="/admin/{{party._id}}"> <div class="post-header" ng-style="{
+        'top' : party.style.header.top,
+        'left' : party.style.header.left,
+        'width' : party.style.header.width,
+        'font-size' : party.style.header.fontSize,
+        'color' : party.style.header.color,
+        'text-align' : party.style.header.textAlign
+      }">{{party.name}} </div> 
+    </a>
 
-        
-
-        <p class="description">{{party.description}}</p>
-
-        <button ng-click="remove(party)">X</button>
-        <!-- Settings Modal -->
-        <button id="settings-button" ng-click="openSettingsModal()">Settings</button>
-        
-        
   
-    </div>
+    <img ng-src="{{ getMainImage(party.images) }}" class="main-image">          
+    <!-- <div ng-if="party.images && party.images.length > 0" ng-style="getMainImage(party.images)" class="main-image">
+    </div> -->   
 
-  </div>  
+    <p class="description">{{party.description}}</p>
+
+    <button ng-click="remove(party)">X</button>
+    <!-- Settings Modal -->
+    <button id="settings-button" ng-click="openSettingsModal()">Settings</button>
+      
+  </div>
+</div>  
 
 <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>

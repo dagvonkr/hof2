@@ -1,17 +1,14 @@
-  
+<h1>Parties:</h1>
+<div>
+  <input type="search" ng-model="search" placeholder="Search">
+</div>
 
 
-  <h1>Parties:</h1>
-  <div>
-    <input type="search" ng-model="search" placeholder="Search">
+<div dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
+  <div class="post">
+    <a href="/parties/{{party._id}}">{{party.name}}</a>
+    <p>{{party.description}}</p>
   </div>
-  
-
-  <div dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
-    <div class="post">
-      <a href="/parties/{{party._id}}">{{party.name}}</a>
-      <p>{{party.description}}</p>
-    </div>
-  </div>
+</div>
 
 <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>

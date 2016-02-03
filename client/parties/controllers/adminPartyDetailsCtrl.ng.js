@@ -12,8 +12,6 @@ angular.module("hof2").controller("adminPartyDetailsCtrl", function ($scope, $st
 		$modalInstance.close();
 	}	
 
-
-
 	// console.log('$scope.images', $scope.images);
 
 	// var displayImg = $scope.party.images.url();

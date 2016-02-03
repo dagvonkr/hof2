@@ -1,6 +1,6 @@
 angular.module("hof2").controller("adminPartyCtrl", function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal) {
 
-  // Dette er for å prø veå få til modal med data inni seg. 
+  // Dette er for å prø ve å få til modal med data inni seg. 
   var partyId = $meteor.object(Parties, $stateParams.partyId);
 
   console.log('partyId', partyId);
@@ -74,7 +74,7 @@ angular.module("hof2").controller("adminPartyCtrl", function ($scope, $meteor, $
       }
     });
 
-    console.log('modalInstance', modalInstance)
+    console.log('modalInstance', modalInstance);
 
     modalInstance.result.then(function() {
       $modal.close()
