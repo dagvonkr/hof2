@@ -17,4 +17,4 @@ The files involved are: <br>
 
 admin.ng.html - the view, <br>  
 admin-party-modal.ng.html - the modal view, <br>
-adminPartyCtrl.ng.js - the controller --> on line 66 is the modal function. <br>
+adminPartyCtrl.ng.js - the controller --> on line 66 is the modal function.
