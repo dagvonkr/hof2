@@ -2,7 +2,6 @@ angular.module("hof2").controller("adminPartyCtrl", function ($scope, $meteor, $
 
   // Dette er for å prø ve å få til modal med data inni seg. 
   var partyId = $meteor.object(Parties, $stateParams.partyId);
-
   console.log('partyId', partyId);
 
   $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
@@ -23,6 +22,8 @@ angular.module("hof2").controller("adminPartyCtrl", function ($scope, $meteor, $
 
     $scope.newParty.owner = $rootScope.currentUser._id;
 
+    console.log('$scope.newPartyImages', $scope.newPartyImages);
+    
     // Link the images and the order to the new party
       if($scope.newPartyImages && $scope.newPartyImages.length > 0) {
         $scope.newParty.images = [];
@@ -32,8 +33,6 @@ angular.module("hof2").controller("adminPartyCtrl", function ($scope, $meteor, $
         });
       }
 
-
-  
     // Saving the party to parties 
     $scope.parties.push($scope.newParty);
 
