@@ -1,6 +1,7 @@
 angular.module("hof2").controller("adminPartyDetailsCtrl", function ($scope, $stateParams, $meteor, $filter, $rootScope, $state) {
 
 	$scope.party = $meteor.object(Parties, $stateParams.partyId);
+	console.log('$scope.party', $scope.party);
 
 	$scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
 	$scope.$meteorSubscribe('parties');
@@ -11,8 +12,6 @@ angular.module("hof2").controller("adminPartyDetailsCtrl", function ($scope, $st
 		$scope.newParty.owner = $rootScope.currentUser._id;
 		$modalInstance.close();
 	}	
-
-
 
 	// console.log('$scope.images', $scope.images);
 
