@@ -1,40 +1,33 @@
 <div class="settings-modal">
-	
-	{{party.description}}
-	{{party.style.header.color}}
-
-	<br>
-	
-	<label>Is public</label>
-	<input type="checkbox" ng-model="party.public">
-	<div class="cms">
-	    Header Top: <input ng-model="party.style.header.top" id="top" type="text">
-  	</div>
-  	<div class="cms">
-	    Header Left: <input ng-model="party.style.header.left" id="left" type="text">
-  	</div>
-  	<div class="cms">
-		Header Width: <input ng-model="party.style.header.width" id="width" type="text">
-  	</div>
-  	<div class="cms">
-		Header Font-size: <input ng-model="party.style.header.fontSize" id="fontSize" type="text">
-  	</div>
-
-  	<div class="cms">
-		Header Color: <select ng-model="party.style.header.color" id="color" type="text"> 
-		<option value="#d7548"> Orange </option>
-		<option value="#2d2c2c"> Black </option>
-		<option value="#529493"> Green </option>
-		<option value="#fbfdfd"> White </option>
-		</select>
-  	</div>
-
-  	<div class="cms">
-		Text align: <select ng-model="party.style.header.textAlign" id="color" type="text"> 
-		<option value="left"> Left </option>
-		<option value="center"> Center </option>
-		<option value="right"> Right </option>
-		</select>
-  	</div>
-
+  {{currentParty}}
+  <br>
+  <label>Is public</label>
+  <input type="checkbox" ng-model="currentParty.public">
+  <div class="cms">
+    Header Top: <input ng-model="currentParty.style.header.top" id="top" type="text">
+  </div>
+  <div class="cms">
+    Header Left: <input ng-model="currentParty.style.header.left" id="left" type="text">
+  </div>
+  <div class="cms">
+    Header Width: <input ng-model="currentParty.style.header.width" id="width" type="text">
+  </div>
+  <div class="cms">
+    Header Font-size: <input ng-model="currentParty.style.header.fontSize" id="fontSize" type="text">
+  </div>
+  <div class="cms">
+    Header Color: <select ng-model="currentParty.style.header.color" id="color" type="text"> 
+      <option value="#d7548"> Orange </option>
+      <option value="#2d2c2c"> Black </option>
+      <option value="#529493"> Green </option>
+      <option value="#fbfdfd"> White </option>
+    </select>
+  </div>
+  <div class="cms">
+    Text align: <select ng-model="currentParty.style.header.textAlign" id="color" type="text"> 
+      <option value="left"> Left </option>
+      <option value="center"> Center </option>
+      <option value="right"> Right </option>
+    </select>
+  </div>
 </div>
