@@ -1,0 +1,12 @@
+{
+  "initial": {
+    "user": {
+      "username": "whatever",
+      "email": "a@a.a",
+      "password": "aaaaaa",
+      "profile": {
+        "name": "Super Administrator"
+      }
+    }
+  }
+}
