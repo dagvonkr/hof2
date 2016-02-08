@@ -1,5 +1,16 @@
 # hof2
 
+Task #2
+<br>
+In the app, when you upload a image you can choose three different cropps. 
+<br>
+I need the the dimentions for the choosen crop to be saved in the database: party --> images --> dimentions --> height and width. So if it the tall rectangle it will save the width: 375, height: 450.
+<br>
+
+
+---------------------------------------------------------------
+
+
 Task #1
 
 First you need to be logged in. <br>
