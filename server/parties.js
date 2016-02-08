@@ -1,4 +1,4 @@
-Meteor.publish('parties', function (options, search = '') {
+Meteor.publish('parties', function (options, searchString = '') {
   Counts.publish(this, 'numberOfParties', Parties.find({
     name: {
       $regex: `.*${searchString || ''}.*`,
