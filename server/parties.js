@@ -1,31 +1,28 @@
-Meteor.publish("parties", function (options, searchString) {
-  if (searchString == null)
-    searchString = '';
-
+Meteor.publish('parties', function (options, search = '') {
   Counts.publish(this, 'numberOfParties', Parties.find({
-    'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
-    $or:[
-      {$and:[
-        {'public': true},
-        {'public': {$exists: true}}
-      ]},
-      {$and:[
-        {owner: this.userId},
-        {owner: {$exists: true}}
-      ]}
-    ]}), { noReady: true });
+    name: {
+      $regex: `.*${searchString || ''}.*`,
+      $options: 'i'
+    },
+    $or: [{
+      public: true
+    }, {
+      owner: this.userId
+    }]
+  }), {
+    noReady: true
+  });
 
-  return Parties.find();
+  // return Parties.find(); // for debug purposes only
   return Parties.find({
-    'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
-    $or:[
-      {$and:[
-        {"public": true},
-        {"public": {$exists: true}}
-      ]},
-      {$and:[
-        {owner: this.userId},
-        {owner: {$exists: true}}
-      ]}
-    ]}, options);
+    name: {
+      $regex: `.*${searchString || ''}.*`,
+      $options: 'i'
+    },
+    $or: [{
+      public: true
+    }, {
+      owner: this.userId
+    }]
+  }, options);
 });
