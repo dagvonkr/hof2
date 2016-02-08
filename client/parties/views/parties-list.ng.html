@@ -1,14 +1,45 @@
-<h1>Parties:</h1>
-<div>
+<!-- <div>
   <input type="search" ng-model="search" placeholder="Search">
-</div>
+</div> -->
+
+<div class="post-wrapper">
+	<div class="menu">
+		<div class="houseoffam-menu">
+			<div class="menu-nav nettbutikk">
+				NETTBUTIKK
+			</div>
+			<div class="menu-nav kontakt">
+				KONTAKT
+			</div>
+			<div class="menu-nav om">
+				OM
+			</div>
+		</div>
+		<div class="houseoffam-line"> </div>
+		<div class="houseoffam-logo">
+			HOUSE OF FAM
+		</div>
+	</div>		
+
+	<div class="post" dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
 
 
-<div dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
-  <div class="post">
-    <a href="/parties/{{party._id}}">{{party.name}}</a>
-    <p>{{party.description}}</p>
-  </div>
+      
+	    <a href="/{{party._id}}"> <div class="post-header" ng-style="{
+	        'top' : party.style.header.top,
+	        'left' : party.style.header.left,
+	        'width' : party.style.header.width,
+	        'font-size' : party.style.header.fontSize,
+	        'color' : party.style.header.color,
+	        'text-align' : party.style.header.textAlign
+	      }">{{party.name}} </div> 
+	    </a>
+
+	    <img ng-src="{{ getMainImage(party.images) }}" class="main-image">          
+	    	<!-- <div ng-if="party.images && party.images.length > 0" ng-style="getMainImage(party.images)" class="main-image">
+	    	</div> -->   
+	    <p class="description">{{party.description}}</p>
+    </div>
 </div>
 
 <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
