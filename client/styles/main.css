@@ -122,6 +122,7 @@ textarea {
 
 a {
     text-decoration: none;
+    color: #2d2c2c;
 }
 
 a:visited{
@@ -129,9 +130,8 @@ a:visited{
 }
 
 a:hover{
-    text-decoration: underline;
-    text-decoration-color: #676074;
 
+    border-bottom: 3px solid #2d2c2c;
 }
 
 .post-header-pre {
@@ -193,7 +193,7 @@ a:hover{
     position: relative;
     padding: 0px 20px 0px 20px;
     margin-top: 100px;
-    margin-left: 100px;
+    margin-left: 25px;
 }
 
 .menu-nav{
@@ -231,6 +231,42 @@ a:hover{
     transform: rotate(66deg);
 
 }
+
+.glitch {
+  position: relative;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  clip: rect(44px, 450px, 56px, 0);  
+  /* ... anything needed to make it identical */
+  /* variation */
+  left: 2px;
+  text-shadow: -1px 0 red;
+  /* important: opaque background masks the original */
+  background: white;
+}
+.glitch::after {
+  /* ... anything needed to make it identical */
+
+  /* variation */
+  left: -2px;
+  text-shadow: -1px 0 blue;
+  
+  /* important: opaque background masks the original */
+  background: white;
+
+
+}
+
 
 .houseoffam-logo {
     font-family: 'Gotham-Bold';
