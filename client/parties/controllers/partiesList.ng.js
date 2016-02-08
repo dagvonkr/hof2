@@ -1,4 +1,6 @@
-angular.module("hof2").controller("PartiesListCtrl", function ($scope, $meteor) {
+angular.module("hof2").controller("PartiesListCtrl", function ($scope, $meteor, $filter) {
+
+  $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
 
   $scope.page = 1;
   $scope.perPage = 10;
@@ -11,7 +13,16 @@ angular.module("hof2").controller("PartiesListCtrl", function ($scope, $meteor) 
     });
   });
 
-  console.log('Parties', $scope.parties);
+  $scope.getMainImage = function(images) {
+    if (images && images.length && images[0] && images[0].id) {
+      var urlMainImage = $filter('filter')($scope.images, {_id: images[0].id})[0].url();
+      return  urlMainImage 
+    }
+  };
+
+  $scope.updateDescription = function($data, image) {
+    image.update({$set: {'metadata.description': $data}});
+  };
 
   $meteor.autorun($scope, function() {
     $meteor.subscribe('parties', {

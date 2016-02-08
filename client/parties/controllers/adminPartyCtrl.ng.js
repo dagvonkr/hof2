@@ -88,7 +88,7 @@ angular.module("hof2").controller("adminPartyCtrl", function ($scope, $meteor, $
      if (images && images.length && images[0] && images[0].id) {
       var urlMainImage = $filter('filter')($scope.images, {_id: images[0].id})[0].url();
       // console.log('url main img', url);
-      return  urlMainImage 
+      return urlMainImage 
     }
   };
 
