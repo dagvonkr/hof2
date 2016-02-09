@@ -10,7 +10,7 @@
 	All images:
 	<div class="all-images" ng-repeat="images in party.images">
 		<div ng-repeat="(id, image) in images">
-			<img ng-src="{{ image.url() }}"/> <br/>
+			<img ng-src="{{getAllImages(party.images)}}"/> <br/>
 			{{image}}
 		</div>	
 	</div>

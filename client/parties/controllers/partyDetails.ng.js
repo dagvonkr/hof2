@@ -13,13 +13,19 @@ angular.module("hof2").controller("PartyDetailsCtrl", ['$scope', '$stateParams',
   $scope.getMainImage = function(images) {
     if (images && images.length && images[0] && images[0].id) {
       let urlMainImage = $filter('filter')($scope.images, {_id: images[0].id})[0].url();
-      // console.log('url main img', url);
+      console.log('url main img', url);
       return urlMainImage;
     }
   };
 
+
+  // trying to get the rest of the images in the array
   $scope.getAllImages = function(images) {
-  	let urlMainImage = ($scope.images, {_id: images.id[1]})[1].url();
-  }
+  	console.log('input images', images);
+  	for (var i = 0; i < images.length; i++) {
+	  	let urlAllImages = $filter('filter')($scope.images, {_id: images[i].id})[i].url();
+	  	return urlAllImages
+  	}
+  };
 
 }]);
