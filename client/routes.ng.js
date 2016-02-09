@@ -13,12 +13,12 @@ angular.module('hof2').config(['$urlRouterProvider', '$stateProvider', '$locatio
 
   $stateProvider
     .state('parties', {
-      url: '/parties',
+      url: '/posts',
       templateUrl: 'client/parties/views/parties-list.ng.html',
       controller: 'PartiesListCtrl'
     })
     .state('partyDetails', {
-      url: '/parties/:partyId',
+      url: '/posts/:partyId',
       templateUrl: 'client/parties/views/party-details.ng.html',
       controller: 'PartyDetailsCtrl'
     })
@@ -74,5 +74,5 @@ angular.module('hof2').config(['$urlRouterProvider', '$stateProvider', '$locatio
       }
     });
 
-  $urlRouterProvider.otherwise('/parties');
+  $urlRouterProvider.otherwise('/posts');
 }]);
