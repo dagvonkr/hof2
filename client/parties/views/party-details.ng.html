@@ -1,6 +1,26 @@
 <div class="post">
 
 	<h3> {{party.name}} </h3>
-	<p> {{party.description}} </p>
 
+  	<img ng-src="{{ getMainImage(party.images) }}" class="main-image">
+  	Dette funker da: {{ getMainImage(party.images)}}
+
+	<p> {{party.description}} </p>
+	
+	All images:
+	<div class="all-images" ng-repeat="images in party.images">
+		<div ng-repeat="(id, image) in images">
+			<img ng-src="{{ image.url() }}"/> <br/>
+			{{image}}
+		</div>	
+	</div>
+
+
+	<br>
+	Prøver igjen her: 
+	<br>
+	<img ng-src="{{getAllImages(party.images)}}">
+	{{getAllImages(party.images)}}
+
+	
 </div>

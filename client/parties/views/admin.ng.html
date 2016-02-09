@@ -79,12 +79,12 @@
   <div  class="post" dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
     <a href="/admin/{{party._id}}">
       <div class="post-header"  ng-style="{
-        'top': party.style.header.top,
+        'top': party.style.header.top || '50px',
         'left': party.style.header.left,
-        'width': party.style.header.width,
+        'width': party.style.header.width || '90%',
         'font-size': party.style.header.fontSize,
-        'color': party.style.header.color,
-        'text-align': party.style.header.textAlign
+        'color': party.style.header.color || '#2d2c2c',
+        'text-align': party.style.header.textAlign || 'center'
         }">
         {{party.name}}
       </div>

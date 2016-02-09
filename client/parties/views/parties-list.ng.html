@@ -29,14 +29,14 @@
 
 
       
-	    <a href="/posts/{{party._id}}"> <div class="post-header" ng-style="{
-	        'top' : party.style.header.top,
-	        'left' : party.style.header.left,
-	        'width' : party.style.header.width,
-	        'font-size' : party.style.header.fontSize,
-	        'color' : party.style.header.color,
-	        'text-align' : party.style.header.textAlign
-	      }">{{party.name}} </div> 
+	    <a href="/posts/{{party._id}}"> <div class="post-header"  ng-style="{
+        'top': party.style.header.top || '50px',
+        'left': party.style.header.left,
+        'width': party.style.header.width || '90%',
+        'font-size': party.style.header.fontSize,
+        'color': party.style.header.color || '#2d2c2c',
+        'text-align': party.style.header.textAlign || 'center'
+        }">{{party.name}} </div> 
 	    </a>
 
 	    <img ng-src="{{ getMainImage(party.images) }}" class="main-image">          
