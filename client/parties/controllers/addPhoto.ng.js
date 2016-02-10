@@ -61,7 +61,10 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   $scope.saveTallRectangleImage = function () {
     if($scope.myCroppedImageTallRectangle !== '') {
       $scope.images.save($scope.myCroppedImageTallRectangle).then(function (result) {
-        $scope.newPartyImages.push(result[0]._id);
+        $scope.newPartyImages.push({
+          id: result[0]._id,
+          dimensions: [0, 1]
+        });
         $scope.imgSrc = undefined;
         $scope.myCroppedImageTallRectangle = '';
       });
@@ -71,7 +74,10 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   $scope.saveRectangleImage = function () {
     if($scope.myCroppedImage !== '') {
       $scope.images.save($scope.myCroppedImage).then(function (result) {
-        $scope.newPartyImages.push(result[0]._id);
+        $scope.newPartyImages.push({
+          id: result[0]._id,
+          dimensions: [1, 0]
+        });
         $scope.imgSrc2 = undefined;
         $scope.myCroppedImage = '';
       });
@@ -81,7 +87,10 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   $scope.saveSquareImage = function () {
     if($scope.myCroppedImage !== '') {
       $scope.images.save($scope.myCroppedImage).then(function (result) {
-        $scope.newPartyImages.push(result[0]._id);
+        $scope.newPartyImages.push({
+          id: result[0]._id,
+          dimensions: [1, 1]
+        });
         $scope.imgSrc3 = undefined;
         $scope.myCroppedImage = '';
       });

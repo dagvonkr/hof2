@@ -1,13 +1,12 @@
 'use strict';
-angular.module("hof2").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor', '$filter', function ($scope, $stateParams, $meteor, $filter) {
+angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams', '$meteor', '$filter', function ($scope, $stateParams, $meteor, $filter) {
   $scope.party = $meteor.object(Parties, $stateParams.partyId);
   console.log('$scope.party', $scope.party);
   $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
   $scope.$meteorSubscribe('parties');
-
   $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
 
-
+  console.log('scopeeee', $scope);
 
   // getting the main image
   $scope.getMainImage = function(images) {
@@ -18,14 +17,12 @@ angular.module("hof2").controller("PartyDetailsCtrl", ['$scope', '$stateParams',
     }
   };
 
-
   // trying to get the rest of the images in the array
   $scope.getAllImages = function(images) {
-  	console.log('input images', images);
-  	for (var i = 0; i < images.length; i++) {
-	  	let urlAllImages = $filter('filter')($scope.images, {_id: images[i].id})[i].url();
-	  	return urlAllImages
-  	}
+    for (let i = 0; i < images.length; i++) {
+      let urlAllImages = $filter('filter')($scope.images, {_id: images[i].id})[i].url();
+      return urlAllImages;
+    }
   };
 
 }]);

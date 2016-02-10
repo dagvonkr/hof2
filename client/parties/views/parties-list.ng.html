@@ -3,31 +3,28 @@
 </div> -->
 
 <div class="post-wrapper">
-	<div class="menu">
-		<div class="houseoffam-menu">
-			<div class="menu-nav nettbutikk">
-				<div class="glitch"> NETTBUTIKK </div>
-			</div>
-			<div class="menu-nav kontakt">
-				<a href="/kontakt.ng.html">
-				KONTAKT
-				</a>
-			</div>
-			<div class="menu-nav om">
-				OM
-			</div>
-		</div>
-		<div class="houseoffam-line"> </div>
-		<div class="houseoffam-logo">
-			HOUSE OF FAM
-		</div>
-	</div>		
+  <div class="menu">
+    <div class="houseoffam-menu">
+      <div class="menu-nav nettbutikk">
+        <div class="glitch"> NETTBUTIKK </div>
+      </div>
+      <div class="menu-nav kontakt">
+        <a href="/kontakt.ng.html">
+          KONTAKT
+        </a>
+      </div>
+      <div class="menu-nav om">
+        OM
+      </div>
+    </div>
+    <div class="houseoffam-line"> </div>
+    <div class="houseoffam-logo">
+      HOUSE OF FAM
+    </div>
+  </div>		
 
-	<div class="post" dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
-
-
-      
-	    <a href="/posts/{{party._id}}"> <div class="post-header"  ng-style="{
+  <div class="post" dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
+    <a href="/posts/{{party._id}}"> <div class="post-header" ng-style="{
         'top': party.style.header.top || '50px',
         'left': party.style.header.left,
         'width': party.style.header.width || '90%',
@@ -35,13 +32,13 @@
         'color': party.style.header.color || '#2d2c2c',
         'text-align': party.style.header.textAlign || 'center'
         }">{{party.name}} </div> 
-	    </a>
+    </a>
 
-	    <img ng-src="{{ getMainImage(party.images) }}" class="main-image">          
-	    	<!-- <div ng-if="party.images && party.images.length > 0" ng-style="getMainImage(party.images)" class="main-image">
-	    	</div> -->   
-	    <p class="description">{{party.description}}</p>
-    </div>
+    <img ng-src="{{ getMainImage(party.images) }}" class="main-image">          
+    <!-- <div ng-if="party.images && party.images.length > 0" ng-style="getMainImage(party.images)" class="main-image">
+    </div> -->   
+    <p class="description">{{party.description}}</p>
+  </div>
 </div>
 
 <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
