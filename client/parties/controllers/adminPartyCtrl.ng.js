@@ -24,12 +24,12 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       // Link the images and the order to the new party
       if ($scope.newPartyImages && $scope.newPartyImages.length > 0) {
         $scope.newParty.images = [];
-        //angular.forEach($scope.newPartyImages, ({id, dimensions}) => {
-          //$scope.newParty.images.push({
-          //  id,
-          //  dimensions
-          //});
-        // });
+        _.forEach($scope.newPartyImages, ({image: {_id}, dimensions}) => {
+          $scope.newParty.images.push({
+            id: _id,
+            dimensions
+          });
+        });
       }
 
       // Saving the party to parties
@@ -115,6 +115,4 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       $scope.sort = {name: parseInt($scope.orderProperty)};
     }
   });
-
-  $scope.$on('addedTallRectangle', (wat) => console.log('tall rectangle!', wat))
 }]);
