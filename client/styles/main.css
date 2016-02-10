@@ -234,39 +234,22 @@ a:hover{
 }
 
 .glitch {
-  position: relative;
+  display:inline-block;
+  cursor: pointer;
 }
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.glitch:hover{
+  animation: noise-3 1s linear infinite;
 }
 
-.glitch::before {
-  clip: rect(44px, 450px, 56px, 0);  
-  /* ... anything needed to make it identical */
-  /* variation */
-  left: 2px;
-  text-shadow: -1px 0 red;
-  /* important: opaque background masks the original */
-  background: white;
+@keyframes noise-3 {
+  0%,3%,5%,42%,44%,100% {opacity: 1; transform: scaleY(1);}
+  4.3% {opacity: 1; transform: scaleY(1.5);}
+  43% {opacity: 1; transform: scaleX(10); 
+    transform: scaleY(.1); 
+    rotate: 60deg;
+    }
 }
-.glitch::after {
-  /* ... anything needed to make it identical */
 
-  /* variation */
-  left: -2px;
-  text-shadow: -1px 0 blue;
-  
-  /* important: opaque background masks the original */
-  background: white;
-
-
-}
 
 
 .houseoffam-logo {
