@@ -1,5 +1,42 @@
 # hof2
 
+Taks #3
+
+<br>
+
+When you add a new post, you can add as many images as you like. You just save an image, and crop a new one and save the new on and so on. 
+
+The images just saves in the image property i the party object:
+
+<br>
+
+images: Array[4]
+0: Object
+id: "Qug7rFQyBMt9YLcAA"
+__proto__: Object
+1: Object
+id: "9n8JMQNuszqpCoZDn"
+__proto__: Object
+2: Object
+id: "QcvNjr7f6qFkd4btg"
+__proto__: Object
+3: Object
+id: "gJTXQuXvBAszTb9RD"
+__proto__: Object
+length: 4
+__proto__: Array[0]
+
+<br>
+
+I simply need to get all images to display in the party-details.ng.html view. 
+<br>
+You can see that I have tried, but haven't succeeded, and you can just delete this if you want. 
+
+<br>
+
+---------------------------------------------------------------
+
+
 Task #2
 
 <br>
