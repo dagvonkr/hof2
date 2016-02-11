@@ -1,30 +1,29 @@
-angular.module("hof2").controller("PartiesListCtrl", function ($scope, $meteor, $filter) {
-
+angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$filter', function ($scope, $meteor, $filter) {
   $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
-
   $scope.page = 1;
   $scope.perPage = 10;
   $scope.sort = {name: 1};
   $scope.orderProperty = '1';
 
-  $scope.parties = $meteor.collection(function() {
+  $scope.parties = $meteor.collection(function () {
     return Parties.find({}, {
-      sort : $scope.getReactively('sort')
+      sort: $scope.getReactively('sort')
     });
   });
 
-  $scope.getMainImage = function(images) {
-    if (images && images.length && images[0] && images[0].id) {
-      var urlMainImage = $filter('filter')($scope.images, {_id: images[0].id})[0].url();
-      return  urlMainImage 
+  $scope.getMainImage = function (images) {
+    try {
+      return $filter('filter')($scope.images, {_id: images[0].id})[0].url();
+    } catch (error) {
+      //console.log(error);
     }
   };
 
-  $scope.updateDescription = function($data, image) {
+  $scope.updateDescription = function ($data, image) {
     image.update({$set: {'metadata.description': $data}});
   };
 
-  $meteor.autorun($scope, function() {
+  $meteor.autorun($scope, function () {
     $meteor.subscribe('parties', {
       limit: parseInt($scope.getReactively('perPage')),
       skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
@@ -34,12 +33,13 @@ angular.module("hof2").controller("PartiesListCtrl", function ($scope, $meteor, 
     });
   });
 
-  $scope.pageChanged = function(newPage) {
+  $scope.pageChanged = function (newPage) {
     $scope.page = newPage;
   };
 
-  $scope.$watch('orderProperty', function(){
-    if ($scope.orderProperty)
+  $scope.$watch('orderProperty', function () {
+    if ($scope.orderProperty) {
       $scope.sort = {name: parseInt($scope.orderProperty)};
+    }
   });
-});
+}]);

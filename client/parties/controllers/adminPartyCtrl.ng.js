@@ -17,18 +17,18 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   $scope.newPartyImages = [];
 
   $scope.addNewParty = function () {
-    if($scope.newParty.name) {
-
+    if ($scope.newParty.name) {
       $scope.newParty.owner = $rootScope.currentUser._id;
-
       console.log('$scope.newPartyImages', $scope.newPartyImages);
 
       // Link the images and the order to the new party
-      if($scope.newPartyImages && $scope.newPartyImages.length > 0) {
+      if ($scope.newPartyImages && $scope.newPartyImages.length > 0) {
         $scope.newParty.images = [];
-
-        angular.forEach($scope.newPartyImages, function(image){
-          $scope.newParty.images.push({id: image._id});
+        _.forEach($scope.newPartyImages, ({image: {_id}, dimensions}) => {
+          $scope.newParty.images.push({
+            id: _id,
+            dimensions
+          });
         });
       }
 
@@ -40,7 +40,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     }
   };
 
-  $scope.updateDescription = function($data, image) {
+  $scope.updateDescription = function ($data, image) {
     image.update({$set: {'metadata.description': $data}});
   };
 
@@ -48,7 +48,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     $scope.parties.splice($scope.parties.indexOf(party), 1);
   };
 
-  $scope.removeAll = function(){
+  $scope.removeAll = function () {
     $scope.parties.remove();
   };
 
@@ -57,7 +57,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   $scope.users = $meteor.collection(Meteor.users, false).subscribe('users'); // hææ? skal denne være med?!?!?!?!?
 
   // Settings modal
-  $scope.openSettingsModal = function(party) {
+  $scope.openSettingsModal = function (party) {
     $scope.currentParty = party;
     let modalInstance = $modal.open({
       templateUrl: 'client/parties/views/admin-party-modal.ng.html',
@@ -76,11 +76,11 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   };
 
   // getting the main image
-  $scope.getMainImage = function(images) {
-    if (images && images.length && images[0] && images[0].id) {
-      let urlMainImage = $filter('filter')($scope.images, {_id: images[0].id})[0].url();
-      // console.log('url main img', url);
-      return urlMainImage;
+  $scope.getMainImage = function (images) {
+    try {
+      return $filter('filter')($scope.images, {_id: images[0].id})[0].url();
+    } catch (error) {
+      //console.log(error);
     }
   };
 
@@ -90,27 +90,27 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   $scope.sort = {name: 1};
   $scope.orderProperty = '1';
 
-  $scope.parties = $meteor.collection(function() {
+  $scope.parties = $meteor.collection(function () {
     return Parties.find({}, {
       sort: $scope.getReactively('sort')
     });
   });
 
-  $meteor.autorun($scope, function() {
+  $meteor.autorun($scope, function () {
     $meteor.subscribe('parties', {
       limit: parseInt($scope.getReactively('perPage')),
       skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
       sort: $scope.getReactively('sort')
-    }, $scope.getReactively('search')).then(function(){
+    }, $scope.getReactively('search')).then(function () {
       $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
     });
   });
 
-  $scope.pageChanged = function(newPage) {
+  $scope.pageChanged = function (newPage) {
     $scope.page = newPage;
   };
 
-  $scope.$watch('orderProperty', function(){
+  $scope.$watch('orderProperty', function () {
     if ($scope.orderProperty) {
       $scope.sort = {name: parseInt($scope.orderProperty)};
     }
