@@ -24,14 +24,20 @@
   </div>		
 
   <div class="post" dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
-    <a href="/posts/{{party._id}}"> <div class="post-header" ng-style="{
-        'top': party.style.header.top || '50px',
-        'left': party.style.header.left,
-        'width': party.style.header.width || '400px',
-        'font-size': party.style.header.fontSize,
-        'color': party.style.header.color || '#2d2c2c',
-        'text-align': party.style.header.textAlign || 'center'
-        }">{{party.name}} </div> 
+    <a href="/posts/{{party._id}}"> 
+	
+	<div class="post-header" ng-style="{
+	        'top': party.style.header.top || '50px',
+	        'left': party.style.header.left,
+	        'width': party.style.header.width || '400px',
+	        'font-size': party.style.header.fontSize,
+	        'color': party.style.header.color || '#2d2c2c',
+	        'text-align': party.style.header.textAlign || 'center'
+	        }">
+		<!-- <div class="post-header-rectangle" ng-if=""> -->
+	        {{party.name}} 
+		<!-- </div>	 -->
+	</div>     
     </a>
 
     <img ng-src="{{ getMainImage(party.images) }}" class="main-image">          
