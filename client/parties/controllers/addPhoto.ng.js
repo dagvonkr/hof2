@@ -26,7 +26,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
       reader.onload = function (e) {
         $scope.$apply(function () {
           $scope.imgSrc2 = e.target.result;
-          $scope.myCroppedImage = '';
+          $scope.myCroppedImageRectangle = '';
         });
       };
 
@@ -46,7 +46,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
       reader.onload = function (e) {
         $scope.$apply(function () {
           $scope.imgSrc3 = e.target.result;
-          $scope.myCroppedImage = '';
+          $scope.myCroppedImageSquare = '';
         });
       };
 
@@ -75,8 +75,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   };
 
   $scope.saveRectangleImage = function () {
-    if($scope.myCroppedImage !== '') {
-      $scope.images.save($scope.myCroppedImage).then(function (result) {
+    if($scope.myCroppedImageRectangle !== '') {
+      $scope.images.save($scope.myCroppedImageRectangle).then(function (result) {
         $scope.newPartyImages.push({
           image: result[0]._id,
           dimensions: {
@@ -85,14 +85,14 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
           }
         });
         $scope.imgSrc2 = undefined;
-        $scope.myCroppedImage = '';
+        $scope.myCroppedImageRectangle = '';
       });
     }
   };
 
   $scope.saveSquareImage = function () {
-    if($scope.myCroppedImage !== '') {
-      $scope.images.save($scope.myCroppedImage).then(function (result) {
+    if($scope.myCroppedImageSquare !== '') {
+      $scope.images.save($scope.myCroppedImageSquare).then(function (result) {
         $scope.newPartyImages.push({
           image: result[0]._id,
           dimensions: {
@@ -101,7 +101,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
           }
         });
         $scope.imgSrc3 = undefined;
-        $scope.myCroppedImage = '';
+        $scope.myCroppedImageSquare = '';
       });
     }
   };

@@ -16,8 +16,9 @@
       </div>
       <div ng-show="imgSrc" class="ng-crop-container-tall-rectangle">
         <button ng-click="saveTallRectangleImage()" ng-disabled="!imgSrc"> Save Image</button>
-        <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.735" result-image="myCroppedImageTallRectangle" result-image-size='{w: 375,h: 450}'> </img-crop>
+        <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.833" result-image="myCroppedImageTallRectangle" result-image-size='{w: 375,h: 450}'> </img-crop>
       </div>
+
       <!-- Image drop rectangle -->
       <div ng-hide="imgSrc2" ngf-drop ngf-select
         ngf-change="addImagesRectangle($files)"
@@ -28,8 +29,9 @@
       </div>
       <div ng-show="imgSrc2" class="ng-crop-container-rectangle">
         <button ng-click="saveRectangleImage()" ng-disabled="!imgSrc2"> Save Image</button>
-        <img-crop image="imgSrc2" area-type="rectangle" aspect-ratio="2.5" result-image="myCroppedImage" result-image-size='{w: 750,h: 300}'> </img-crop>
+        <img-crop image="imgSrc2" area-type="rectangle" aspect-ratio="2.5" result-image="myCroppedImageRectangle" result-image-size='{w: 750,h: 300}'> </img-crop>
       </div>
+
       <!-- Image drop square -->
       <div ng-hide="imgSrc3" ngf-drop ngf-select
         ngf-change="addImagesSquare($files)"
@@ -40,9 +42,11 @@
       </div>
       <div ng-show="imgSrc3" class="ng-crop-container-square">
         <button ng-click="saveSquareImage()" ng-disabled="!imgSrc3"> Save Image</button>
-        <img-crop image="imgSrc3" area-type="square" aspect-ratio="1" result-image="myCroppedImage" result-image-size='{w: 375,h: 375}'> </img-crop>
+        <img-crop image="imgSrc3" area-type="square" aspect-ratio="1" result-image="myCroppedImageSquare" result-image-size='{w: 375,h: 375}'> </img-crop>
       </div>
+      
       <br>
+
     </div> <!-- class="image-upload" -->
     <div class="main-image-preview" sv-root sv-part="newPartyImage">
       <div sv-element ng-repeat="image in newPartyImages">

@@ -1,4 +1,4 @@
-angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$filter', function ($scope, $meteor, $stateParams, $filter) {
+angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$filter', function ($scope, $meteor, $filter) {
   $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
   $scope.page = 1;
   $scope.perPage = 10;
@@ -7,7 +7,17 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
 
 
   $scope.parties = $meteor.collection(function() {
-  
+
+    var partiesLen = $scope.parties;
+
+    console.log('partiesLen', partiesLen);
+
+    // for (var i = 0; i < partiesLen.length; i++ ) {
+    //   if (i > 0) {
+    //     alert('nøørd')
+    //   }
+    // }
+
     return Parties.find({}, {
       sort: $scope.getReactively('sort')
     });
