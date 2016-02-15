@@ -7,7 +7,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
       reader.onload = function (e) {
         $scope.$apply(function () {
           $scope.imgSrc = e.target.result;
-          $scope.myCroppedImageTallRectangle = '';
+          $scope.myCroppedImage = '';
         });
       };
 
@@ -26,7 +26,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
       reader.onload = function (e) {
         $scope.$apply(function () {
           $scope.imgSrc2 = e.target.result;
-          $scope.myCroppedImageRectangle = '';
+          $scope.myCroppedImage = '';
         });
       };
 
@@ -46,7 +46,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
       reader.onload = function (e) {
         $scope.$apply(function () {
           $scope.imgSrc3 = e.target.result;
-          $scope.myCroppedImageSquare = '';
+          $scope.myCroppedImage = '';
         });
       };
 
@@ -59,8 +59,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   };
 
   $scope.saveTallRectangleImage = function () {
-    if($scope.myCroppedImageTallRectangle !== '') {
-      $scope.images.save($scope.myCroppedImageTallRectangle).then(function (result) {
+    if($scope.myCroppedImage !== '') {
+      $scope.images.save($scope.myCroppedImage).then(function (result) {
         $scope.newPartyImages.push({
           image: result[0]._id,
           dimensions: {
@@ -69,14 +69,14 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
           }
         });
         $scope.imgSrc = undefined;
-        $scope.myCroppedImageTallRectangle = '';
+        $scope.myCroppedImage = '';
       });
     }
   };
 
   $scope.saveRectangleImage = function () {
-    if($scope.myCroppedImageRectangle !== '') {
-      $scope.images.save($scope.myCroppedImageRectangle).then(function (result) {
+    if($scope.myCroppedImage !== '') {
+      $scope.images.save($scope.myCroppedImage).then(function (result) {
         $scope.newPartyImages.push({
           image: result[0]._id,
           dimensions: {
@@ -85,14 +85,14 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
           }
         });
         $scope.imgSrc2 = undefined;
-        $scope.myCroppedImageRectangle = '';
+        $scope.myCroppedImage = '';
       });
     }
   };
 
   $scope.saveSquareImage = function () {
-    if($scope.myCroppedImageSquare !== '') {
-      $scope.images.save($scope.myCroppedImageSquare).then(function (result) {
+    if($scope.myCroppedImage !== '') {
+      $scope.images.save($scope.myCroppedImage).then(function (result) {
         $scope.newPartyImages.push({
           image: result[0]._id,
           dimensions: {
@@ -101,8 +101,21 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
           }
         });
         $scope.imgSrc3 = undefined;
-        $scope.myCroppedImageSquare = '';
+        $scope.myCroppedImage = '';
       });
     }
   };
+
+
+  $scope.deletePreviewImage = function(image) {
+    $scope.images.remove($scope.myCroppedImage).then(function(result) {
+      $scope.newPartyImages.splice(image, 1)
+    })
+  }
+
+
+  // $scope.removePreviewImage = function(image) {
+  //   $scope.parties.splice($scope.parties.indexOf(image), 1);
+  // }
+
 }]);
