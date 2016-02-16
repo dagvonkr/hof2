@@ -1,28 +1,26 @@
 'use strict';
-angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams', '$meteor', '$filter', function ($scope, $stateParams, $meteor, $filter) {
-  $scope.party = $meteor.object(Parties, $stateParams.partyId);
-  console.log('$scope.party', $scope.party);
-  $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
-  $scope.$meteorSubscribe('parties');
-  $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
+angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$reactive', '$stateParams', '$meteor', '$filter', function ($scope, $reactive, $stateParams, $meteor, $filter) {
+  $reactive(this).attach($scope);
 
-  console.log('scopeeee', $scope);
+  this.subscribe('users');
+  this.subscribe('parties');
+  this.subscribe('images');
 
-  // getting the main image
-  $scope.getMainImage = function(images) {
-    if (images && images.length && images[0] && images[0].id) {
-      let urlMainImage = $filter('filter')($scope.images, {_id: images[0].id})[0].url();
-      console.log('url main img', url);
-      return urlMainImage;
+  const party = Parties.findOne({
+    _id: $stateParams.partyId
+  });
+  const images = Images.find({
+    _id: {
+      $in: _.map(party.images, image => image.id)
     }
-  };
+  });
+  const imageDescriptionList = images.fetch().map(image => ({
+    url: image.url(),
+    ..._.find(party.images, ({id}) => id === image._id).dimensions
+  }));
 
-  // trying to get the rest of the images in the array
-  $scope.getAllImages = function(images) {
-    for (let i = 0; i < images.length; i++) {
-      let urlAllImages = $filter('filter')($scope.images, {_id: images[i].id})[i].url();
-      return urlAllImages;
-    }
-  };
-
+  $scope.name = party.name;
+  $scope.description = party.description;
+  $scope.images = imageDescriptionList;
+  $scope.mainImageUrl = imageDescriptionList[0]; // FIXME: the first image is the main one, right?
 }]);

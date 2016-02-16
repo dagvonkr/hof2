@@ -11,21 +11,21 @@ Images = new FS.Collection('images', {
 
 if (Meteor.isServer) {
   Images.allow({
-    insert: function(userId) {
+    insert: function (userId) {
       return userId;
     },
-    remove: function(userId) {
+    remove: function (userId) {
       return userId;
     },
-    download: function() {
+    download: function () {
       return true;
     },
-    update: function(userId) {
+    update: function (userId) {
       return userId;
     }
   });
 
-  Meteor.publish('images', function() {
+  Meteor.publish('images', function (ids) {
     return Images.find({});
   });
 }

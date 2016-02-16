@@ -14,7 +14,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
       reader.readAsDataURL(files[0]);
       $scope.images.save(files[0]);
     }
-    else{
+    else {
       $scope.imgSrc = undefined;
     }
   };
@@ -33,7 +33,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
       reader.readAsDataURL(files[0]);
       $scope.images.save(files[0]);
     }
-    else{
+    else {
       $scope.imgSrc2 = undefined;
     }
   };
@@ -53,13 +53,13 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
       reader.readAsDataURL(files[0]);
       $scope.images.save(files[0]);
     }
-    else{
+    else {
       $scope.imgSrc3 = undefined;
     }
   };
 
   $scope.saveTallRectangleImage = function () {
-    if($scope.myCroppedImage !== '') {
+    if ($scope.myCroppedImage !== '') {
       $scope.images.save($scope.myCroppedImage).then(function (result) {
         $scope.newPartyImages.push({
           image: result[0]._id,
@@ -75,7 +75,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   };
 
   $scope.saveRectangleImage = function () {
-    if($scope.myCroppedImage !== '') {
+    if ($scope.myCroppedImage !== '') {
       $scope.images.save($scope.myCroppedImage).then(function (result) {
         $scope.newPartyImages.push({
           image: result[0]._id,
@@ -91,7 +91,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   };
 
   $scope.saveSquareImage = function () {
-    if($scope.myCroppedImage !== '') {
+    if ($scope.myCroppedImage !== '') {
       $scope.images.save($scope.myCroppedImage).then(function (result) {
         $scope.newPartyImages.push({
           image: result[0]._id,
@@ -107,11 +107,11 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   };
 
 
-  $scope.deletePreviewImage = function(image) {
-    $scope.images.remove($scope.myCroppedImage).then(function(result) {
-      $scope.newPartyImages.splice(image, 1)
-    })
-  }
+  $scope.deletePreviewImage = function (image) {
+    $scope.images.remove($scope.myCroppedImage).then(function (result) {
+      $scope.newPartyImages.splice(image, 1);
+    });
+  };
 
 
   // $scope.removePreviewImage = function(image) {
@@ -119,3 +119,4 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   // }
 
 }]);
+
