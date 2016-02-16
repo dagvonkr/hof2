@@ -1,5 +1,5 @@
 'use strict';
-angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$reactive', '$stateParams', '$meteor', '$filter', function ($scope, $reactive, $stateParams, $meteor, $filter) {
+angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$reactive', '$stateParams', '$meteor', function ($scope, $reactive, $stateParams, $meteor) {
   $reactive(this).attach($scope);
 
   this.subscribe('users');
