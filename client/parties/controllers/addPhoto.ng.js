@@ -107,9 +107,25 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   };
 
 
+
   $scope.deletePreviewImage = function(image) {
     $scope.images.remove($scope.myCroppedImage).then(function(result) {
-      $scope.newPartyImages.splice(image, 1)
+
+
+      var currentImage = $scope.newPartyImages.indexOf(image);
+      console.log('$scope.newPartyImages.indexOf(image);', currentImage);
+
+      var imageArr = $scope.newPartyImages;
+
+      for (var i = 0; i < imageArr.length; i++) {
+        console.log('imageArr[i].image._id', imageArr);
+        if (imageArr === currentImage) {
+            $scope.newPartyImages.splice(currentImage, 1);
+            break;
+        }
+      }
+
+    
     })
   }
 
