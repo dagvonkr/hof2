@@ -25,7 +25,15 @@ if (Meteor.isServer) {
     }
   });
 
-  Meteor.publish('images', function (ids) {
-    return Images.find({});
+  Meteor.publish('images', function (party) {
+    if (!party) {
+      return Images.find({});
+    } else {
+      return Images.find({
+        _id: {
+          $in: party.images
+        }
+      });
+    }
   });
 }
