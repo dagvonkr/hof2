@@ -11,21 +11,29 @@ Images = new FS.Collection('images', {
 
 if (Meteor.isServer) {
   Images.allow({
-    insert: function(userId) {
+    insert: function (userId) {
       return userId;
     },
-    remove: function(userId) {
+    remove: function (userId) {
       return userId;
     },
-    download: function() {
+    download: function () {
       return true;
     },
-    update: function(userId) {
+    update: function (userId) {
       return userId;
     }
   });
 
-  Meteor.publish('images', function() {
-    return Images.find({});
+  Meteor.publish('images', function (party) {
+    if (!party) {
+      return Images.find({});
+    } else {
+      return Images.find({
+        _id: {
+          $in: party.images
+        }
+      });
+    }
   });
 }

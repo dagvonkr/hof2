@@ -191,18 +191,28 @@ a:hover{
 
 .menu {
     position: relative;
+    font-family: 'Gotham-Bold';
     padding: 0px 20px 0px 20px;
     margin-top: 100px;
     width: 100%;
     margin-left: 10%;
 }
 
+.menu-sub-view {
+    width: 80%;
+}
+
 .menu-nav{
     position: relative;
-    font-family: 'Gotham-Bold';
     font-size: 14px;
     margin-top: 10px;
     letter-spacing: 1px;
+}
+
+.menu-nav-sub {
+    font-family: 'Gotham-Bold';
+    font-size: 12px;
+    line-height: 18px;
 }
 
 .nettbutikk {
@@ -220,6 +230,18 @@ a:hover{
     margin-top: 50px;
     margin-left: 14px;
 }
+
+.nettbutikk-sub {
+    position: static;
+}
+.kontakt-sub {
+    position: static;
+}
+.om-sub {
+    position: static;
+}
+
+
 
 .houseoffam-line {
     position: relative;
@@ -250,10 +272,7 @@ a:hover{
     }
 }
 
-
-
 .houseoffam-logo {
-    font-family: 'Gotham-Bold';
     text-align: right;
     font-size: 30px;
     letter-spacing: 2px;
@@ -261,7 +280,13 @@ a:hover{
     display: inline-block;
     margin-left: 88px;
     margin-top: -80px;
+}
 
+.houseoffam-logo-sub {
+    font-family: 'Gotham-Bold';
+    font-size: 25px;
+    float: right;
+    margin-top: -50px;
 }
 
 .post-header {

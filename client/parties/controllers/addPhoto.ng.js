@@ -14,7 +14,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
       reader.readAsDataURL(files[0]);
       $scope.images.save(files[0]);
     }
-    else{
+    else {
       $scope.imgSrc = undefined;
     }
   };
@@ -33,7 +33,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
       reader.readAsDataURL(files[0]);
       $scope.images.save(files[0]);
     }
-    else{
+    else {
       $scope.imgSrc2 = undefined;
     }
   };
@@ -53,13 +53,13 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
       reader.readAsDataURL(files[0]);
       $scope.images.save(files[0]);
     }
-    else{
+    else {
       $scope.imgSrc3 = undefined;
     }
   };
 
   $scope.saveTallRectangleImage = function () {
-    if($scope.myCroppedImage !== '') {
+    if ($scope.myCroppedImage !== '') {
       $scope.images.save($scope.myCroppedImage).then(function (result) {
         $scope.newPartyImages.push({
           image: result[0]._id,
@@ -75,7 +75,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   };
 
   $scope.saveRectangleImage = function () {
-    if($scope.myCroppedImage !== '') {
+    if ($scope.myCroppedImage !== '') {
       $scope.images.save($scope.myCroppedImage).then(function (result) {
         $scope.newPartyImages.push({
           image: result[0]._id,
@@ -91,7 +91,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   };
 
   $scope.saveSquareImage = function () {
-    if($scope.myCroppedImage !== '') {
+    if ($scope.myCroppedImage !== '') {
       $scope.images.save($scope.myCroppedImage).then(function (result) {
         $scope.newPartyImages.push({
           image: result[0]._id,
@@ -108,26 +108,13 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
 
 
 
-  $scope.deletePreviewImage = function(image) {
-    $scope.images.remove($scope.myCroppedImage).then(function(result) {
+  $scope.deletePreviewImage = function (image) {
+    $scope.images.remove($scope.myCroppedImage).then(function (result) {
+      $scope.newPartyImages.splice(image, 1);
+    });
+  };
 
-      var currentImage = $scope.newPartyImages.indexOf(image);
-      console.log('$scope.newPartyImages.indexOf(image);', currentImage);
-
-      var imageArr = $scope.newPartyImages;
-
-      for (var i = 0; i < imageArr.length; i++) {
-        console.log('imageArr[i].image._id', imageArr);
-        if (imageArr === currentImage) {
-            $scope.newPartyImages.splice(currentImage, 1);
-            break;
-        }
-      }
-
-      //   $scope.parties.splice($scope.parties.indexOf(image), 1);
-    
-    })
-  }
 
 
 }]);
+

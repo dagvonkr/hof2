@@ -1,26 +1,32 @@
-<div class="post">
+<div class="menu-sub-view">
+    <div class="menu-nav-sub nettbutikk-sub">
+      <div> NETTBUTIKK </div>
+    </div>
+    <div class="menu-nav-sub kontakt-sub">
+      <a href="/kontakt.ng.html">
+        KONTAKT
+      </a>
+    </div>
+    <div class="menu-nav-sub om-sub">
+      OM
+    </div>
 
-  <h3> {{party.name}} </h3>
-
-  <img ng-src="{{ getMainImage(party.images) }}" class="main-image">
-  Dette funker da: {{ getMainImage(party.images)}}
-
-  <p> {{party.description}} </p>
-
-  All images:
-  <div class="all-images" ng-repeat="images in party.images">
-    <div ng-repeat="(id, image) in images">
-      <img ng-src="{{getAllImages(party.images)}}"/> <br/>
-      {{image}}
-    </div>	
+  
+  <div class="houseoffam-logo-sub">
+    HOUSE OF FAM
   </div>
+</div>
 
 
-  <br>
-  Prøver igjen her: 
-  <br>
-  <img ng-src="{{getAllImages(party.images)}}">
-  {{getAllImages(party.images)}}
-
-
+<div class="post">
+  <h3>{{name}}</h3>
+  <p>{{description}}</p>
+  <div class="all-images" ng-repeat="image in images">
+    <div class="image">
+      <img ng-src="{{image}}" />
+    </div>
+  </div>
+  <div class="main-image">
+    <img ng-src="{{mainImageUrl}}" alt="" />
+  </div>
 </div>
