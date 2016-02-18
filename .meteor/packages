@@ -26,7 +26,7 @@ cfs:gridfs
 danialfarid:ng-file-upload
 vitalets:angular-xeditable
 netanelgilad:angular-sortable-view
-correpw:ng-img-crop-full-extended@=0.4.3
+correpw:ng-img-crop-full-extended
 linto:jquery-ui
 twbs:bootstrap
 peppelg:bootstrap-3-modal

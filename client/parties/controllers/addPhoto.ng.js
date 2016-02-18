@@ -107,6 +107,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   };
 
 
+
   $scope.deletePreviewImage = function (image) {
     $scope.images.remove($scope.myCroppedImage).then(function (result) {
       $scope.newPartyImages.splice(image, 1);
@@ -114,9 +115,6 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   };
 
 
-  // $scope.removePreviewImage = function(image) {
-  //   $scope.parties.splice($scope.parties.indexOf(image), 1);
-  // }
 
 }]);
 

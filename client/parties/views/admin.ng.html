@@ -50,7 +50,7 @@
     </div> <!-- class="image-upload" -->
     <div class="main-image-preview" sv-root sv-part="newPartyImage">
       <div sv-element ng-repeat="image in newPartyImages">
-        <button ng-click="deletePreviewImage()"> X </button>
+        <button ng-click="deletePreviewImage(image)"> X </button>
         <br>
         <div class="main-image" ng-show="$index === 0"></div>
         <img draggable="false" ng-src="{{image.image.url()}}" />
