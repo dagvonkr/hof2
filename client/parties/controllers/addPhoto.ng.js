@@ -64,8 +64,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
         $scope.newPartyImages.push({
           image: result[0]._id,
           dimensions: {
-            height: 450,
-            width: 375
+            height: 906,
+            width: 1065
           }
         });
         $scope.imgSrc = undefined;
@@ -80,8 +80,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
         $scope.newPartyImages.push({
           image: result[0]._id,
           dimensions: {
-            height: 300,
-            width: 750
+            height: 906,
+            width: 518
           }
         });
         $scope.imgSrc2 = undefined;
@@ -96,8 +96,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
         $scope.newPartyImages.push({
           image: result[0]._id,
           dimensions: {
-            height: 375,
-            width: 375
+            height: 906,
+            width: 906
           }
         });
         $scope.imgSrc3 = undefined;

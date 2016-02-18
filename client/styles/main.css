@@ -199,6 +199,7 @@ a:hover{
 }
 
 .menu-sub-view {
+    font-family: 'Gotham-Bold';
     width: 80%;
 }
 
@@ -210,7 +211,7 @@ a:hover{
 }
 
 .menu-nav-sub {
-    font-family: 'Gotham-Bold';
+    margin-left: 20%;
     font-size: 12px;
     line-height: 18px;
 }
@@ -230,17 +231,6 @@ a:hover{
     margin-top: 50px;
     margin-left: 14px;
 }
-
-.nettbutikk-sub {
-    position: static;
-}
-.kontakt-sub {
-    position: static;
-}
-.om-sub {
-    position: static;
-}
-
 
 
 .houseoffam-line {
@@ -323,6 +313,16 @@ a:hover{
 .article-text {
     width: 75%;
 }
+
+.image-detail-view{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 100%;
+
+}
+
 
 @media screen and (max-width : 720px) { 
 
