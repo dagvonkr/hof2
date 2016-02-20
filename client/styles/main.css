@@ -200,7 +200,6 @@ a:hover{
 
 .menu-sub-view {
     font-family: 'Gotham-Bold';
-    width: 80%;
 }
 
 .menu-nav{
@@ -275,6 +274,7 @@ a:hover{
 .houseoffam-logo-sub {
     font-family: 'Gotham-Bold';
     font-size: 25px;
+    margin-right: 20%;
     float: right;
     margin-top: -50px;
 }
@@ -312,6 +312,19 @@ a:hover{
 
 .article-text {
     width: 75%;
+}
+
+
+.header-detail-view {
+    font-family: 'Gotham-Bold';
+    font-size: 75px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    max-width: 80%;
+
 }
 
 .image-detail-view{
