@@ -9,10 +9,8 @@ angular-meteor-data@0.1.0
 angular-templates@0.0.3
 angular-with-blaze@1.2.1
 angular:angular@1.4.8
-angularui:angular-ui-bootstrap@0.13.0
 angularui:angular-ui-router@0.2.15
 angularutils:pagination@0.9.1_2
-anti:i18n@0.4.3
 autoupdate@1.2.4
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
@@ -37,12 +35,14 @@ cfs:http-publish@0.0.13
 cfs:power-queue@0.9.11
 cfs:reactive-list@0.0.9
 cfs:reactive-property@0.0.4
+cfs:s3@0.1.3
 cfs:standard-packages@0.5.9
 cfs:storage-adapter@0.2.3
 cfs:tempstore@0.1.5
 cfs:upload-http@0.0.20
 cfs:worker@0.1.4
 check@1.1.0
+chrismbeckett:toastr@2.1.2_1
 correpw:ng-img-crop-full-extended@0.4.7
 danialfarid:ng-file-upload@5.0.9
 dburles:mongo-collection-instances@0.3.4
@@ -65,7 +65,6 @@ hot-code-push@1.0.0
 html-tools@1.0.5
 htmljs@1.0.5
 http@1.1.1
-ian:accounts-ui-bootstrap-3@1.2.89
 id-map@1.0.4
 jquery@1.11.4
 lai:collection-extensions@0.1.4
@@ -109,12 +108,10 @@ spacebars@1.0.7
 spacebars-compiler@1.0.7
 srp@1.0.4
 standard-minifiers@1.0.2
-stylus@2.511.1
 templating@1.1.5
 templating-tools@1.0.0
 tmeasday:publish-counts@0.7.3
 tracker@1.0.9
-twbs:bootstrap@3.3.6
 twitter@1.1.5
 ui@1.0.8
 underscore@1.0.4

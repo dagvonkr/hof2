@@ -28,8 +28,7 @@ vitalets:angular-xeditable
 netanelgilad:angular-sortable-view
 correpw:ng-img-crop-full-extended
 linto:jquery-ui
-twbs:bootstrap
 peppelg:bootstrap-3-modal
-angularui:angular-ui-bootstrap
-ian:accounts-ui-bootstrap-3
 underscore
+cfs:s3
+chrismbeckett:toastr
