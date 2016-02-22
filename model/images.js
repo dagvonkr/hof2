@@ -9,7 +9,7 @@ if (Meteor.isServer) {
 
   Images = new FS.Collection("images", {
     stores: [imageStore],
-    filters: {
+    filter: {
       allow: {
         contentTypes: ['image/*']
       }
@@ -45,12 +45,16 @@ if (Meteor.isServer) {
 }
 
 if (Meteor.isClient) {
-  var imageStore = new FS.Store.S3("images");
+  var imageStore = new FS.Store.S3("images", {
+    beforeWrite: function (file) {
+      console.log('Writing it!', file);
+    }
+  });
   Images = new FS.Collection("Images", {
     stores: [imageStore],
     filter: {
       allow: {
-        contentTypes: ['images/*']
+        contentTypes: ['image/*']
       },
       onInvalid: function(message) {
         toastr.error(message);
