@@ -1,13 +1,13 @@
 if (Meteor.isServer) {
 
-  var imageStore = new FS.Store.S3('original', {
-    "accessKeyId" : "AKIAIYQP7KLRMJZZTKUQ",
-    "secretAccessKey" : "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",
-    "bucket" : "houseoffam2"
+  const imageStore = new FS.Store.S3('original', {
+    accessKeyId: 'AKIAIYQP7KLRMJZZTKUQ',
+    secretAccessKey: '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',
+    bucket: 'houseoffam2'
   });
 
 
-  Images = new FS.Collection("images", {
+  Images = new FS.Collection('images', {
     stores: [imageStore],
     filter: {
       allow: {
@@ -45,18 +45,14 @@ if (Meteor.isServer) {
 }
 
 if (Meteor.isClient) {
-  var imageStore = new FS.Store.S3("images", {
-    beforeWrite: function (file) {
-      console.log('Writing it!', file);
-    }
-  });
-  Images = new FS.Collection("Images", {
+  const imageStore = new FS.Store.S3('original');
+  Images = new FS.Collection('images', {
     stores: [imageStore],
     filter: {
       allow: {
         contentTypes: ['image/*']
       },
-      onInvalid: function(message) {
+      onInvalid: function (message) {
         toastr.error(message);
       }
     }
