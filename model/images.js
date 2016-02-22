@@ -1,15 +1,21 @@
-Images = new FS.Collection('images', {
-  stores: [
-    new FS.Store.GridFS('original')
-  ],
-  filters: {
-    allow: {
-      contentTypes: ['image/*']
-    }
-  }
-});
-
 if (Meteor.isServer) {
+
+  var imageStore = new FS.Store.S3('original', {
+    "accessKeyId" : "AKIAIYQP7KLRMJZZTKUQ",
+    "secretAccessKey" : "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",
+    "bucket" : "houseoffam2"
+  });
+
+
+  Images = new FS.Collection("images", {
+    stores: [imageStore],
+    filters: {
+      allow: {
+        contentTypes: ['image/*']
+      }
+    }
+  });
+
   Images.allow({
     insert: function (userId) {
       return userId;
@@ -34,6 +40,21 @@ if (Meteor.isServer) {
           $in: party.images
         }
       });
+    }
+  });
+}
+
+if (Meteor.isClient) {
+  var imageStore = new FS.Store.S3("images");
+  Images = new FS.Collection("Images", {
+    stores: [imageStore],
+    filter: {
+      allow: {
+        contentTypes: ['images/*']
+      },
+      onInvalid: function(message) {
+        toastr.error(message);
+      }
     }
   });
 }
