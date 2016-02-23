@@ -42,6 +42,12 @@ angular.module('hof2').config(['$urlRouterProvider', '$stateProvider', '$locatio
         }
       }
     })
+
+    .state('kontakt', {
+      url: '/kontakt',
+      templateUrl: 'client/otherviews/views/kontakt.ng.html'
+    })
+
     // all the auth views:
     .state('login', {
       url: '/login',

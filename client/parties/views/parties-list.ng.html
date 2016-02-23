@@ -4,22 +4,27 @@
 
 <div class="post-wrapper">
   <div class="menu">
+    <div class="houseoffam-logo-mobile">
+     HOUSE OF FAM
+    </div>
     <div class="houseoffam-menu">
       <div class="menu-nav nettbutikk">
-        <div class="glitch"> NETTBUTIKK </div>
+        <a href="http://fam-irvoll.myshopify.com/collections/frontpage" class="menu-nav-hover"> NETTBUTIKK </a>
       </div>
       <div class="menu-nav kontakt">
-        <a href="/kontakt.ng.html">
+        <a href="/kontakt" class="menu-nav-hover">
           KONTAKT
         </a>
       </div>
       <div class="menu-nav om">
-        OM
+        <a href="/om" class="menu-nav-hover">
+          OM
+        </a>
       </div>
     </div>
     <div class="houseoffam-line"> </div>
     <div class="houseoffam-logo">
-      HOUSE OF FAM
+      <a href="/">HOUSE OF FAM</a>
     </div>
   </div>		
 
@@ -39,12 +44,9 @@
 		<!-- </div>	 -->
 	</div>     
     </a>
-
-    <img ng-src="{{ getMainImage(party.images) }}" class="main-image">          
-    <!-- <div ng-if="party.images && party.images.length > 0" ng-style="getMainImage(party.images)" class="main-image">
-    </div> -->   
+      <img ng-src="{{ getMainImage(party.images) }}" class="main-image">          
     <p class="description">{{party.description}}</p>
   </div>
-</div>
+</div> <!-- post-wrapper -->
 
 <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>

@@ -64,9 +64,10 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
         $scope.newPartyImages.push({
           image: result[0]._id,
           dimensions: {
-            height: 906,
-            width: 1065
-          }
+            height: 432,
+            width: 508
+          },
+          articleDescription: '' 
         });
         $scope.imgSrc = undefined;
         $scope.myCroppedImage = '';
@@ -80,9 +81,10 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
         $scope.newPartyImages.push({
           image: result[0]._id,
           dimensions: {
-            height: 906,
-            width: 518
-          }
+            height: 432,
+            width: 247
+          },
+          articleDescription: ''
         });
         $scope.imgSrc2 = undefined;
         $scope.myCroppedImage = '';
@@ -96,9 +98,10 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
         $scope.newPartyImages.push({
           image: result[0]._id,
           dimensions: {
-            height: 906,
-            width: 906
-          }
+            height: 432,
+            width: 432
+          },
+          articleDescription: ''
         });
         $scope.imgSrc3 = undefined;
         $scope.myCroppedImage = '';

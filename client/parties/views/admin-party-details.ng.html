@@ -2,51 +2,33 @@
 
 	<label>Is public</label>
 	<input type="checkbox" ng-model="party.public">
-	<div class="cms">
-	    Header Top: <input ng-model="party.style.header.top" id="top" type="text">
-  	</div>
-  	<div class="cms">
-	    Header Left: <input ng-model="party.style.header.left" id="left" type="text">
-  	</div>
-  	<div class="cms">
-		Header Width: <input ng-model="party.style.header.width" id="width" type="text">
-  	</div>
-  	<div class="cms">
-		Header Font-size: <input ng-model="party.style.header.fontSize" id="fontSize" type="text">
-  	</div>
-
-  	<div class="cms">
-		Header Color: <select ng-model="party.style.header.color" id="color" type="text"> 
-		<option value="#d7548"> Orange </option>
-		<option value="#2d2c2c"> Black </option>
-		<option value="#529493"> Green </option>
-		<option value="#fbfdfd"> White </option>
-		</select>
-  	</div>
-
-  	<div class="cms">
-		Text align: <select ng-model="party.style.header.textAlign" id="color" type="text"> 
-		<option value="left"> Left </option>
-		<option value="center"> Center </option>
-		<option value="right"> Right </option>
-		</select>
-  	</div>
 	
 
-</div>
-
-<div class="article-editor">
-	<h3> <textarea class="post-header" 
+	<input class="header-detail-view" 
 	ng-style="{
-	'font-size' : party.style.header.fontSize,
-	'color' : party.style.header.color,
-	'text-align' : party.style.header.textAlign
-}" ng-model="party.name" id="nameInput" type="text"> </textarea> </h3>
+	'color' : party.style.header.color
+}" ng-model="party.name" id="nameInput" type="text">
 
 
 	<textarea ng-model="party.description" class="article-text">  </textarea>
+	
+	<div ng-repeat="image in images" class="image-detail-view">
+		
+
+      <img class="image-detail" ng-src="{{image}}" />
 
 
-</div>
+	<textarea type="text" class="article-description" ng-model="party.image.articleDescription"> </textarea>
+
+      <!-- <a href="#" editable-text="image.articleDescription" onbeforesave="updateDescription($data, image)" class="article-description-edit">{{ image.articleDescription || 'Click here to add text' }}</a> -->
+
+
+    </div>
+
+
+
+
+</div>	
+
 
 

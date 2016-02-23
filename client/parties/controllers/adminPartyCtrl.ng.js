@@ -24,10 +24,11 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       // Link the images and the order to the new party
       if ($scope.newPartyImages && $scope.newPartyImages.length > 0) {
         $scope.newParty.images = [];
-        _.forEach($scope.newPartyImages, ({image: {_id}, dimensions}) => {
+        _.forEach($scope.newPartyImages, ({image: {_id}, dimensions, articleDescription}) => {
           $scope.newParty.images.push({
             id: _id,
-            dimensions
+            dimensions,
+            articleDescription
           });
         });
       }

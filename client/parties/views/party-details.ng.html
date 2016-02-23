@@ -1,10 +1,13 @@
 <div class="details-view-wrapper">
   <div class="menu-sub-view">
+    <div class="houseoffam-logo-mobile">
+      <a href="/" class="menu-nav-hover"> HOUSE OF FAM</a>
+    </div>
       <div class="menu-nav-sub nettbutikk-sub">
-        <div> NETTBUTIKK </div>
+        <a href="http://fam-irvoll.myshopify.com/collections/frontpage" class="menu-nav-hover"> NETTBUTIKK </a>
       </div>
       <div class="menu-nav-sub kontakt-sub">
-        <a href="/kontakt.ng.html">
+        <a href="/kontakt">
           KONTAKT
         </a>
       </div>
@@ -14,7 +17,9 @@
 
     
     <div class="houseoffam-logo-sub">
+      <a href="/">
       HOUSE OF FAM
+      </a>
     </div>
   </div>
 
@@ -23,9 +28,11 @@
     <h3 class="header-detail-view" ng-style="{
       'color' : party.style.header.color
     }">{{name}}</h3>
-    <p>{{description}}</p>
-    <div class="image-detail-view" ng-repeat="image in images">
-      <img ng-src="{{image}}" />
+    <p class="description-details">{{description}}</p>
+    <div class="image-detail-view-2">
+      <div ng-repeat="image in images" class="image-detail-view">
+        <img ng-src="{{image}}"  class="image-detail"/>
+      </div>
     </div>
   <!--   <div class="main-image">
       <img ng-src="{{mainImageUrl}}" alt="" />

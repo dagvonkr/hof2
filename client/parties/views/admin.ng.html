@@ -16,7 +16,7 @@
       </div>
       <div ng-show="imgSrc" class="ng-crop-container-tall-rectangle">
         <button ng-click="saveTallRectangleImage()" ng-disabled="!imgSrc"> Save Image</button>
-        <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.85" result-image="myCroppedImage" result-image-size='{w: 720,h: 847}'> </img-crop>
+        <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.85" result-image="myCroppedImage" result-image-size='{w: 432,h: 508}'> </img-crop>
       </div>
 
       <!-- Image drop rectangle -->
@@ -29,7 +29,7 @@
       </div>
       <div ng-show="imgSrc2" class="ng-crop-container-rectangle">
         <button ng-click="saveRectangleImage()" ng-disabled="!imgSrc2"> Save Image</button>
-        <img-crop image="imgSrc2" area-type="rectangle" aspect-ratio="1.75" result-image="myCroppedImage" result-image-size='{w: 720,h: 411}'> </img-crop>
+        <img-crop image="imgSrc2" area-type="rectangle" aspect-ratio="1.75" result-image="myCroppedImage" result-image-size='{w: 648,h: 370}'> </img-crop>
       </div>
 
       <!-- Image drop square -->
@@ -42,7 +42,7 @@
       </div>
       <div ng-show="imgSrc3" class="ng-crop-container-square">
         <button ng-click="saveSquareImage()" ng-disabled="!imgSrc3"> Save Image</button>
-        <img-crop image="imgSrc3" area-type="square" aspect-ratio="1" result-image="myCroppedImage" result-image-size='{w: 720,h: 720}'> </img-crop>
+        <img-crop image="imgSrc3" area-type="square" aspect-ratio="1" result-image="myCroppedImage" result-image-size='{w: 432,h: 432}'> </img-crop>
       </div>
       
       <br>
@@ -83,6 +83,13 @@
 <br>
 <div class="post-wrapper">
   <div  class="post" dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
+    <button ng-click="remove(party)">X</button>
+    <!-- Settings Modal -->
+    <button
+      id="settings-button"
+      ng-click="openSettingsModal(party)">
+      Settings
+    </button>
     <a href="/admin/{{party._id}}">
       <div class="post-header"  ng-style="{
         'top': party.style.header.top || '50px',
@@ -99,13 +106,6 @@
     <!-- <div ng-if="party.images && party.images.length > 0" ng-style="getMainImage(party.images)" class="main-image">
     </div> -->
     <p class="description">{{party.description}}</p>
-    <button ng-click="remove(party)">X</button>
-    <!-- Settings Modal -->
-    <button
-      id="settings-button"
-      ng-click="openSettingsModal(party)">
-      Settings
-    </button>
   </div>
 </div>  
 <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>

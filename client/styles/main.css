@@ -3,6 +3,24 @@ body {
 	background-color: #fbfdfd;
 }
 
+a {
+    text-decoration: none;
+    color: #2d2c2c;
+}
+
+a:visited{
+    text-decoration: none;
+}
+
+
+a:hover {
+    position: relative;
+    color: #333333;
+}
+
+
+
+
 .image-upload{
     width: 50%;
     display: flex;
@@ -45,6 +63,7 @@ body {
 }
 
 .main-image-preview {
+    width: 50%;
     margin-left: 8%;
     margin-top: 20px;
 }
@@ -120,19 +139,7 @@ textarea {
     margin-bottom: 50px;
 }
 
-a {
-    text-decoration: none;
-    color: #2d2c2c;
-}
 
-a:visited{
-    text-decoration: none;
-}
-
-a:hover{
-
-    border-bottom: 3px solid #2d2c2c;
-}
 
 .post-header-pre {
     z-index: 500;
@@ -193,7 +200,7 @@ a:hover{
     position: relative;
     font-family: 'Gotham-Bold';
     padding: 0px 20px 0px 20px;
-    margin-top: 100px;
+    margin-top: 50px;
     width: 100%;
     margin-left: 10%;
 }
@@ -244,22 +251,16 @@ a:hover{
 
 }
 
-.glitch {
-  display:inline-block;
-  cursor: pointer;
-}
-.glitch:hover{
-  animation: noise-3 1s linear infinite;
+.menu-nav-hover:hover:after {
+    text-decoration: none;
+    content: url(/arrow.png);
+    display: block;
+    position: absolute;
+    left: -50px; 
+    top: 1px; 
 }
 
-@keyframes noise-3 {
-  0%,3%,5%,42%,44%,100% {opacity: 1; transform: scaleY(1);}
-  4.3% {opacity: 1; transform: scaleY(1.5);}
-  43% {opacity: 1; transform: scaleX(10); 
-    transform: scaleY(.1); 
-    rotate: 60deg;
-    }
-}
+
 
 .houseoffam-logo {
     text-align: right;
@@ -269,6 +270,10 @@ a:hover{
     display: inline-block;
     margin-left: 88px;
     margin-top: -80px;
+}
+
+.houseoffam-logo-mobile {
+    visibility: hidden;
 }
 
 .houseoffam-logo-sub {
@@ -290,12 +295,14 @@ a:hover{
     margin-left: 8px;
 }
 
+
 .main-image {
-    position: relative;
-    margin: 0 auto;
     max-width: 100%;
     margin: 0px 10px 0px 10px;    
 }
+
+
+
 .description {
     font-family: 'GothamLight';
     font-size: 12px;
@@ -314,33 +321,185 @@ a:hover{
     width: 75%;
 }
 
-
 .header-detail-view {
     font-family: 'Gotham-Bold';
     font-size: 75px;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 8px;
-    margin-top: 100px;
-    margin-bottom: 100px;
-    max-width: 80%;
+    margin-top: 70px;
+    margin-bottom: 30px;
+    max-width: 100%;
 
 }
 
 .image-detail-view{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    max-width: 100%;
+    margin-top: 20px;
+}
 
+.image-detail-view-2{
+    display: inline;
+    text-align: center;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.image-detail {
+    max-width: 90%;
+
+}
+
+.description-details {
+    font-family: 'GothamMedium';
+    font-size: 20px;
+    margin: 0 auto;
+    text-align: center;
+    letter-spacing: 0.4px;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.article-description{
+    position: relative;
+    display: block;
+    width: 720px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+#map {
+    width: 100%;
+    height: 500px;
 }
 
 
 @media screen and (max-width : 720px) { 
 
-.post-header {
+.menu {
+    position: relative;
+    width: 100%;
+}
 
+
+.menu-nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.nettbutikk{
+    position: relative;
+    display: inline-block;
+    background-color: #f4f4f4;
+    padding: 7px 10px 7px 10px;
+    font-size: 10px;
+    margin-top: 0px;
+    margin-left: 0px;
+}
+.kontakt{
+    position: relative;
+    display: inline-block;
+    background-color: #f4f4f4;
+    padding: 7px 15px 7px 15px;
+    font-size: 10px;
+    margin-top: 0px;
+    margin-left: 10px;
+}
+.om{
+    position: relative;
+    display: inline-block;
+    background-color: #f4f4f4;
+    padding: 7px 20px 7px 20px;
+    font-size: 10px;
+    margin-top: 0px;
+    margin-left: 20px;
+}
+
+/*Må skirve alt om igjrn her for mobile view til details view */
+
+.menu-nav-sub{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.nettbutikk-sub{
+    position: relative;
+    display: inline-block;
+    background-color: #f4f4f4;
+    padding: 7px 10px 7px 10px;
+    font-size: 10px;
+    margin-top: 0px;
+    margin-left: 0px;
+}
+.kontakt-sub{
+    position: relative;
+    display: inline-block;
+    background-color: #f4f4f4;
+    padding: 7px 15px 7px 15px;
+    font-size: 10px;
+    margin-top: 0px;
+    margin-left: 10px;
+}
+.om-sub{
+    position: relative;
+    display: inline-block;
+    background-color: #f4f4f4;
+    padding: 7px 20px 7px 20px;
+    font-size: 10px;
+    margin-top: 0px;
+    margin-left: 20px;
+}
+
+.houseoffam-line {
+    display: none;
+}
+
+.menu-nav-hover:hover:after {
+    text-decoration: none;
+
+}
+
+.houseoffam-logo {
+    display: none;
+}
+
+.houseoffam-logo-sub {
+    display: none;
+}
+
+.houseoffam-logo-mobile {
+    visibility: visible;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+
+.menu-nav-hover:hover:after {
+    text-decoration: none;
+    content: none;
+    background: #d4d4d4;
+}
+
+.post-header{
+    font-size: 50px !important;
+    top: 35px !important;
+    text-align: center !important;
+}
+
+.header-detail-view{
+    font-size: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.description-details{
+    font-size: 16px;
 }
 
 
