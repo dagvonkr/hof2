@@ -1,5 +1,16 @@
 # hof2
 
+Task #4 
+
+
+Under each image in the admin-party-details there can be added text underneath. I have made a property called articleDescription under each image where it should be stored. 
+
+<br>
+
+Also the client should be able to hit enter to make a new line (br). Also be able to mark some text and make it bold and be able to mark text and make it a link. 
+
+---------------------------------------------------------------
+
 Taks #3
 
 <br>
