@@ -6,7 +6,7 @@ Task #4
 
 Under each image in the admin-party-details there can be added text underneath. I have made a property called articleDescription under each image where it should be stored. 
 
-I want to use the "<a href="#" editable-text="" onbeforesave="">" to put in the text. This is added so I need you to save it to each image. 
+I want to use the a href="#" editable-text="" onbeforesave="" to put in the text. This is added so I need you to save it to each image. 
 <br>
 
 After that, the client should be able to hit enter to make a new line (<br>). Also be able to mark some text and make it bold and be able to mark text and make it a link. 
