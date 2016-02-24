@@ -9,6 +9,7 @@ angular-meteor-data@0.1.0
 angular-templates@0.0.3
 angular-with-blaze@1.2.1
 angular:angular@1.4.8
+angularui:angular-ui-bootstrap@0.13.0
 angularui:angular-ui-router@0.2.15
 angularutils:pagination@0.9.1_2
 autoupdate@1.2.4
