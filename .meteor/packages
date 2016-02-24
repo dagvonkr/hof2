@@ -32,3 +32,7 @@ peppelg:bootstrap-3-modal
 underscore
 cfs:s3
 chrismbeckett:toastr
+angularui:angular-ui-bootstrap
+ian:accounts-ui-bootstrap-3
+twbs:bootstrap
+fraywing:text-angular
