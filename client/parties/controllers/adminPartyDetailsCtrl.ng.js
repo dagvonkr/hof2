@@ -13,10 +13,6 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
 		$scope.description = $scope.party.description;
 
 		console.log('$scope.party', $scope.party);
-		console.log('$scope.partyImages', $scope.partyImages);
-
-		
-			
 	});
 
 
