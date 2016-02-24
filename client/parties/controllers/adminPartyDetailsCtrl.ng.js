@@ -12,7 +12,10 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
 		$scope.name = $scope.party.name;
 		$scope.description = $scope.party.description;
 
-		console.log('$scope.party', $scope.party);
+		$scope.editorcontent;
+		console.log('$scope.editorcontent', $scope.editorcontent)
+
+		console.log('$scope.party', $scope.party);	
 	});
 
 

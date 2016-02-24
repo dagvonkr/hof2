@@ -1,4 +1,4 @@
-angular.module('hof2',['angular-meteor', 'ui.router', 'ui.bootstrap', 'angularUtils.directives.dirPagination', 'ngFileUpload', 'ngImgCrop', 'xeditable', 'angular-sortable-view']);
+angular.module('hof2',['angular-meteor', 'ui.router', 'ui.bootstrap', 'angularUtils.directives.dirPagination', 'ngFileUpload', 'ngImgCrop', 'xeditable', 'angular-sortable-view', 'textAngular']);
 
 function onReady() {
   angular.bootstrap(document, ['hof2'], {

@@ -318,7 +318,8 @@ textarea {
 }
 
 .article-text {
-    width: 75%;
+    width: 50%;
+    margin: auto 0;
 }
 
 .header-detail-view {
@@ -338,7 +339,7 @@ textarea {
 }
 
 .image-detail-view-2{
-    display: inline;
+
     text-align: center;
     margin-left: 5%;
     margin-right: 5%;
@@ -362,7 +363,8 @@ textarea {
 .article-description{
     position: relative;
     display: block;
-    width: 720px;
+    font-family: 'GothamLight';
+    width: 650px;
     margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 40px;

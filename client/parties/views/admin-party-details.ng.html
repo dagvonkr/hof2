@@ -4,7 +4,7 @@
 	<input type="checkbox" ng-model="party.public">
 	
 
-	<input class="header-detail-view" 
+	<input class="header-detail-view"  
 	ng-style="{
 	'color' : party.style.header.color
 }" ng-model="name" id="nameInput" type="text">
@@ -14,11 +14,10 @@
 	
 	<div ng-repeat="image in images" class="image-detail-view">
 		
-
+	<div class="image-detail-view-2">
       <img class="image-detail" ng-src="{{image}}" />
-
-
-	<textarea type="text" class="article-description" ng-model="party.image.articleDescription"> </textarea>
+    </div>	  
+	<div class="article-description" text-angular ng-model="editorcontent"> </div>
 
       <!-- <a href="#" editable-text="image.articleDescription" onbeforesave="updateDescription($data, image)" class="article-description-edit">{{ image.articleDescription || 'Click here to add text' }}</a> -->
 
