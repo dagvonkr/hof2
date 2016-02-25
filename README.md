@@ -2,12 +2,15 @@
 
 Task #4 
 
+CRITICAL ERROR WITH UPDATING: 
 
-Under each image in the admin-party-details there can be added text underneath. I have made a property called articleDescription under each image where it should be stored. 
+Console throws this error when trying to update a post/party:
+
+{error: 409, reason: "MinimongoError: Mod on _id not allowed", details: undefined, message: "MinimongoError: Mod on _id not allowed [409]"
 
 <br>
+Under each image in the admin-party-details there can be added text underneath. Now you can just add text on the top. I have made a property called articleDescription which shoyuld be under each image where it should be stored. 
 
-Also the client should be able to hit enter to make a new line (br). Also be able to mark some text and make it bold and be able to mark text and make it a link. 
 
 ---------------------------------------------------------------
 
