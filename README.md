@@ -10,7 +10,7 @@ Console throws this error when trying to update a post/party:
 
 ---------------------------------------------------------------
 
-Task #5
+Task #4
 
 <br>
 Under each image in the admin-party-details there can be added text underneath. Now you can just add text on the top. I have made a property called articleDescription which shoyuld be under each image where it should be stored. 
