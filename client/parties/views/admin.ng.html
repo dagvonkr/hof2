@@ -1,4 +1,4 @@
-<a href="/logout"> Log ut </a>
+<!-- <a href="/logout"> Log ut </a> -->
 <br>
 <br>
 <div class="form">
@@ -72,30 +72,52 @@
 <br>
 <hr>
 <br>
-<div class="front-page">
+<!-- <div class="front-page">
   <h1>Forsiden</h1>
   <input type="search" ng-model="search" placeholder="Search">
   <select ng-model="orderProperty">
     <option value="1">Ascending</option>
     <option value="-1">Descending</option>
   </select>
-</div>
+</div> -->
+  <div class="menu">
+    <div class="houseoffam-logo-mobile">
+     HOUSE OF FAM
+    </div>
+    <div class="houseoffam-menu">
+      <div class="menu-nav nettbutikk">
+        <a href="http://fam-irvoll.myshopify.com/collections/frontpage" class="menu-nav-hover"> NETTBUTIKK </a>
+      </div>
+      <div class="menu-nav kontakt">
+        <a href="/kontakt" class="menu-nav-hover">
+          KONTAKT
+        </a>
+      </div>
+      <div class="menu-nav om">
+        <a href="/om" class="menu-nav-hover">
+          OM
+        </a>
+      </div>
+    </div>
+    <div class="houseoffam-line"> </div>
+    <div class="houseoffam-logo">
+      <a href="/">HOUSE OF FAM</a>
+    </div>
+  </div>  
 <br>
 <div class="post-wrapper">
   <div  class="post" dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
-    <button ng-click="remove(party)">X</button>
+    <button ng-click="remove(party)"><strong>SLETT</strong></button>
     <!-- Settings Modal -->
-    <button
-      id="settings-button"
-      ng-click="openSettingsModal(party)">
+    <button id="settings-button" ng-click="openSettingsModal(party)" class="settings-button">
       Settings
     </button>
     <a href="/admin/{{party._id}}">
       <div class="post-header"  ng-style="{
-        'top': party.style.header.top || '50px',
-        'left': party.style.header.left,
-        'width': party.style.header.width || '400px',
-        'font-size': party.style.header.fontSize,
+        'top': party.style.header.top + 'px'|| '250px',
+        'left': party.style.header.left + 'px',
+        'width': party.style.header.width + 'px' || '400px',
+        'font-size': party.style.header.fontSize + 'px',
         'color': party.style.header.color || '#2d2c2c',
         'text-align': party.style.header.textAlign || 'center'
         }">

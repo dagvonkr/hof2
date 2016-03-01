@@ -3,6 +3,7 @@
     <div class="houseoffam-logo-mobile">
       <a href="/" class="menu-nav-hover"> HOUSE OF FAM</a>
     </div>
+    <div class="menu-nav-sub-wrapper">
       <div class="menu-nav-sub nettbutikk-sub">
         <a href="http://fam-irvoll.myshopify.com/collections/frontpage" class="menu-nav-hover"> NETTBUTIKK </a>
       </div>
@@ -14,8 +15,8 @@
       <div class="menu-nav-sub om-sub">
         OM
       </div>
-
-    
+    </div>  
+      
     <div class="houseoffam-logo-sub">
       <a href="/">
       HOUSE OF FAM
@@ -30,8 +31,18 @@
     }">{{name}}</h3>
     <p class="description-details">{{description}}</p>
     <div class="image-detail-view-2">
+
+        <div class="article-description">
+          <div ta-bind="text" ng-model="party.editorcontent"></div>
+          <!-- {{party.editorcontent }} -->
+<!--           <span ng-bind-html="party.editorcontent | htmlToPlaintext"></span> -->
+        </div>
+
       <div ng-repeat="image in images" class="image-detail-view">
         <img ng-src="{{image}}"  class="image-detail"/>
+
+
+
       </div>
     </div>
   <!--   <div class="main-image">

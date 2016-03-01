@@ -1,25 +1,52 @@
+<div class="menu-sub-view">
+    <div class="houseoffam-logo-mobile">
+      <a href="/admin" class="menu-nav-hover"> HOUSE OF FAM</a>
+    </div>
+    <div class="menu-nav-sub-wrapper">
+      <div class="menu-nav-sub nettbutikk-sub">
+        <a href="http://fam-irvoll.myshopify.com/collections/frontpage" class="menu-nav-hover"> NETTBUTIKK </a>
+      </div>
+      <div class="menu-nav-sub kontakt-sub">
+        <a href="/kontakt">
+          KONTAKT
+        </a>
+      </div>
+      <div class="menu-nav-sub om-sub">
+        OM
+      </div>
+    </div>  
+      
+    <div class="houseoffam-logo-sub">
+      <a href="/admin">
+      HOUSE OF FAM
+      </a>
+    </div>
+  </div>
+
+
 <div class="post">
 
 	<label>Is public</label>
 	<input type="checkbox" ng-model="party.public">
 	
 
-	<input class="header-detail-view"  
+	<textarea style="overflow: visible" class="header-detail-view"  
 	ng-style="{
 	'color' : party.style.header.color
-}" ng-model="party.name" id="nameInput" type="text">
+}" ng-model="party.name" id="nameInput" type="text"> </textarea>
 
 
-	<textarea ng-model="party.description" class="article-text">  </textarea>
+	<textarea style="overflow: visible" ng-model="party.description" class="article-text">  </textarea>
+
+	<div class="article-description" text-angular ng-model="party.editorcontent" ta-toolbar="[['bold','italics'], ['insertLink']]"> </div>
 	
 	<div ng-repeat="image in images" class="image-detail-view">
 		
-	<div class="image-detail-view-2">
-      <img class="image-detail" ng-src="{{image}}" />
-    </div>	  
-	<div class="article-description" text-angular ng-model="editorcontent"> </div>
+		<div class="image-detail-view-2">
+	      <img class="image-detail" ng-src="{{image}}" />
+	    </div>	  
 
-      <!-- <a href="#" editable-text="image.articleDescription" onbeforesave="updateDescription($data, image)" class="article-description-edit">{{ image.articleDescription || 'Click here to add text' }}</a> -->
+	      <!-- <a href="#" editable-text="image.articleDescription" onbeforesave="updateDescription($data, image)" class="article-description-edit">{{ image.articleDescription || 'Click here to add text' }}</a> -->
 
 
     </div>

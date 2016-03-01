@@ -1,6 +1,19 @@
-body {
+body, html {
+    font-family: 'gotham-medium';
     width: 100%;
 	background-color: #fbfdfd;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'gotham-medium';
+}
+
+div {
+    font-family: 'gotham-medium';
+}
+
+p {
+    font-family: 'gotham-light';
 }
 
 a {
@@ -18,7 +31,10 @@ a:hover {
     color: #333333;
 }
 
-
+::-moz-selection {
+  background-color: #333333;
+  color: #fff;
+}
 
 
 .image-upload{
@@ -124,6 +140,13 @@ a:hover {
 textarea {
     resize: initial;
     height: auto;
+    border: none;
+}
+
+.form-control {
+    border: none;
+    background-color: #fbfdfd;
+
 }
 
 .post-wrapper {
@@ -145,22 +168,23 @@ textarea {
     z-index: 500;
     position: relative;
     font-size: 50px;
-    font-family: 'Gotham-Bold';
+    font-family: 'gotham-bold';
+    top: 50px;
     text-transform: uppercase;
     text-align: left; /*Lag knapper for alle typene*/
     text-decoration: none;
-    color: #d75c48;
+    color: #333333;
     background: #f8f8f8;
     outline: 0px !important;   /*bootsrap default*/
     -webkit-appearance: none;  /*bootsrap default*/
     border: none;
     height: 105px;
     margin-left: 8%;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
 }
 
 .description-pre {
-    font-family: 'GothamLight';
+    font-family: 'gotham-light';
     font-size: 12px;
     width: 600px;
     background: #f8f8f8;
@@ -176,8 +200,44 @@ textarea {
     margin-top: 50px;
 }
 
+.settings-modal {
+    background-color: #fff;
+    width: 100%;
+    height: 160px;
+    padding: 0px 20px 0px 20px;
+}
+
+.is-public input {
+    display: none;
+}
+
+.is-public span{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    display: block;
+    background: url("/red.png");
+    margin-left: -55px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.is-public input:checked + span {
+    position: absolute;
+    background: url("/green.png");
+    margin-left: -55px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+
 .cms {
     float: right;
+    margin: 10px 10px 10px 10px;
+}
+
+.color-button{
+    padding-left: 200px;
 }
 
 .modal{
@@ -185,28 +245,22 @@ textarea {
 }
 
 
-.settings-modal {
-    background-color: #fff;
-    width: 100%;
-    height: 150px;
-    padding: 20px 20px 30px 20px;
-}
-
 .modal-backdrop {
     display: none;
 }
 
 .menu {
     position: relative;
-    font-family: 'Gotham-Bold';
+    font-family: 'gotham-bold';
     padding: 0px 20px 0px 20px;
     margin-top: 50px;
     width: 100%;
     margin-left: 10%;
+    margin-top: 100px;
 }
 
 .menu-sub-view {
-    font-family: 'Gotham-Bold';
+    font-family: 'gotham-bold';
 }
 
 .menu-nav{
@@ -277,7 +331,7 @@ textarea {
 }
 
 .houseoffam-logo-sub {
-    font-family: 'Gotham-Bold';
+    font-family: 'gotham-bold';
     font-size: 25px;
     margin-right: 20%;
     float: right;
@@ -288,7 +342,9 @@ textarea {
     z-index: 500;
     position: relative;
     font-size: 50px;
-    font-family: 'Gotham-Bold';
+    width: 400px;
+    top: 50px;
+    font-family: 'gotham-bold';
     text-transform: uppercase;
     text-align: left; /*Lag knapper for alle typene*/
     text-decoration: none;
@@ -304,7 +360,7 @@ textarea {
 
 
 .description {
-    font-family: 'GothamLight';
+    font-family: 'gotham-light';
     font-size: 12px;
     width: 375px;
     text-align: right;
@@ -318,19 +374,30 @@ textarea {
 }
 
 .article-text {
-    width: 50%;
-    margin: auto 0;
+    width: 650px;
+    display: block;
+    background-color: #fbfdfd;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'gotham-medium';
+    font-size: 20px;
+    text-align: center;
 }
 
 .header-detail-view {
-    font-family: 'Gotham-Bold';
+    font-family: 'gotham-bold';
     font-size: 75px;
+    background-color: #fbfdfd;
     text-align: center;
     text-transform: uppercase;
-    letter-spacing: 8px;
+    letter-spacing: 4px;
     margin-top: 70px;
     margin-bottom: 30px;
-    max-width: 100%;
+    width: 800px;
+    max-width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 
 }
 
@@ -351,20 +418,27 @@ textarea {
 }
 
 .description-details {
-    font-family: 'GothamMedium';
+    font-family: 'gotham-medium';
     font-size: 20px;
+    display: block;
     margin: 0 auto;
     text-align: center;
+    width: 675px;
     letter-spacing: 0.4px;
     margin-top: 20px;
-    margin-left: 10px;
+    margin-bottom: 40px;
 }
 
 .article-description{
     position: relative;
+    text-align: left;
     display: block;
-    font-family: 'GothamLight';
+    background-color: #fbfdfd;
+    font-family: 'gotham-light';
+    font-size: 16px;
+    line-height: 22px;
     width: 650px;
+    border: none;
     margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 40px;
@@ -420,10 +494,10 @@ textarea {
 
 /*Må skirve alt om igjrn her for mobile view til details view */
 
-.menu-nav-sub{
+.menu-nav-sub-wrapper{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .nettbutikk-sub{
@@ -442,7 +516,7 @@ textarea {
     padding: 7px 15px 7px 15px;
     font-size: 10px;
     margin-top: 0px;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 .om-sub{
     position: relative;
@@ -476,10 +550,10 @@ textarea {
     margin: 0 auto;
     text-align: center;
     width: 100%;
-    font-size: 20px;
+    font-size: 35px;
     letter-spacing: 2px;
     margin-top: 0px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .menu-nav-hover:hover:after {
@@ -496,13 +570,25 @@ textarea {
 }
 
 .header-detail-view{
-    font-size: 30px;
-    margin-left: 20px;
-    margin-right: 20px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 40px;
+    margin-top: 40px;
 }
 
-.description-details{
+
+.description-details {
     font-size: 16px;
+    width: 90%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.article-description{
+    width: 90%;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 
