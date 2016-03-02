@@ -2,6 +2,7 @@ body, html {
     font-family: 'gotham-medium';
     width: 100%;
 	background-color: #fbfdfd;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -572,6 +573,7 @@ textarea {
     top: 35px !important;
     left: 0px !important;
     text-align: center !important;
+    width: 320px !important;
 }
 
 .header-detail-view{
