@@ -6,14 +6,9 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
 
     $scope.partyImages = _.isObject($scope.party) ? $scope.party.images : [];
     console.log('$scope.party', $scope.party);
-    console.log('$scope.party.editorcontent', $scope.party.editorcontent);
+    
 
   });
-
-
-
-
-
 
 	$reactive(this).attach($scope);
 
@@ -23,10 +18,12 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
 		  _id: $stateParams.partyId
 		});
 		$scope.partyImages = _.isObject($scope.party) ? $scope.party.images : [];
-		// $scope.name = $scope.party.name;
-		// $scope.description = $scope.party.description;
+		$scope.name = $scope.party.name;
+		$scope.description = $scope.party.description;
+		$scope.editorcontent = $scope.party.editorcontent;
 
-		// console.log('$scope.party', $scope.party);	
+		console.log('$scope.party', $scope.party);	
+		console.log('$scope.party.editorcontent', $scope.party.editorcontent);
 	});
 
 

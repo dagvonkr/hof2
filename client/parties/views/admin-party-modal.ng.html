@@ -21,10 +21,19 @@
     Color: <select ng-model="currentParty.style.header.color" id="color" type="text"> 
       <option value="#d7548">Orange</option>
       <option selected="selected" value="#2d2c2c">Black</option>
+      <option value="#5b5b5b">Grey</option>
       <option value="#529493">Green</option>
       <option value="#fbfdfd">White</option>
     </select>
   </div>
+  
+  <div class="cms color-button">
+    Font-shadow: <select ng-model="currentParty.style.header.textShadow" id="shadow" type="text">
+      <option value="none">None</option>
+      <option value="3px 3px #2e312e">Black</option>
+    </select>
+  </div>
+
   <div class="cms">
     Text-align: <select ng-model="currentParty.style.header.textAlign" id="color" type="text"> 
       <option value="left"> Left </option>
