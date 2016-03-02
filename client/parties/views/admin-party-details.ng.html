@@ -43,7 +43,7 @@
 	<div ng-repeat="image in images" class="image-detail-view">
 		
 		<div class="image-detail-view-2">
-	      <img class="image-detail" ng-src="{{image}}" />
+	      <img class="image-detail" ng-src="{{image.url()}}" />
 	    </div>	  
 
 	      <!-- <a href="#" editable-text="image.articleDescription" onbeforesave="updateDescription($data, image)" class="article-description-edit">{{ image.articleDescription || 'Click here to add text' }}</a> -->

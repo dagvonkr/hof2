@@ -14,7 +14,7 @@ Meteor.publish('parties', function (options, searchString = '') {
   });
 
   // return Parties.find(); // for debug purposes only
-  return Parties.find({
+  const parties = Parties.find({
     name: {
       $regex: `.*${searchString || ''}.*`,
       $options: 'i'
@@ -25,4 +25,6 @@ Meteor.publish('parties', function (options, searchString = '') {
       owner: this.userId
     }]
   }, options);
+  console.log('parties count:', parties.count());
+  return parties;
 });
