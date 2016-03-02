@@ -36,6 +36,11 @@ a:hover {
   color: #fff;
 }
 
+/*.fitte {
+    color: white;
+    text-shadow: 3px 3px #2e312e;
+}*/
+
 
 .image-upload{
     width: 50%;
@@ -361,7 +366,7 @@ textarea {
 
 .description {
     font-family: 'gotham-light';
-    font-size: 12px;
+    font-size: 18px;
     width: 375px;
     text-align: right;
     letter-spacing: 0.4px;

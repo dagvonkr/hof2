@@ -14,9 +14,8 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$reactive', '$
   this.subscribe('images', () => [this.getReactively('party')], () => {
     const partyImages = $scope.getReactively('partyImages');
     const partyImageIds = _.map(partyImages, ({id}) => id);
-    const images = _.filter(Images.find().fetch(), ({_id}) => _.contains(partyImageIds, _id));
-
-    $scope.images = _.map(images, image => image.url());
+    const images = Images.find().fetch();//_.filter(Images.find().fetch(), ({_id}) => _.contains(partyImageIds, _id));
+    $scope.images = images;//_.map(images, image => image.url());
     $scope.mainImageUrl = $scope.images[0]; // FIXME: the first image is the main one, right?
   });
 }]);
