@@ -33,6 +33,7 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
   };
 
   $scope.updateDescription = function ($data, image) {
+    console.warn('PartiesListCtrl --> updateDescription');
     image.update({$set: {'metadata.description': $data}});
   };
 

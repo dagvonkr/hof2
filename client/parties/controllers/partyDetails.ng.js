@@ -31,11 +31,13 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$reactive', '$
   });
   $scope.$meteorSubscribe('images').then(() => {
     $scope.images = $meteor.collection(() => {
-      return Images.find({
+      var theImages = Images.find({
         _id: {
           $in: _.map($scope.party.images, image => image.id)
         }
       });
+
+      return theImages;
     }).subscribe('images');
     $scope.mainImageUrl = $scope.images[0];
 // >>>>>>> 456cdaf85dc73d7ae69ee40d6426949eaccd7509

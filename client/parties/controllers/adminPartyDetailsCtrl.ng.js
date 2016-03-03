@@ -4,6 +4,23 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
   $scope.$meteorSubscribe('parties').then(() => {
     $scope.party = $meteor.object(Parties, $stateParams.partyId);
     $scope.partyImages = _.isObject($scope.party) ? $scope.party.images : [];
+    console.log('$scope.partyImages details-view', $scope.partyImages)
+
+      });
+
+  $scope.$meteorSubscribe('images').then( () => {
+    $scope.images = $meteor.collection(() => {
+      return Images.find({
+        _id: {
+          $in: _.map($scope.party.images, image => image.id)
+        }
+      });
+    }).subscribe('images');
+    console.log('$scope.images detailsview', $scope.images)
+// >>>>>>> 456cdaf85dc73d7ae69ee40d6426949eaccd7509
+  });
+}]);
+
 // <<<<<<< HEAD
 //     console.log('$scope.party', $scope.party);
     
@@ -38,15 +55,3 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
 //     $scope.images = _.map(images, image => image.url());
 //     $scope.mainImageUrl = $scope.images[0]; // FIXME: the first image is the main one, right?
 // =======
-  });
-  $scope.$meteorSubscribe('images').then(() => {
-    $scope.images = $meteor.collection(() => {
-      return Images.find({
-        _id: {
-          $in: _.map($scope.party.images, image => image.id)
-        }
-      });
-    }).subscribe('images');
-// >>>>>>> 456cdaf85dc73d7ae69ee40d6426949eaccd7509
-  });
-}]);

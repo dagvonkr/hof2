@@ -10,6 +10,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     'createdAt': new Date()
   };
   $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
+  console.log('$scope.images', $scope.images);
 
   $scope.newPartyImages = [];
 
@@ -39,7 +40,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   };
 
   $scope.updateDescription = function ($data, image) {
-    image.update({$set: {'metadata.description': $data}});
+    Images.update(image.image._id, {$set: {'metadata.description': $data}});
   };
 
   $scope.remove = function (party) {
@@ -78,7 +79,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     try {
       return $filter('filter')($scope.images, {_id: images[0].id})[0].url();
     } catch (error) {
-      //console.log(error);
+      console.log('getMainImage error', error);
     }
   };
 

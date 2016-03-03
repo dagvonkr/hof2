@@ -6,6 +6,8 @@ if (Meteor.isServer) {
     bucket: 'houseoffam2'
   });
 
+  // console.log( 'FS.TempStore --------->', FS.TempStore);
+  FS.TempStore.Storage = new FS.Store.FileSystem('_tempstore', { internal: true });
 
   Images = new FS.Collection('images', {
     stores: [imageStore],
