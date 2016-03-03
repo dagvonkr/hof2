@@ -12,6 +12,11 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
   console.log('$scope.images', $scope.images);
 
+  $scope.hasImagesOn = function (party) {
+    // Answers true if the given party has any images.
+    return !_.isEmpty(party.images);
+  };
+
   $scope.newPartyImages = [];
 
   $scope.addNewParty = function () {
@@ -75,11 +80,12 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   };
 
   // getting the main image
-  $scope.getMainImage = function (images) {
-    try {
-      return $filter('filter')($scope.images, {_id: images[0].id})[0].url();
-    } catch (error) {
-      console.log('getMainImage error', error);
+  $scope.getMainImageOf = function (party) {
+    // Answers the url of he first image of the given party, null otherwise.
+    if (!_.isEmpty(party.images)) {
+      return $filter('filter')($scope.images, {_id: party.images[0].id})[0].url();
+    } else {
+      return null;
     }
   };
 

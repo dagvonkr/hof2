@@ -23,7 +23,6 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
     });
   });
 
-
   $scope.getMainImage = function (images) {
     try {
       return $filter('filter')($scope.images, {_id: images[0].id})[0].url();
