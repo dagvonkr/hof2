@@ -36,4 +36,5 @@ twbs:bootstrap
 fraywing:text-angular
 angularui:angular-ui-bootstrap@0.13.0
 
-dag:ngimgcropfullextended
+correpw:ng-img-crop-full-extended
+cfs:filesystem
