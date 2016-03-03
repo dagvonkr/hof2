@@ -1,0 +1,1 @@
+crop = angular.module('ngImgCrop', []);
