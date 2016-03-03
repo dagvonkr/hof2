@@ -20,6 +20,8 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   $scope.newPartyImages = [];
 
   $scope.addNewParty = function () {
+    debugger
+
     if ($scope.newParty.name) {
       $scope.newParty.owner = $rootScope.currentUser._id;
       console.log('$scope.newPartyImages', $scope.newPartyImages);
