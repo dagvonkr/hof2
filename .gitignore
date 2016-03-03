@@ -12,7 +12,6 @@ coverage
 
 public
 mup.json
-packages
-.meteor/packages
-.meteor/versions
+
 node_modules
+
