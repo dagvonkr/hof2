@@ -23,23 +23,28 @@
 //     $scope.images = _.map(images, image => image.url());
 //     $scope.mainImageUrl = $scope.images[0]; // FIXME: the first image is the main one, right?
 // =======
-angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$reactive', '$stateParams', '$meteor', function ($scope, $reactive, $stateParams, $meteor) {
+angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams', '$meteor', function ($scope, $stateParams, $meteor) {
   $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
+
   $scope.$meteorSubscribe('parties').then(() => {
     $scope.party = $meteor.object(Parties, $stateParams.partyId);
     $scope.partyImages = $scope.party.images;
   });
+
   $scope.$meteorSubscribe('images').then(() => {
     $scope.images = $meteor.collection(() => {
+      var theseImageIds = _.map($scope.party.images, image => image.id);
       var theImages = Images.find({
         _id: {
-          $in: _.map($scope.party.images, image => image.id)
+          $in: theseImageIds
         }
       });
-
       return theImages;
-    }).subscribe('images');
-    $scope.mainImageUrl = $scope.images[0];
+    });
+    // }).subscribe('images');
+
+    // $scope.mainImageUrl = $scope.images[0];
+
 // >>>>>>> 456cdaf85dc73d7ae69ee40d6426949eaccd7509
   });
   // this.subscribe('images', () => [this.getReactively('party')], () => {
