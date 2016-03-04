@@ -80,11 +80,21 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   };
 
   // getting the main image
-  $scope.getMainImageOf = function (party) {
+  $scope.getMainImageUrlOf = function (party) {
     // Answers the url of he first image of the given party, null otherwise.
     if (!_.isEmpty(party.images)) {
-      console.log('party.images about to filter and get the first URL', party);
-      return $filter('filter')($scope.images, {_id: party.images[0].id})[0].url();
+      var filtered = $filter('filter')($scope.images, {_id: party.images[0].id});
+      var answer = null;
+      // console.log('party.images about to filter and get the first URL', party);
+
+      try {
+        answer = filtered[0].url();
+      } catch (anError) {
+        // console.warn('Could not get url of the first image after filtering: ',filtered);
+        return null;
+      }
+
+      return answer;
     } else {
       return null;
     }
