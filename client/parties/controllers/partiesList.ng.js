@@ -31,10 +31,10 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
     }
   };
 
-  $scope.updateDescription = function ($data, image) {
-    console.warn('PartiesListCtrl --> updateDescription');
-    image.update({$set: {'metadata.description': $data}});
-  };
+  // $scope.updateDescription = function ($data, image) {   probalbly best to remove
+  //   console.warn('PartiesListCtrl --> updateDescription');
+  //   Image.update({$set: {'metadata.description': $data}});
+  // };
 
   $meteor.autorun($scope, function () {
     $meteor.subscribe('parties', {
