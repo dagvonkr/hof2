@@ -1,0 +1,80 @@
+# This references the default ubuntu container
+# http://devcenter.wercker.com/docs/containers/index.html
+box: nodesource/vivid:4.2.1
+services:
+  - id: mongo
+# This is the build pipeline. Pipelines are the core of wercker
+# http://devcenter.wercker.com/docs/pipelines/index.html
+#services:
+#    - mongodb
+    # http://devcenter.wercker.com/docs/services/mongodb.html
+build:
+  # The steps that will be executed on build
+  steps:
+    #- wantedly/pretty-slack-notify@0.2.14
+    - script:
+        name : meteor install
+        code : |
+            sudo apt-get update -y
+            sudo apt-get -y install curl wget
+            #sudo apt-get -y install phantomjs
+            curl https://install.meteor.com | /bin/sh
+    # - script :
+    #     name : meteor test
+    #     code : |
+    #        meteor test-packages --velocity
+    #
+    #- script:
+    #    name: install laika
+    #    code: sudo npm install -g laika
+    #- script:
+    #    name: run laika
+    #    code: laika -D
+    - script :
+        name : meteor build
+        code : |
+            meteor build .
+    - script:
+        name: echo informations
+        code: |
+          pwd
+          ls -la
+  # after-steps:
+  #   - slack-notifier:
+  #       url: $SLACK_WEBHOOK_URL
+  #       channel: hof2
+  #       username: wrecker
+deploy:
+  steps:
+    - add-to-known_hosts:
+        hostname: 162.243.218.173
+        fingerprint: SHA256:5xwr+QJm79bBLbUqKFcQ9IDfbB37V9o4fUkAJhETSmg
+    - mktemp:
+        envvar: PRIVATEKEY_PATH
+    - create-file:
+        name: write key
+        filename: $PRIVATEKEY_PATH
+        content: $DEPLOY_KEY_PRIVATE
+        overwrite: true
+        hide-from-log: true
+
+    # Stopping not possible at the moment
+    # - script:
+    #    name: stop application
+    #    code: ssh -i $PRIVATEKEY_PATH -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $UNIX_USER@vps1003.directvps.nl stop apito-admin-$UNIX_USER
+
+    - script:
+        name: transfer application
+        code: |
+            pwd
+            ls -la
+            scp -i $PRIVATEKEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no -r source.tar.gz prepare.sh $UNIX_USER@162.243.218.173:/home/$UNIX_USER/hof2
+            ssh -i $PRIVATEKEY_PATH -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $UNIX_USER@162.243.218.173 /home/$UNIX_USER/hof2/prepare.sh
+    - script:
+        name: start application
+        code: ssh -i $PRIVATEKEY_PATH -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@162.243.218.173 start $UNIX_USER-hof2
+  # after-steps:
+  #   - slack-notifier:
+  #       url: $SLACK_WEBHOOK_URL
+  #       channel: hof2
+  #       username: wrecker
