@@ -17,15 +17,8 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
       });
     }).subscribe('images');
     console.log('$scope.images detailsview', $scope.images)
-// >>>>>>> 456cdaf85dc73d7ae69ee40d6426949eaccd7509
   });
 }]);
-
-// <<<<<<< HEAD
-//     console.log('$scope.party', $scope.party);
-    
-
-//   });
 
 // 	$reactive(this).attach($scope);
 
@@ -54,4 +47,3 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
 
 //     $scope.images = _.map(images, image => image.url());
 //     $scope.mainImageUrl = $scope.images[0]; // FIXME: the first image is the main one, right?
-// =======
