@@ -13,7 +13,7 @@
       </div>
       <div class="menu-nav kontakt">
         <a href="/kontakt" class="menu-nav-hover">
-          KONTAKT
+          KONTAKTTTT
         </a>
       </div>
       <div class="menu-nav om">
@@ -26,11 +26,11 @@
     <div class="houseoffam-logo">
       <a href="/">HOUSE OF FAM</a>
     </div>
-  </div>		
+  </div>
 
   <div class="post" dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
-    <a href="/posts/{{party._id}}"> 
-	
+    <a href="/posts/{{party._id}}">
+
 	<div class="post-header" ng-style="{
 	        'top': party.style.header.top + 'px'|| '50px',
 	        'left': party.style.header.left + 'px',
@@ -41,11 +41,11 @@
 	        'text-align': party.style.header.textAlign || 'center'
 	        }">
 		<!-- <div class="post-header-rectangle" ng-if=""> -->
-	        {{party.name}} 
+	        {{party.name}}
 		<!-- </div>	 -->
-	</div>     
+	</div>
     </a>
-      <img ng-src="{{ getMainImage(party.images) }}" class="main-image">          
+      <img ng-src="{{ getMainImage(party.images) }}" class="main-image">
     <p class="description">{{party.description}}</p>
   </div>
 </div> <!-- post-wrapper -->
