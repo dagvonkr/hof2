@@ -1,11 +1,11 @@
 if (Meteor.isServer) {
 
   var compressImage = function(fileObj, readStream, writeStream) {
-    console.log('fileObj --->', fileObj, 'readStream --->',  readStream, 'writeStream --->', writeStream);
+    // console.log('fileObj --->', fileObj, 'readStream --->',  readStream, 'writeStream --->', writeStream);
     gm(readStream, fileObj.name()).compress("BZip").quality(1).stream().pipe(writeStream);
   };
 
-  console.log('compressImage -------> ', compressImage);
+  // console.log('compressImage -------> ', compressImage);
 
 
   const imageStore = new FS.Store.S3('original', {

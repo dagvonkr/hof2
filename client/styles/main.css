@@ -355,6 +355,7 @@ textarea {
     text-align: left; /*Lag knapper for alle typene*/
     text-decoration: none;
     margin-left: 8px;
+    line-height: 110%;
 }
 
 

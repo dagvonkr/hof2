@@ -1,14 +1,10 @@
 'use strict';
-angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal) {
+angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', '$window', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal, $window) {
   // Dette er for å prø veå få til modal med data inni seg.
   let partyId = $meteor.object(Parties, $stateParams.partyId);
   $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
   $scope.$meteorSubscribe('parties');
 
-  // add/remove new post (or party...) and add image
-  $scope.newParty = {
-    'createdAt': new Date()
-  };
   $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
   console.log('$scope.images', $scope.images);
 
@@ -19,13 +15,24 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
 
   $scope.newPartyImages = [];
 
+
+  $scope.newParty = {
+    'createdAt' : new Date ()
+  };
+  // if (!$scope.newParty.createdAt) {
+  //     $scope.newParty = {
+  //       'createdAt' : new Date()
+  //     }
+  //   }
+
+
   $scope.addNewParty = function () {
-    if ($scope.newParty.name) {
+    if ($scope.newParty.name && ($scope.newPartyImages && $scope.newPartyImages.length > 0)) {
       $scope.newParty.owner = $rootScope.currentUser._id;
+
       console.log('$scope.newPartyImages', $scope.newPartyImages);
 
       // Link the images and the order to the new party
-      if ($scope.newPartyImages && $scope.newPartyImages.length > 0) {
         $scope.newParty.images = [];
         _.forEach($scope.newPartyImages, ({image: {_id}, dimensions, articleDescription}) => {
           $scope.newParty.images.push({
@@ -34,14 +41,19 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
             articleDescription
           });
         });
-      }
-
+      
       // Saving the party to parties
       $scope.parties.push($scope.newParty);
       // Reset the form
       $scope.newPartyImages = [];
       $scope.newParty = {};
+      $window.location.reload();
     }
+
+    else {
+      alert('Du må vente på at jeg har lastet opp bilde. Eller så har du ikke skrevet noe overskrift')
+    }
+
   };
 
   $scope.updateDescription = function ($data, image) {
