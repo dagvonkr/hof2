@@ -1,15 +1,15 @@
 if (Meteor.isServer) {
 
-  // var compressImage = function(fileObj, readStream, writeStream) {
-  //   // console.log('fileObj --->', fileObj, 'readStream --->',  readStream, 'writeStream --->', writeStream);
-  //   gm(readStream, fileObj.name()).compress("BZip").quality(1).stream().pipe(writeStream);
-  // };
+  var compressImage = function(fileObj, readStream, writeStream) {
+    // console.log('fileObj --->', fileObj, 'readStream --->',  readStream, 'writeStream --->', writeStream);
+    gm(readStream, fileObj.name()).compress("BZip").quality(1).stream().pipe(writeStream);
+  };
 
   // console.log('compressImage -------> ', compressImage);
 
 
   const imageStore = new FS.Store.S3('original', {
-    // transformWrite : compressImage,
+    transformWrite : compressImage,
     accessKeyId: 'AKIAIYQP7KLRMJZZTKUQ',
     secretAccessKey: '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',
     bucket: 'houseoffam2'
