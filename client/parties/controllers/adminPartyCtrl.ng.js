@@ -33,27 +33,29 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       console.log('$scope.newPartyImages', $scope.newPartyImages);
 
       // Link the images and the order to the new party
-        $scope.newParty.images = [];
-        _.forEach($scope.newPartyImages, ({image: {_id}, dimensions, articleDescription}) => {
+      $scope.newParty.images = [];
+
+      // {image: {_id}, dimensions, articleDescription}
+
+      $scope.newPartyImages.forEach( (each) => {
+          console.log(each);
           $scope.newParty.images.push({
-            id: _id,
-            dimensions,
-            articleDescription
+            id: each._id
+            , dimensions: each.dimensions
+            , articleDescription: each.articleDescription
           });
-        });
-      
+      });
+
       // Saving the party to parties
       $scope.parties.push($scope.newParty);
       // Reset the form
       $scope.newPartyImages = [];
       $scope.newParty = {};
       $window.location.reload();
-    }
 
-    else {
+    } else {
       alert('Du må vente på at jeg har lastet opp bilde. Eller så har du ikke skrevet noe overskrift')
     }
-
   };
 
   $scope.updateDescription = function ($data, image) {

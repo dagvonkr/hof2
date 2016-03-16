@@ -35,6 +35,7 @@
         <!-- class="image-upload" -->
         <div class="main-image-preview" sv-root sv-part="newPartyImage">
             <div sv-element ng-repeat="image in newPartyImages">
+                <blaze-template name="uploadProgressBar"></blaze-template>
                 <!--         <button ng-click="deletePreviewImage(image)"> X </button> -->
                 <br>
                 <div class="main-image" ng-show="$index === 0"></div>

@@ -57,9 +57,9 @@ if (Meteor.isServer) {
 }
 
 if (Meteor.isClient) {
-  const imageStore = new FS.Store.S3('original');
+  const store = new FS.Store.S3('original');
   Images = new FS.Collection('images', {
-    stores: [imageStore],
+    stores: [store],
     filter: {
       allow: {
         contentTypes: ['image/*']
