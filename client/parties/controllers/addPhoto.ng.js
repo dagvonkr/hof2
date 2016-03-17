@@ -1,6 +1,9 @@
 'use strict';
 angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   $scope.addImagesTallRectangle = function (files) {
+    console.log('AddPhotoCtrl -> files:',files);
+    if(!files) { return; }
+
     if (files.length > 0) {
       let reader = new FileReader();
 
@@ -20,6 +23,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   };
 
   $scope.addImagesRectangle = function (files) {
+    if(!files) { return; }
+
     if (files.length > 0) {
       let reader = new FileReader();
 
@@ -39,6 +44,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   };
 
   $scope.addImagesSquare = function (files) {
+    if(!files) { return; }
+
     if (files.length > 0) {
 
       let reader = new FileReader();
@@ -59,7 +66,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   };
 
   $scope.saveTallRectangleImage = function () {
-    if ($scope.myCroppedImage !== '') {
+    if (isCropping() && !_($scope.images).isEmpty()) {
       $scope.images.save($scope.myCroppedImage).then(function (result) {
         $scope.newPartyImages.push({
           image: result[0]._id,
@@ -67,7 +74,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
             height: 432,
             width: 508
           },
-          articleDescription: '' 
+          articleDescription: ''
         });
         $scope.imgSrc = undefined;
         $scope.myCroppedImage = '';
@@ -76,7 +83,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   };
 
   $scope.saveRectangleImage = function () {
-    if ($scope.myCroppedImage !== '') {
+    if (isCropping() && !_($scope.images).isEmpty()) {
       $scope.images.save($scope.myCroppedImage).then(function (result) {
         $scope.newPartyImages.push({
           image: result[0]._id,
@@ -93,7 +100,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   };
 
   $scope.saveSquareImage = function () {
-    if ($scope.myCroppedImage !== '') {
+    if (isCropping() && !_($scope.images).isEmpty()) {
       $scope.images.save($scope.myCroppedImage).then(function (result) {
         $scope.newPartyImages.push({
           image: result[0]._id,
@@ -109,15 +116,16 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
     }
   };
 
-
+  function isCropping() {
+    // Answers true if the controller is currently cropping an image.
+    return !!$scope.myCroppedImage && $scope.myCroppedImage !== '';
+  }
 
   // $scope.deletePreviewImage = function (image) {
   //   $scope.images.remove($scope.myCroppedImage).then(function (result) {
   //     $scope.newPartyImages.splice(image, 1);
   //   });
   // };
-
-
 
 }]);
 

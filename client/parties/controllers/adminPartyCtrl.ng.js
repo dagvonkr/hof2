@@ -10,7 +10,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
 
   $scope.hasImagesOn = function (party) {
     // Answers true if the given party has any images.
-    return !_.isEmpty(party.images);
+    return !!party && !_.isEmpty(party.images);
   };
 
   $scope.newPartyImages = [];
@@ -58,8 +58,10 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     }
   };
 
-  $scope.updateDescription = function ($data, image) {
-    Images.update(image.image._id, {$set: {'metadata.description': $data}});
+  $scope.updateDescription = function ($data, imageOrNull) {
+    if(!!imageOrNull) {
+      Images.update(imageOrNull.image._id, {$set: {'metadata.description': $data}});
+    }
   };
 
   $scope.remove = function (party) {
