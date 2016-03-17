@@ -2,14 +2,14 @@ if (Meteor.isServer) {
 
   var compressImage = function(fileObj, readStream, writeStream) {
     // console.log('fileObj --->', fileObj, 'readStream --->',  readStream, 'writeStream --->', writeStream);
-    gm(readStream, fileObj.name()).compress("JPEG").quality(0.3).stream().pipe(writeStream);
+    gm(readStream, fileObj.name()).compress('JPEG').quality(0.3).stream().pipe(writeStream);
   };
 
   // console.log('compressImage -------> ', compressImage);
 
 
   const imageStore = new FS.Store.S3('original', {
-    transformWrite : compressImage,
+    transformWrite: compressImage,
     accessKeyId: 'AKIAIYQP7KLRMJZZTKUQ',
     secretAccessKey: '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',
     bucket: 'houseoffam2'
@@ -23,7 +23,12 @@ if (Meteor.isServer) {
     stores: [imageStore],
     filter: {
       allow: {
-        contentTypes: ['image/*']
+
+        maxSize: 786432,  // 6MB in [Bytes]
+        allow: {
+          contentTypes: ['image/*'],
+          extensions: ['png', 'PNG', 'jpg', 'JPG', 'jpeg', 'JPEG']
+        }
       }
     }
   });
