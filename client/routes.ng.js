@@ -9,7 +9,10 @@ angular.module('hof2').run(['$rootScope', '$state', function ($rootScope, $state
 }]);
 
 angular.module('hof2').config(['$urlRouterProvider', '$stateProvider', '$locationProvider', function ($urlRouterProvider, $stateProvider, $locationProvider) {
-  $locationProvider.html5Mode(true);
+  $locationProvider.html5Mode({
+    enabled: true
+    // , requireBase: false
+  });
 
   $stateProvider
     .state('parties', {

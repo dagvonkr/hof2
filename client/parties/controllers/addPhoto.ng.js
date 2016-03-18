@@ -31,7 +31,12 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
       };
 
       reader.readAsDataURL(files[0]);
-      $scope.images.save(files[0]);
+
+      $scope.images.save(files[0]).then(function (result) {
+        // console.log(result);
+        // window.kk = result;
+      });
+
     }
     else {
       $scope.imgSrc2 = undefined;
@@ -67,7 +72,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
             height: 432,
             width: 508
           },
-          articleDescription: '' 
+          articleDescription: ''
         });
         $scope.imgSrc = undefined;
         $scope.myCroppedImage = '';

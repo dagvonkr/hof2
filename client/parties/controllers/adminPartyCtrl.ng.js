@@ -41,7 +41,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
             articleDescription
           });
         });
-      
+
       // Saving the party to parties
       $scope.parties.push($scope.newParty);
       // Reset the form
