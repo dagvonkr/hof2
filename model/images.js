@@ -27,17 +27,11 @@ if (Meteor.isServer) {
     bucket: 'houseoffam2'
   });
 
-  const localStore = new FS.Store.FileSystem('localImages', {
-    path: '~/uploads',
-    // beforeWrite: beforeWrite,
-    transformWrite: compressImage
-  });
-
   // console.log( 'FS.TempStore --------->', FS.TempStore);
   FS.TempStore.Storage = new FS.Store.FileSystem('_tempstore', { internal: true });
 
   Images = new FS.Collection('images', {
-    stores: [serverImageStore, localStore]
+    stores: [serverImageStore]
     , filter: {
       allow: {
         maxSize: 6 * 1024 * 1024,  // 6MB in [Bytes]
