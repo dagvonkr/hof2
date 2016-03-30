@@ -414,6 +414,7 @@ textarea {
 }
 
 .image-detail {
+    width: 60%;
     max-width: 90%;
 
 }
@@ -569,6 +570,10 @@ textarea {
     left: 0px !important;
     text-align: center !important;
     width: 320px !important;
+}
+
+.image-detail {
+    width: 100%;
 }
 
 .header-detail-view{
