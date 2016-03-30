@@ -4,7 +4,7 @@ if (Meteor.isServer) {
     // console.log('fileObj --->', fileObj, 'readStream --->',  readStream, 'writeStream --->', writeStream);
     // gm(readStream, fileObj.name()).compress('JPEG').quality(0.3).stream().pipe(writeStream);
     // gm(readStream, fileObj.name()).compress('JPEG').stream().pipe(writeStream);
-    gm(readStream, fileObj.name()).interlace('Line').quality(30).setFormat('jpg').stream().pipe(writeStream);
+    gm(readStream, fileObj.name()).interlace('Line').quality(100).setFormat('jpg').stream().pipe(writeStream);
 
     // console.log('compressImage ----->', fileObj);
 
