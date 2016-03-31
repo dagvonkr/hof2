@@ -46,8 +46,8 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
     });
   });
 
-  $scope.pageChanged = function (newPage) {
-    $scope.page = newPage;
+  $scope.addMoreItems = function () {
+    console.log('addMoreItems');
   };
 
   $scope.$watch('orderProperty', function () {

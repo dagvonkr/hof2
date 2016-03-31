@@ -17,7 +17,6 @@ accounts-password
 urigo:angular-blaze-template
 accounts-facebook
 accounts-twitter
-angularutils:pagination
 tmeasday:publish-counts
 check
 cfs:standard-packages
@@ -39,3 +38,4 @@ cfs:filesystem
 cfs:graphicsmagick
 cfs:ui
 angular@1.0.2
+netanelgilad:ng-infinite-scroll

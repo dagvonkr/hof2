@@ -113,7 +113,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   };
 
   // Pagination
-  $scope.page = 1;
+  // $scope.page = 1;  deprecated by infinite scroll
   $scope.perPage = 10;
   $scope.sort = {name: 1};
   $scope.orderProperty = '1';
@@ -134,8 +134,8 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     });
   });
 
-  $scope.pageChanged = function (newPage) {
-    $scope.page = newPage;
+  $scope.addMoreItems = function () {
+    console.log('addMoreItems');
   };
 
   $scope.$watch('orderProperty', function () {
