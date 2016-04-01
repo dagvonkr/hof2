@@ -1,5 +1,7 @@
 angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$filter', function ($scope, $meteor, $filter) {
-  $meteor.subscribe('parties').then( function () { $scope.getNextPage() });
+  $meteor.subscribe('parties').then( function () {
+    $scope.getNextPage()
+  });
   $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
   $scope.page = 1;
   $scope.perPage = 10;
@@ -10,7 +12,7 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
 
   $scope.getNextPage = function () {
     // Loads the next page of posts and adds them to the parties array.
-
+    console.log('-----> getNextPage');
     if ($scope.busy) return;
 
     $scope.busy = true;
@@ -19,6 +21,7 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
       , skip: (($scope.page - 1) * Meteor.settings.public.perPage)
       , sort: {'createdAt': -1}
     }).fetch();
+    console.log(bunch);
     bunch.forEach( function (each) {
       $scope.parties.push(each);
     });
