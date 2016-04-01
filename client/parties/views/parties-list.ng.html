@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <div infinite-scroll="getNextPage()">
+  <div infinite-scroll="getNextPage()" infinite-scroll-disabled="busy" infinite-scroll-distance="1">
     <div class="post" ng-repeat="party in parties">
       <a href="/posts/{{party._id}}">
 

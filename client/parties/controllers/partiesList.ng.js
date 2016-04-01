@@ -18,8 +18,8 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
     $scope.busy = true;
     const bunch = Parties.find({}, {
       limit: Meteor.settings.public.perPage
-      , skip: (($scope.page - 1) * Meteor.settings.public.perPage)
-      , sort: {'createdAt': -1}
+      , skip: parseInt(Meteor.settings.public.perPage) * parseInt(($scope.getReactively('page')))
+      , sort: {'createdAt': 1}
     }).fetch();
     console.log(bunch);
     bunch.forEach( function (each) {

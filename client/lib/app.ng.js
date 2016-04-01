@@ -1,7 +1,7 @@
 angular.module('hof2',['angular-meteor', 'ui.router', 'ui.bootstrap', 'ngFileUpload', 'ngImgCrop', 'xeditable', 'angular-sortable-view', 'textAngular']);
 
 function onReady() {
-  angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 250);
+  angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 500);
 
   angular.bootstrap(document, ['hof2'], {
     strictDi: true
