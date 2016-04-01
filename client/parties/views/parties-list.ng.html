@@ -28,8 +28,8 @@
     </div>
   </div>
 
-  <div infinite-scroll="addMoreItems()">
-    <div class="post" ng-repeat="party in parties | orderBy: '-createdAt' ">
+  <div infinite-scroll="getNextPage()">
+    <div class="post" ng-repeat="party in parties">
       <a href="/posts/{{party._id}}">
 
       	<div class="post-header" ng-style="{

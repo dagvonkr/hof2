@@ -1,27 +1,30 @@
 angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$filter', function ($scope, $meteor, $filter) {
+  $meteor.subscribe('parties').then( function () { $scope.getNextPage() });
   $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
   $scope.page = 1;
   $scope.perPage = 10;
   $scope.sort = {name: 1};
   $scope.orderProperty = '1';
+  $scope.parties = [];
+  $scope.busy = false;
 
+  $scope.getNextPage = function () {
+    // Loads the next page of posts and adds them to the parties array.
 
-  $scope.parties = $meteor.collection(function() {
+    if ($scope.busy) return;
 
-    var partiesLen = $scope.parties;
-
-    console.log('partiesLen', partiesLen);
-
-    // for (var i = 0; i < partiesLen.length; i++ ) {
-    //   if (i > 0) {
-    //     alert('nøørd')
-    //   }
-    // }
-
-    return Parties.find({}, {
-      sort: $scope.getReactively('sort')
+    $scope.busy = true;
+    const bunch = Parties.find({}, {
+      limit: Meteor.settings.public.perPage
+      , skip: (($scope.page - 1) * Meteor.settings.public.perPage)
+      , sort: {'createdAt': -1}
+    }).fetch();
+    bunch.forEach( function (each) {
+      $scope.parties.push(each);
     });
-  });
+    $scope.busy = false;
+    $scope.page += 1;
+  };
 
   $scope.getMainImage = function (images) {
     try {
@@ -31,28 +34,10 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
     }
   };
 
+  window.este = $scope;
   // $scope.updateDescription = function ($data, image) {   probalbly best to remove
   //   console.warn('PartiesListCtrl --> updateDescription');
   //   Image.update({$set: {'metadata.description': $data}});
   // };
 
-  $meteor.autorun($scope, function () {
-    $meteor.subscribe('parties', {
-      limit: parseInt($scope.getReactively('perPage')),
-      skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
-      sort: $scope.getReactively('sort')
-    }, $scope.getReactively('search')).then(function(){
-      $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
-    });
-  });
-
-  $scope.addMoreItems = function () {
-    console.log('addMoreItems');
-  };
-
-  $scope.$watch('orderProperty', function () {
-    if ($scope.orderProperty) {
-      $scope.sort = {name: parseInt($scope.orderProperty)};
-    }
-  });
 }]);
