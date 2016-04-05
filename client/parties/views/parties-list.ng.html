@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <div class="post" dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
+  <div class="post" ng-repeat="party in parties | orderBy: '-createdAt' " total-items="partiesCount.count">
     <a href="/posts/{{party._id}}">
 
   <div class="post-header" ng-style="{
@@ -52,4 +52,3 @@
 
 </div> <!-- post-wrapper -->
 
-<dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
