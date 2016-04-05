@@ -6,7 +6,6 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   $scope.$meteorSubscribe('parties');
 
   $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
-  console.log('$scope.images', $scope.images);
 
   $scope.hasImagesOn = function (party) {
     // Answers true if the given party has any images.
@@ -29,8 +28,6 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   $scope.addNewParty = function () {
     if ($scope.newParty.name && ($scope.newPartyImages && $scope.newPartyImages.length > 0)) {
       $scope.newParty.owner = $rootScope.currentUser._id;
-
-      console.log('$scope.newPartyImages', $scope.newPartyImages);
 
       // Link the images and the order to the new party
         $scope.newParty.images = [];
@@ -67,8 +64,6 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   $scope.removeAll = function () {
     $scope.parties.remove();
   };
-
-  console.log('$scope.parties', $scope.parties);
 
   $scope.users = $meteor.collection(Meteor.users, false).subscribe('users'); // hææ? skal denne være med?!?!?!?!?
 

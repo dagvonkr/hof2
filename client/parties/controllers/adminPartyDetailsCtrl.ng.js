@@ -2,21 +2,31 @@
 angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$stateParams', '$meteor', '$filter', '$rootScope', '$state', '$reactive', function ($scope, $stateParams, $meteor, $filter, $rootScope, $state, $reactive) {
   $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
 
+  $scope.$meteorSubscribe('parties');
 
-  $scope.$meteorSubscribe('parties').then(() => {
-    $scope.party = $meteor.object(Parties, $stateParams.partyId);
-    $scope.partyImages = _.isObject($scope.party) ? $scope.party.images : [];
-    console.log('$scope.partyImages details-view', $scope.partyImages)
+    $scope.helpers({
+      party() {
+        return Parties.findOne($stateParams.partyId);
+      }
+      , images () {
+          const party = Parties.findOne($stateParams.partyId);
+          const theseImageIds = _.map(party.images, image => image.id);
+          return Images.find({
+                  _id: {
+                    $in: theseImageIds
+                  }
+                }).fetch();
+      }
+    });
 
-      });
-
-  $scope.$meteorSubscribe('images').then(() => {
-    const theseImageIds = _.map($scope.party.images, image => image.id);
-    $scope.images = Images.find({
-        _id: {
-          $in: theseImageIds
-        }
-      }).fetch();
-  });
+  $scope.save = function () {
+    Parties.update($scope.party._id, {
+      '$set': {
+        name: $scope.party.name
+        , description: $scope.party.description
+        , editorcontent: $scope.party.editorcontent
+      }
+    });
+  };
 
 }]);

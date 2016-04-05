@@ -24,17 +24,23 @@
 //     $scope.mainImageUrl = $scope.images[0]; // FIXME: the first image is the main one, right?
 // =======
 angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams', '$meteor', function ($scope, $stateParams, $meteor) {
-  $scope.$meteorSubscribe('parties').then(() => {
-    $scope.party = Parties.findOne($stateParams.partyId);
-    $scope.partyImages = $scope.party.images;
-  });
+  $scope.$meteorSubscribe('parties');
 
-  $scope.$meteorSubscribe('images').then(() => {
-    const theseImageIds = _.map($scope.party.images, image => image.id);
-    $scope.images = Images.find({
-        _id: {
-          $in: theseImageIds
-        }
-      }).fetch();
-  });
+    $scope.helpers({
+      party() {
+        return Parties.findOne($stateParams.partyId);
+      }
+      , images () {
+          const party = Parties.findOne($stateParams.partyId);
+          const theseImageIds = _.map(party.images, image => image.id);
+          return Images.find({
+                  _id: {
+                    $in: theseImageIds
+                  }
+                }).fetch();
+      }
+
+    });
+
+  $scope.$meteorSubscribe('images');
 }]);

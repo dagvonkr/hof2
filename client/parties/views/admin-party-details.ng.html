@@ -14,8 +14,8 @@
       <div class="menu-nav-sub om-sub">
         OM
       </div>
-    </div>  
-      
+    </div>
+
     <div class="houseoffam-logo-sub">
       <a href="/admin">
       HOUSE OF FAM
@@ -27,24 +27,24 @@
 <div class="post">
 
 	<label>Is public</label>
-	<input type="checkbox" ng-model="party.public">
-	
+	<input type="checkbox" ng-model="party.public" ng-blur="save()">
 
-	<textarea style="overflow: visible" class="header-detail-view"  
+
+	<textarea style="overflow: visible" class="header-detail-view"
 	ng-style="{
 	'color' : party.style.header.color
-}" ng-model="party.name" id="nameInput" type="text"> </textarea>
+}" ng-model="party.name" id="nameInput" type="text" ng-blur="save()"> </textarea>
 
 
-	<textarea style="overflow: visible" ng-model="party.description" class="article-text">  </textarea>
+	<textarea style="overflow: visible" ng-model="party.description" class="article-text" ng-blur="save()">  </textarea>
 
-	<div class="article-description" text-angular ng-model="party.editorcontent" ta-toolbar="[['bold','italics'], ['insertLink']]"> </div>
-	
+	<div class="article-description" text-angular ng-model="party.editorcontent" ta-toolbar="[['bold','italics'], ['insertLink']]" ng-blur="save()"> </div>
+
 	<div ng-repeat="image in images" class="image-detail-view">
-		
+
 		<div class="image-detail-view-2">
 	      <img class="image-detail" ng-src="{{image.url()}}" />
-	    </div>	  
+	    </div>
 
 	      <!-- <a href="#" editable-text="image.articleDescription" onbeforesave="updateDescription($data, image)" class="article-description-edit">{{ image.articleDescription || 'Click here to add text' }}</a> -->
 
@@ -54,7 +54,7 @@
 
 
 
-</div>	
+</div>
 
 
 
