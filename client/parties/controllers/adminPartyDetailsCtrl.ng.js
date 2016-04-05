@@ -10,6 +10,9 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
       }
       , images () {
           const party = Parties.findOne($stateParams.partyId);
+          if(!party) {
+            return [];
+          }
           const theseImageIds = _.map(party.images, image => image.id);
           return Images.find({
                   _id: {
