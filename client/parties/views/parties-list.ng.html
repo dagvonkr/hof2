@@ -31,23 +31,25 @@
   <div class="post" dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
     <a href="/posts/{{party._id}}">
 
-	<div class="post-header" ng-style="{
-	        'top': party.style.header.top + 'px'|| '50px',
-	        'left': party.style.header.left + 'px',
-	        'width': party.style.header.width + 'px' || '400px',
-	        'font-size': party.style.header.fontSize + 'px',
-	        'color': party.style.header.color || '#2d2c2c',
+  <div class="post-header" ng-style="{
+          'top': party.style.header.top + 'px'|| '50px',
+          'left': party.style.header.left + 'px',
+          'width': party.style.header.width + 'px' || '400px',
+          'font-size': party.style.header.fontSize + 'px',
+          'color': party.style.header.color || '#2d2c2c',
           'text-shadow' : party.style.header.textShadow,
-	        'text-align': party.style.header.textAlign || 'center'
-	        }">
-		<!-- <div class="post-header-rectangle" ng-if=""> -->
-	        {{party.name}}
-		<!-- </div>	 -->
-	</div>
+          'text-align': party.style.header.textAlign || 'center'
+          }">
+    <!-- <div class="post-header-rectangle" ng-if=""> -->
+          {{party.name}}
+    <!-- </div>  -->
+  </div>
     </a>
       <img ng-src="{{ getMainImage(party.images) }}" class="main-image">
     <p class="description">{{party.description}}</p>
   </div>
+
+
 </div> <!-- post-wrapper -->
 
 <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
