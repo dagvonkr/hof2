@@ -93,7 +93,7 @@
 </div>
 <br>
 <div class="post-wrapper">
-    <div class="post" dir-paginate="party in parties | orderBy: '-createdAt' " total-items="partiesCount.count">
+    <div class="post" ng-repeat="party in parties | orderBy: '-createdAt' " total-items="partiesCount.count">
         <button ng-click="remove(party)"><strong>SLETT</strong></button>
         <!-- Settings Modal -->
         <button id="settings-button" ng-click="openSettingsModal(party)" class="settings-button">
