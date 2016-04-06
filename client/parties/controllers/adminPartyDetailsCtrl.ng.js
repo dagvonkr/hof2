@@ -28,6 +28,7 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
         name: $scope.party.name
         , description: $scope.party.description
         , editorcontent: $scope.party.editorcontent
+        , public: $scope.party.public
       }
     });
   };
