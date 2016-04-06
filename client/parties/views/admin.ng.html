@@ -2,70 +2,65 @@
 <br>
 <br>
 <div class="form">
-  <div ng-controller="AddPhotoCtrl">
-    <input class="post-header-pre" ng-model="newParty.name" id="nameInput" type="text">
-    <br>
-    <div class="image-upload">
-      <!-- Image drop tall rectangle -->
-      <div ng-hide="imgSrc" ngf-drop ngf-select
-        ngf-change="addImagesTallRectangle($files)"
-        ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box tall-rectangle"
-        ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'"
-        ngf-drop-available="dropAvailable">
-        <div class="drop-image-tall-rectangle" ng-show="dropAvailable"></div>
-      </div>
-      <div ng-show="imgSrc" class="ng-crop-container-tall-rectangle">
-        <button ng-click="saveTallRectangleImage()" ng-disabled="!imgSrc"> Save Image</button>
-        <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.85" result-image="myCroppedImage" result-image-size='{w: 432,h: 508}'> </img-crop>
-      </div>
-
-      <!-- Image drop rectangle -->
-      <div ng-hide="imgSrc2" ngf-drop ngf-select
-        ngf-change="addImagesRectangle($files)"
-        ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box rectangle"
-        ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'"
-        ngf-drop-available="dropAvailable">
-        <div class="drop-image-rectangle" ng-show="dropAvailable"></div>
-      </div>
-      <div ng-show="imgSrc2" class="ng-crop-container-rectangle">
-        <button ng-click="saveRectangleImage()" ng-disabled="!imgSrc2"> Save Image</button>
-        <img-crop image="imgSrc2" area-type="rectangle" aspect-ratio="1.75" result-image="myCroppedImage" result-image-size='{w: 648,h: 370}'> </img-crop>
-      </div>
-
-      <!-- Image drop square -->
-      <div ng-hide="imgSrc3" ngf-drop ngf-select
-        ngf-change="addImagesSquare($files)"
-        ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box square"
-        ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'"
-        ngf-drop-available="dropAvailable">
-        <div class="drop-image-square" ng-show="dropAvailable"></div>
-      </div>
-      <div ng-show="imgSrc3" class="ng-crop-container-square">
-        <button ng-click="saveSquareImage()" ng-disabled="!imgSrc3"> Save Image</button>
-        <img-crop image="imgSrc3" area-type="square" aspect-ratio="1" result-image="myCroppedImage" result-image-size='{w: 432,h: 432}'> </img-crop>
-      </div>
-
-      <br>
-
-    </div> <!-- class="image-upload" -->
-    <div class="main-image-preview" sv-root sv-part="newPartyImage">
-      <div sv-element ng-repeat="image in newPartyImages">
-<!--         <button ng-click="deletePreviewImage(image)"> X </button> -->
+    <div ng-controller="AddPhotoCtrl">
+        <input class="post-header-pre" ng-model="newParty.name" id="nameInput" type="text" placeholder="OVERSKRIFT">
         <br>
-        <div class="main-image" ng-show="$index === 0"></div>
-        <img draggable="false" ng-src="{{image.image.url()}}" />
         <br>
-        <a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Klikk her for å legge inn fotokred' }}</a>
-      </div>
+        <br>
+        <br>
+        <div class="image-upload">
+
+            <!-- Image drop tall rectangle -->
+            <div ng-hide="imgSrc" ngf-drop ngf-select ngf-change="addImagesTallRectangle($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box tall-rectangle" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
+                <div class="drop-image-tall-rectangle" ng-show="dropAvailable"></div>
+            </div>
+            <div ng-show="imgSrc" class="ng-crop-container-tall-rectangle">
+                <button ng-click="saveTallRectangleImage() || disableButton()" ng-disabled="!imgSrc || isDisabled"> Save Image</button>
+                <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.85" result-image="myCroppedImage" result-image-size='{w: 432,h: 508}'> </img-crop>
+            </div>
+
+
+            <!-- Image drop rectangle -->
+            <div ng-hide="imgSrc2" ngf-drop ngf-select ngf-change="addImagesRectangle($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box rectangle" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
+                <div class="drop-image-rectangle" ng-show="dropAvailable"></div>
+            </div>
+            <div ng-show="imgSrc2" class="ng-crop-container-rectangle">
+                <button ng-click="saveRectangleImage() || disableButton()" ng-disabled="!imgSrc2 || isDisabled"> Save Image</button>
+                <img-crop image="imgSrc2" area-type="rectangle" aspect-ratio="1.75" result-image="myCroppedImage" result-image-size='{w: 648,h: 370}'> </img-crop>
+            </div>
+
+
+            <!-- Image drop square -->
+            <div ng-hide="imgSrc3" ngf-drop ngf-select ngf-change="addImagesSquare($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box square" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
+                <div class="drop-image-square" ng-show="dropAvailable"></div>
+            </div>
+            <div ng-show="imgSrc3" class="ng-crop-container-square">
+                <button ng-click="saveSquareImage() || disableButton()" ng-disabled="!imgSrc3 || isDisabled"> Save Image</button>
+                <img-crop image="imgSrc3" area-type="square" aspect-ratio="1" result-image="myCroppedImage" result-image-size='{w: 432,h: 432}'> </img-crop>
+            </div>
+            <br>
+        </div>
+
+
+        <!-- class="image-upload" -->
+        <div class="main-image-preview" sv-root sv-part="newPartyImage">
+            <div sv-element ng-repeat="image in newPartyImages">
+                <!--         <button ng-click="deletePreviewImage(image)"> X </button> -->
+                <br>
+                <div class="main-image" ng-show="$index === 0"></div>
+                <img draggable="false" ng-src="{{image.image.url()}}" />
+                <br>
+                <a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Klikk her for å legge inn spesifik informasjon om dette bilde' }}</a>
+            </div>
+        </div>
     </div>
-  </div> <!-- AddPhotoCtrl -->
-  <br>
-  <br>
-  <!-- Short description of post -->
-  <input placeholder="Brøtekst (må ikke være med)" ng-model="newParty.description" id="description" type="text" class="description-pre">
-  <br>
-  <button class="add-btn" ng-click="addNewParty()">Add </button>
-</div> <!-- form -->
+    <!-- AddPhotoCtrl -->
+    <br>
+    <!-- Short description of post -->
+    <!-- <input placeholder="Brøtekst" ng-model="newParty.description" id="description" type="text" class="description-pre"> -->
+    <button class="add-btn" ng-click="addNewParty()">Opprett post </button>
+</div>
+<!-- form -->
 <br>
 <br>
 <br>
@@ -73,62 +68,63 @@
 <hr>
 <br>
 <div class="front-page">
-  <h1>Forsiden</h1>
-  <input type="search" ng-model="search" placeholder="Search">
-  <select ng-model="orderProperty">
-    <option value="1">Ascending</option>
-    <option value="-1">Descending</option>
-  </select>
+    <h1>Forsiden</h1>
+    <input type="search" ng-model="search" placeholder="Search">
+    <select ng-model="orderProperty">
+        <option value="1">Ascending</option>
+        <option value="-1">Descending</option>
+    </select>
 </div>
-  <div class="menu">
+<div class="menu">
     <div class="houseoffam-logo-mobile">
-     HOUSE OF FAM
+        HOUSE OF FAM
     </div>
     <div class="houseoffam-menu">
-      <div class="menu-nav nettbutikk">
-        <a href="http://fam-irvoll.myshopify.com/collections/frontpage" class="menu-nav-hover"> NETTBUTIKK </a>
-      </div>
-      <div class="menu-nav kontakt">
-        <a href="/kontakt" class="menu-nav-hover">
+        <div class="menu-nav nettbutikk">
+            <a href="http://fam-irvoll.myshopify.com/collections/frontpage" class="menu-nav-hover"> NETTBUTIKK </a>
+        </div>
+        <div class="menu-nav kontakt">
+            <a href="/kontakt" class="menu-nav-hover">
           KONTAKT
         </a>
-      </div>
-      <div class="menu-nav om">
-        <a href="/om" class="menu-nav-hover">
+        </div>
+        <div class="menu-nav om">
+            <a href="/om" class="menu-nav-hover">
           OM
         </a>
-      </div>
+        </div>
     </div>
     <div class="houseoffam-line"> </div>
     <div class="houseoffam-logo">
-      <a href="/">HOUSE OF FAM</a>
+        <a href="/">HOUSE OF FAM</a>
     </div>
-  </div>
+</div>
 <br>
 <div class="post-wrapper">
-  <div  class="post" dir-paginate="party in parties | itemsPerPage: perPage | orderBy: '-createdAt' " total-items="partiesCount.count">
-    <button ng-click="remove(party)"><strong>SLETT</strong></button>
-    <!-- Settings Modal -->
-    <button id="settings-button" ng-click="openSettingsModal(party)" class="settings-button">
-      Settings
-    </button>
-    <a href="/admin/{{party._id}}">
-      <div class="post-header"  ng-style="{
+    <div class="post" ng-repeat="party in parties | orderBy: '-createdAt' " total-items="partiesCount.count">
+        <button ng-click="remove(party)"><strong>SLETT</strong></button>
+        <!-- Settings Modal -->
+        <button id="settings-button" ng-click="openSettingsModal(party)" class="settings-button">
+            Settings
+        </button>
+        <a href="/admin/{{party._id}}">
+            <div class="post-header" ng-style="{
         'top': party.style.header.top + 'px'|| '250px',
         'left': party.style.header.left + 'px',
         'width': party.style.header.width + 'px' || '400px',
         'font-size': party.style.header.fontSize + 'px',
+        'transform' : 'rotate(' + currentParty.style.header.rotate + 'deg)',
+        'background' : currentParty.style.header.background-color,
         'color': party.style.header.color || '#2d2c2c',
         'text-shadow' : party.style.header.textShadow,
         'text-align': party.style.header.textAlign || 'center'
         }">
-        {{party.name}}
-      </div>
-    </a>
-    <img ng-show="hasImagesOn(party)" ng-src="{{ getMainImageUrlOf(party) }}" class="main-image">
-    <!-- <div ng-if="party.images && party.images.length > 0" ng-style="getMainImage(party.images)" class="main-image">
+                {{party.name}}
+            </div>
+        </a>
+        <img ng-show="hasImagesOn(party)" ng-src="{{ getMainImageUrlOf(party) }}" class="main-image">
+        <!-- <div ng-if="party.images && party.images.length > 0" ng-style="getMainImage(party.images)" class="main-image">
     </div> -->
-    <p class="description">{{party.description}}</p>
-  </div>
+        <p class="description">{{party.description}}</p>
+    </div>
 </div>
-<dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>

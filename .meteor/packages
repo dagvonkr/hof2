@@ -12,13 +12,11 @@ jquery                  # Helpful client-side library
 tracker                 # Meteor's client-side reactive programming library
 standard-minifiers      # JS/CSS minifiers run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
-angular@1.0.2
+angular
 angularui:angular-ui-router
 accounts-password
-urigo:angular-blaze-template
 accounts-facebook
 accounts-twitter
-angularutils:pagination
 tmeasday:publish-counts
 check
 cfs:standard-packages
@@ -38,3 +36,5 @@ angularui:angular-ui-bootstrap@0.13.0
 dag:ngimgcropfullextended
 cfs:filesystem
 cfs:graphicsmagick
+cfs:ui
+
