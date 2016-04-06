@@ -44,7 +44,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       // Reset the form
       $scope.newPartyImages = [];
       $scope.newParty = {};
-      $window.location.reload();
+      // $window.location.reload();
     }
 
     else {
