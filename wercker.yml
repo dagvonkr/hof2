@@ -58,11 +58,6 @@ deploy:
         overwrite: true
         hide-from-log: true
 
-    # Stopping not possible at the moment
-    # - script:
-    #    name: stop application
-    #    code: ssh -i $PRIVATEKEY_PATH -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $UNIX_USER@vps1003.directvps.nl stop apito-admin-$UNIX_USER
-
     - script:
         name: stop application
         code: ssh -i $PRIVATEKEY_PATH -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@162.243.218.173 stop $UNIX_USER-hof2
