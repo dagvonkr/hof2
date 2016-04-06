@@ -3,9 +3,13 @@
 <br>
 <div class="form">
     <div ng-controller="AddPhotoCtrl">
-        <input class="post-header-pre" ng-model="newParty.name" id="nameInput" type="text">
+        <input class="post-header-pre" ng-model="newParty.name" id="nameInput" type="text" placeholder="OVERSKRIFT">
+        <br>
+        <br>
+        <br>
         <br>
         <div class="image-upload">
+
             <!-- Image drop tall rectangle -->
             <div ng-hide="imgSrc" ngf-drop ngf-select ngf-change="addImagesTallRectangle($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box tall-rectangle" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
                 <div class="drop-image-tall-rectangle" ng-show="dropAvailable"></div>
@@ -14,6 +18,8 @@
                 <button ng-click="saveTallRectangleImage() || disableButton()" ng-disabled="!imgSrc || isDisabled"> Save Image</button>
                 <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.85" result-image="myCroppedImage" result-image-size='{w: 432,h: 508}'> </img-crop>
             </div>
+
+
             <!-- Image drop rectangle -->
             <div ng-hide="imgSrc2" ngf-drop ngf-select ngf-change="addImagesRectangle($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box rectangle" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
                 <div class="drop-image-rectangle" ng-show="dropAvailable"></div>
@@ -22,6 +28,8 @@
                 <button ng-click="saveRectangleImage() || disableButton()" ng-disabled="!imgSrc2 || isDisabled"> Save Image</button>
                 <img-crop image="imgSrc2" area-type="rectangle" aspect-ratio="1.75" result-image="myCroppedImage" result-image-size='{w: 648,h: 370}'> </img-crop>
             </div>
+
+
             <!-- Image drop square -->
             <div ng-hide="imgSrc3" ngf-drop ngf-select ngf-change="addImagesSquare($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box square" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
                 <div class="drop-image-square" ng-show="dropAvailable"></div>
@@ -32,6 +40,8 @@
             </div>
             <br>
         </div>
+
+
         <!-- class="image-upload" -->
         <div class="main-image-preview" sv-root sv-part="newPartyImage">
             <div sv-element ng-repeat="image in newPartyImages">
@@ -40,17 +50,15 @@
                 <div class="main-image" ng-show="$index === 0"></div>
                 <img draggable="false" ng-src="{{image.image.url()}}" />
                 <br>
-                <a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Klikk her for å legge inn fotokred' }}</a>
+                <a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Klikk her for å legge inn spesifik informasjon om dette bilde' }}</a>
             </div>
         </div>
     </div>
     <!-- AddPhotoCtrl -->
     <br>
-    <br>
     <!-- Short description of post -->
-    <input placeholder="Brøtekst (må ikke være med)" ng-model="newParty.description" id="description" type="text" class="description-pre">
-    <br>
-    <button class="add-btn" ng-click="addNewParty()">Add </button>
+    <!-- <input placeholder="Brøtekst" ng-model="newParty.description" id="description" type="text" class="description-pre"> -->
+    <button class="add-btn" ng-click="addNewParty()">Opprett post </button>
 </div>
 <!-- form -->
 <br>
