@@ -56,18 +56,6 @@ if (Meteor.isServer) {
       return userId;
     }
   });
-
-  Meteor.publish('images', function (party) {
-    if (!party) {
-      return Images.find({});
-    } else {
-      return Images.find({
-        _id: {
-          $in: party.images
-        }
-      });
-    }
-  });
 }
 
 if (Meteor.isClient) {
