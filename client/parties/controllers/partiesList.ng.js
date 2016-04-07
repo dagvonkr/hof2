@@ -1,4 +1,5 @@
 angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$filter', function ($scope, $meteor, $filter) {
+  $scope.$meteorSubscribe('parties');
   $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
   $scope.page = 1;
   $scope.perPage = 10;
@@ -6,21 +7,12 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
   $scope.orderProperty = '1';
 
 
-  $scope.parties = $meteor.collection(function() {
-
-    var partiesLen = $scope.parties;
-
-    console.log('partiesLen', partiesLen);
-
-    // for (var i = 0; i < partiesLen.length; i++ ) {
-    //   if (i > 0) {
-    //     alert('nøørd')
-    //   }
-    // }
-
-    return Parties.find({}, {
-      sort: $scope.getReactively('sort')
-    });
+  $scope.helpers({
+    parties: function () {
+      return Parties.find({}, {
+        sort: {name: 1}
+      });
+    }
   });
 
   $scope.getMainImage = function (images) {
@@ -36,23 +28,23 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
   //   Image.update({$set: {'metadata.description': $data}});
   // };
 
-  $meteor.autorun($scope, function () {
-    $meteor.subscribe('parties', {
-      limit: parseInt($scope.getReactively('perPage')),
-      skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
-      sort: $scope.getReactively('sort')
-    }, $scope.getReactively('search')).then(function(){
-      $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
-    });
-  });
+  // $meteor.autorun($scope, function () {
+  //   $meteor.subscribe('parties', {
+  //     limit: parseInt($scope.getReactively('perPage')),
+  //     skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
+  //     sort: $scope.getReactively('sort')
+  //   }, $scope.getReactively('search')).then(function(){
+  //     $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
+  //   });
+  // });
 
-  $scope.pageChanged = function (newPage) {
-    $scope.page = newPage;
-  };
+  // $scope.pageChanged = function (newPage) {
+  //   $scope.page = newPage;
+  // };
 
-  $scope.$watch('orderProperty', function () {
-    if ($scope.orderProperty) {
-      $scope.sort = {name: parseInt($scope.orderProperty)};
-    }
-  });
+  // $scope.$watch('orderProperty', function () {
+  //   if ($scope.orderProperty) {
+  //     $scope.sort = {name: parseInt($scope.orderProperty)};
+  //   }
+  // });
 }]);
