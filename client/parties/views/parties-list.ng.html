@@ -2,6 +2,8 @@
   <input type="search" ng-model="search" placeholder="Search">
 </div> -->
 
+  <h1 style="color:red; text-align:center;"> This is a test page. </h1>
+
 <div class="post-wrapper">
   <div class="menu">
     <div class="houseoffam-logo-mobile">
@@ -27,6 +29,7 @@
       <a href="/">HOUSE OF FAM</a>
     </div>
   </div>
+
 
   <div class="post" ng-repeat="party in parties | orderBy: '-createdAt' " total-items="partiesCount.count">
     <a href="/posts/{{party._id}}">
