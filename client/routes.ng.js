@@ -58,12 +58,13 @@ angular.module('hof2').config(['$urlRouterProvider', '$stateProvider', '$locatio
       controller: 'LoginCtrl',
       controllerAs: 'lc' // hva i all verden er rc ????
     })
-    .state('register', {
-      url: '/register',
-      templateUrl: 'client/users/views/register.ng.html',
-      controller: 'RegisterCtrl',
-      controllerAs: 'rc'
-    })
+    // Kommenterer ut dette slik at det ikke går an å registrere seg
+    // .state('register', {
+    //   url: '/register',
+    //   templateUrl: 'client/users/views/register.ng.html',
+    //   controller: 'RegisterCtrl',
+    //   controllerAs: 'rc'
+    // })
     .state('resetpw', {
       url: '/resetpw',
       templateUrl: 'client/users/views/reset-password.html',

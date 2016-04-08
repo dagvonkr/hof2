@@ -1,11 +1,11 @@
 'use strict';
-angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', '$window', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal, $window) {
+angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal) {
   // Dette er for å prø veå få til modal med data inni seg.
-  let partyId = $meteor.object(Parties, $stateParams.partyId);
+  // let partyId = $meteor.object(Parties, $stateParams.partyId);
   $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
   $scope.$meteorSubscribe('parties');
 
-  $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
+  $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('mainImages');
 
   $scope.hasImagesOn = function (party) {
     // Answers true if the given party has any images.
@@ -18,12 +18,6 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   $scope.newParty = {
     'createdAt' : new Date ()
   };
-  // if (!$scope.newParty.createdAt) {
-  //     $scope.newParty = {
-  //       'createdAt' : new Date()
-  //     }
-  //   }
-
 
   $scope.addNewParty = function () {
     if ($scope.newParty.name && ($scope.newPartyImages && $scope.newPartyImages.length > 0)) {
@@ -61,11 +55,9 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     $scope.parties.splice($scope.parties.indexOf(party), 1);
   };
 
-  $scope.removeAll = function () {
-    $scope.parties.remove();
-  };
-
-  $scope.users = $meteor.collection(Meteor.users, false).subscribe('users'); // hææ? skal denne være med?!?!?!?!?
+  // $scope.removeAll = function () {
+  //   $scope.parties.remove();
+  // };
 
   // Settings modal
   $scope.openSettingsModal = function (party) {
@@ -86,56 +78,47 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     modalInstance.result.then(resolve, reject);
   };
 
-  // getting the main image
-  $scope.getMainImageUrlOf = function (party) {
-    // Answers the url of he first image of the given party, null otherwise.
-    if (!_.isEmpty(party.images)) {
-      var filtered = $filter('filter')($scope.images, {_id: party.images[0].id});
-      var answer = null;
-      // console.log('party.images about to filter and get the first URL', party);
 
-      try {
-        answer = filtered[0].url();
-      } catch (anError) {
-        // console.warn('Could not get url of the first image after filtering: ',filtered);
-        return null;
-      }
+  $scope.helpers({
+    parties: function() {
+      return Parties.find({}, {
+        sort: {name: 1}
+      });
+    }
+  });
 
-      return answer;
-    } else {
-      return null;
+  $scope.getMainImage = function (images) {
+    try {
+      return $filter('filter')($scope.images, {_id: images[0].id})[0].url();
+    } catch (error) {
     }
   };
 
-  // Pagination
-  $scope.page = 1;
-  $scope.perPage = 10;
-  $scope.sort = {name: 1};
-  $scope.orderProperty = '1';
+  // // getting the main image
+  // $scope.getMainImageUrlOf = function (party) {
+  //   // Answers the url of he first image of the given party, null otherwise.
+  //   if (!_.isEmpty(party.images)) {
+  //     var filtered = $filter('filter')($scope.images, {_id: party.images[0].id});
+  //     var answer = null;
+  //     // console.log('party.images about to filter and get the first URL', party);
 
-  $scope.parties = $meteor.collection(function () {
-    return Parties.find({}, {
-      sort: $scope.getReactively('sort')
-    });
-  });
+  //     try {
+  //       answer = filtered[0].url();
+  //     } catch (anError) {
+  //       // console.warn('Could not get url of the first image after filtering: ',filtered);
+  //       return null;
+  //     }
 
-  $meteor.autorun($scope, function () {
-    $meteor.subscribe('parties', {
-      limit: parseInt($scope.getReactively('perPage')),
-      skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
-      sort: $scope.getReactively('sort')
-    }, $scope.getReactively('search')).then(function () {
-      $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
-    });
-  });
+  //     return answer;
+  //   } else {
+  //     return null;
+  //   }
+  // };
 
-  $scope.pageChanged = function (newPage) {
-    $scope.page = newPage;
-  };
+  // $scope.parties = $meteor.collection(function () {
+  //   return Parties.find({}, {
+  //     sort: $scope.getReactively('sort')
+  //   });
+  // });
 
-  $scope.$watch('orderProperty', function () {
-    if ($scope.orderProperty) {
-      $scope.sort = {name: parseInt($scope.orderProperty)};
-    }
-  });
 }]);

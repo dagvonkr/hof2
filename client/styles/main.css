@@ -271,6 +271,7 @@ textarea {
 }
 
 .menu-sub-view {
+    margin-top: 40px;
     font-family: 'gotham-bold';
 }
 
@@ -339,6 +340,10 @@ textarea {
 }
 
 .houseoffam-logo-mobile {
+    visibility: hidden;
+}
+
+.logo-mobile-front-page {
     visibility: hidden;
 }
 
@@ -481,7 +486,6 @@ textarea {
     width: 100%;
 }
 
-
 .menu-nav{
     display: flex;
     flex-direction: row;
@@ -523,6 +527,13 @@ textarea {
     flex-direction: row;
     justify-content: center;
 }
+
+.menu-nav-sub-wrapper-front-page {
+    text-align: center;
+    margin-right: 20%;
+    margin-top: 20px;
+}
+
 
 .nettbutikk-sub{
     position: relative;
@@ -574,10 +585,19 @@ textarea {
     margin: 0 auto;
     text-align: center;
     width: 100%;
-    font-size: 35px;
+    font-size: 25px;
     letter-spacing: 2px;
     margin-top: 0px;
     margin-bottom: 20px;
+}
+
+.logo-mobile-front-page {
+    visibility: visible;
+    font-size: 25px;
+    margin-right:110px;
+    text-align: center;
+    margin-top: -60px;
+    letter-spacing: 2px;
 }
 
 .menu-nav-hover:hover:after {

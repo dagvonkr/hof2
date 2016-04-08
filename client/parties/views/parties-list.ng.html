@@ -4,12 +4,13 @@
 
 <!--   <h1 style="color:red; text-align:center;"> This is a test page. </h1> -->
 
-<div class="post-wrapper">
-  <div class="menu">
-    <div class="houseoffam-logo-mobile">
-     HOUSE OF FAM
-    </div>
-    <div class="houseoffam-menu">
+
+<div class="menu">
+  <div class="logo-mobile-front-page">
+   HOUSE OF FAM
+  </div>
+  <div class="houseoffam-menu">
+    <div class="menu-nav-sub-wrapper-front-page">
       <div class="menu-nav nettbutikk">
         <a href="http://fam-irvoll.myshopify.com/collections/frontpage" class="menu-nav-hover"> NETTBUTIKK </a>
       </div>
@@ -24,13 +25,14 @@
         </a>
       </div>
     </div>
-    <div class="houseoffam-line"> </div>
-    <div class="houseoffam-logo">
-      <a href="/">HOUSE OF FAM</a>
-    </div>
   </div>
+  <div class="houseoffam-line"> </div>
+  <div class="houseoffam-logo">
+    <a href="/">HOUSE OF FAM</a>
+  </div>
+</div>
 
-
+<div class="post-wrapper">
   <div class="post" ng-repeat="party in parties | orderBy: '-createdAt' " total-items="partiesCount.count">
     <a href="/posts/{{party._id}}">
 
