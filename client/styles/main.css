@@ -467,11 +467,18 @@ textarea {
     margin-bottom: 40px;
 }
 
+.oppdater-post {
+    margin-top: 50px;
+    text-align: center;
+}
+
 .is-public-details-view {
     margin-top: 50px;
     text-align: center;
     color: #23527C;
 }
+
+
 
 .kontaktmanager {
     text-align: center;
