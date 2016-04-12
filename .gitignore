@@ -1,5 +1,7 @@
 **/*.sw[op]
 
+run.sh
+
 # Logs
 logs
 *.log
