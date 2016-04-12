@@ -4,8 +4,8 @@ if (Meteor.isServer) {
     // console.log('fileObj --->', fileObj, 'readStream --->',  readStream, 'writeStream --->', writeStream);
     // gm(readStream, fileObj.name()).compress('JPEG').quality(0.3).stream().pipe(writeStream);
     // gm(readStream, fileObj.name()).compress('JPEG').stream().pipe(writeStream);
-    // gm(readStream, fileObj.name()).interlace('Line').quality(100).setFormat('jpg').stream().pipe(writeStream);
-    gm(readStream, fileObj.name()).interlace('Line').setFormat('png').stream().pipe(writeStream);
+    gm(readStream, fileObj.name()).interlace('Line').quality(100).setFormat('jpg').stream().pipe(writeStream);
+    // gm(readStream, fileObj.name()).interlace('Line').setFormat('png').stream().pipe(writeStream);
 
     // console.log('compressImage ----->', fileObj);
 
@@ -18,8 +18,10 @@ if (Meteor.isServer) {
     beforeWrite: function (fileObj) {
       // console.log('FS.Collection images beforeWrite -------> ', fileObj);
       return {
-        extension: 'png',
-        type: 'image/png'
+        extension: 'jpg',
+        type: 'image/jpg'
+        // extension: 'png',
+        // type: 'image/png'
       };
     },
     transformWrite: compressImage,
