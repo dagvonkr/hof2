@@ -33,7 +33,7 @@ build:
     - script :
         name : meteor build
         code : |
-            meteor build .
+            meteor build --debug .
     - script:
         name: echo informations
         code: |
