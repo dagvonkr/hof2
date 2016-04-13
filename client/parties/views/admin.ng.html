@@ -16,7 +16,7 @@
             </div>
             <div ng-show="imgSrc" class="ng-crop-container-tall-rectangle">
                 <button ng-click="saveTallRectangleImage() || disableButton()" ng-disabled="!imgSrc || isDisabled"> Save Image</button>
-                <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.85" result-image="myCroppedImage" result-image-size='{w: 648,h: 762}'> </img-crop>
+                <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.85" result-image="myCroppedImage" result-image-size='{w: 648,h: 766}'> </img-crop>
             </div>
 
 
@@ -47,10 +47,14 @@
             <div sv-element ng-repeat="image in newPartyImages">
                 <!--         <button ng-click="deletePreviewImage(image)"> X </button> -->
                 <br>
+                <div style = "margin-left: 110px;">
+                    Image:
+                </div>
                 <div class="main-image" ng-show="$index === 0"></div>
                 <img draggable="false" ng-src="{{image.image.url()}}" />
                 <br>
-                <a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Klikk her for å legge inn spesifik informasjon om dette bilde' }}</a>
+                <!-- Commented out this since it doesn't really have a purpose yet -->
+                <!-- <a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Klikk her for å legge inn spesifik informasjon om dette bilde' }}</a> -->
             </div>
         </div>
     </div>
@@ -101,7 +105,7 @@
 </div>
 <br>
 <div class="post-wrapper">
-    <div class="post" ng-repeat="party in parties | orderBy: '-createdAt' " total-items="partiesCount.count">
+    <div class="post-frontpage" ng-repeat="party in parties | orderBy: '-createdAt' " total-items="partiesCount.count">
         <button ng-click="remove(party)"><strong>SLETT</strong></button>
         <!-- Settings Modal -->
         <button id="settings-button" ng-click="openSettingsModal(party)" class="settings-button">

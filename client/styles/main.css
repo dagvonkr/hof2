@@ -83,7 +83,7 @@ a.editable-empty {
 }
 
 .main-image-preview img {
-    width: 50%;
+    width: 20%;
     margin-left: 8%;
     margin-top: 20px;
 }
@@ -160,13 +160,30 @@ textarea {
     flex-wrap: wrap;
     flex-grow: 1;
     flex-shrink: 1;
+
 }
+
 
 .post{
     margin-top: 25px;
     margin-bottom: 50px;
+
 }
 
+.post-frontpage{
+    margin-top: 25px;
+    margin-bottom: 50px;
+    max-width: 665px;
+    margin-left: 3%;
+    margin-right: 3%;
+
+}
+
+.main-image{
+    max-width: 100%;
+    max-height: 508px;
+
+}
 
 
 .post-header-pre {
@@ -365,10 +382,7 @@ textarea {
 }
 
 
-.main-image {
-    max-width: 100%;
-    margin: 0px 10px 0px 10px;
-}
+
 
 
 
@@ -430,7 +444,7 @@ textarea {
 }
 
 .image-detail {
-    width: 60%;
+    width: 50%;
     max-width: 90%;
 
 }
@@ -467,6 +481,9 @@ textarea {
     text-align: center;
     color: #23527C;
 }
+.update-post-button{
+    text-align: center;
+}
 
 .kontaktmanager {
     text-align: center;
@@ -479,13 +496,22 @@ textarea {
 .menu {
     position: relative;
     width: 100%;
+    margin: 20px 0px 0px 0px;
 }
 
 
-.menu-nav{
+/*.menu-nav{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}*/
+
+.menu-sub-view {
+    margin-top: 20px;
+}
+
+.houseoffam-menu {
+    text-align: center;
 }
 
 .nettbutikk{
@@ -493,7 +519,7 @@ textarea {
     display: inline-block;
     background-color: #f4f4f4;
     padding: 7px 10px 7px 10px;
-    font-size: 10px;
+    font-size: 8px;
     margin-top: 0px;
     margin-left: 0px;
 }
@@ -502,7 +528,7 @@ textarea {
     display: inline-block;
     background-color: #f4f4f4;
     padding: 7px 15px 7px 15px;
-    font-size: 10px;
+    font-size: 8px;
     margin-top: 0px;
     margin-left: 10px;
 }
@@ -511,7 +537,7 @@ textarea {
     display: inline-block;
     background-color: #f4f4f4;
     padding: 7px 20px 7px 20px;
-    font-size: 10px;
+    font-size: 8px;
     margin-top: 0px;
     margin-left: 20px;
 }
@@ -574,7 +600,7 @@ textarea {
     margin: 0 auto;
     text-align: center;
     width: 100%;
-    font-size: 35px;
+    font-size: 25px;
     letter-spacing: 2px;
     margin-top: 0px;
     margin-bottom: 20px;
@@ -586,15 +612,26 @@ textarea {
     background: #d4d4d4;
 }
 
+.post-frontpage{
+    margin-left: 0%;
+    margin-right: 0%;
+
+}
+
+.main-image {
+    margin: 0px 0px 0px 0px;
+}
+
 .post-header{
     font-size: 60px !important;
     top: 20px !important;
     left: 0px !important;
     text-align: center !important;
-    width: 320px !important;
+
 }
 
 .image-detail {
+    max-width: 100%;
     width: 100%;
 }
 
@@ -620,5 +657,21 @@ textarea {
     margin-right: 10px;
 }
 
+}
+
+@media screen and (max-width : 520px) {
+
+.post-header{
+    word-wrap:break-word;
+    }
+}
+
+@media screen and (max-width : 420px) {
+
+.post-header{
+    font-size: 40px !important;
+    padding-left: 8% !important;
+    padding-right: 8% !important;
+}
 
 }
