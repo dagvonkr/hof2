@@ -3,54 +3,66 @@
 <br>
 <div class="form">
     <div ng-controller="AddPhotoCtrl">
-        <input class="post-header-pre" ng-model="newParty.name" id="nameInput" type="text">
+        <input class="post-header-pre" ng-model="newParty.name" id="nameInput" type="text" placeholder="OVERSKRIFT">
+        <br>
+        <br>
+        <br>
         <br>
         <div class="image-upload">
+
             <!-- Image drop tall rectangle -->
             <div ng-hide="imgSrc" ngf-drop ngf-select ngf-change="addImagesTallRectangle($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box tall-rectangle" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
                 <div class="drop-image-tall-rectangle" ng-show="dropAvailable"></div>
             </div>
             <div ng-show="imgSrc" class="ng-crop-container-tall-rectangle">
-                <button ng-click="saveTallRectangleImage()" ng-disabled="!imgSrc"> Save Image</button>
-                <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.85" result-image="myCroppedImage" result-image-size='{w: 432,h: 508}'> </img-crop>
+                <button ng-click="saveTallRectangleImage() || disableButton()" ng-disabled="!imgSrc || isDisabled"> Save Image</button>
+                <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.85" result-image="myCroppedImage" result-image-size='{w: 648,h: 766}'> </img-crop>
             </div>
+
+
             <!-- Image drop rectangle -->
             <div ng-hide="imgSrc2" ngf-drop ngf-select ngf-change="addImagesRectangle($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box rectangle" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
                 <div class="drop-image-rectangle" ng-show="dropAvailable"></div>
             </div>
             <div ng-show="imgSrc2" class="ng-crop-container-rectangle">
-                <button ng-click="saveRectangleImage()" ng-disabled="!imgSrc2"> Save Image</button>
-                <img-crop image="imgSrc2" area-type="rectangle" aspect-ratio="1.75" result-image="myCroppedImage" result-image-size='{w: 648,h: 370}'> </img-crop>
+                <button ng-click="saveRectangleImage() || disableButton()" ng-disabled="!imgSrc2 || isDisabled"> Save Image</button>
+                <img-crop image="imgSrc2" area-type="rectangle" aspect-ratio="1.75" result-image="myCroppedImage" result-image-size='{w: 972,h: 555}'> </img-crop>
             </div>
+
+
             <!-- Image drop square -->
             <div ng-hide="imgSrc3" ngf-drop ngf-select ngf-change="addImagesSquare($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box square" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
                 <div class="drop-image-square" ng-show="dropAvailable"></div>
             </div>
             <div ng-show="imgSrc3" class="ng-crop-container-square">
-                <button ng-click="saveSquareImage()" ng-disabled="!imgSrc3"> Save Image</button>
-                <img-crop image="imgSrc3" area-type="square" aspect-ratio="1" result-image="myCroppedImage" result-image-size='{w: 432,h: 432}'> </img-crop>
+                <button ng-click="saveSquareImage() || disableButton()" ng-disabled="!imgSrc3 || isDisabled"> Save Image</button>
+                <img-crop image="imgSrc3" area-type="square" aspect-ratio="1" result-image="myCroppedImage" result-image-size='{w: 648,h: 648}'> </img-crop>
             </div>
             <br>
         </div>
+
+
         <!-- class="image-upload" -->
         <div class="main-image-preview" sv-root sv-part="newPartyImage">
             <div sv-element ng-repeat="image in newPartyImages">
                 <!--         <button ng-click="deletePreviewImage(image)"> X </button> -->
                 <br>
+                <div style = "margin-left: 110px;">
+                    Image:
+                </div>
                 <div class="main-image" ng-show="$index === 0"></div>
                 <img draggable="false" ng-src="{{image.image.url()}}" />
                 <br>
-                <a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Klikk her for å legge inn fotokred' }}</a>
+                <!-- Commented out this since it doesn't really have a purpose yet -->
+                <!-- <a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Klikk her for å legge inn spesifik informasjon om dette bilde' }}</a> -->
             </div>
         </div>
     </div>
     <!-- AddPhotoCtrl -->
     <br>
-    <br>
     <!-- Short description of post -->
-    <input placeholder="Brøtekst (må ikke være med)" ng-model="newParty.description" id="description" type="text" class="description-pre">
-    <br>
-    <button class="add-btn" ng-click="addNewParty()">Add </button>
+    <!-- <input placeholder="Brøtekst" ng-model="newParty.description" id="description" type="text" class="description-pre"> -->
+    <button class="add-btn" ng-click="addNewParty()">Opprett post </button>
 </div>
 <!-- form -->
 <br>
@@ -95,8 +107,8 @@
 <div class="post-wrapper">
 
   <div infinite-scroll="addMoreItems()">
+    <div class="post-frontpage" ng-repeat="party in parties | orderBy: '-createdAt' ">
 
-    <div class="post" ng-repeat="party in parties | orderBy: '-createdAt' ">
         <button ng-click="remove(party)"><strong>SLETT</strong></button>
         <!-- Settings Modal -->
         <button id="settings-button" ng-click="openSettingsModal(party)" class="settings-button">

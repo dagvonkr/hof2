@@ -1,12 +1,11 @@
 'use strict';
-angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', '$window', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal, $window) {
+angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal) {
   // Dette er for å prø veå få til modal med data inni seg.
   let partyId = $meteor.object(Parties, $stateParams.partyId);
   $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
   $scope.$meteorSubscribe('parties');
 
   $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
-  console.log('$scope.images', $scope.images);
 
   $scope.hasImagesOn = function (party) {
     // Answers true if the given party has any images.
@@ -30,8 +29,6 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     if ($scope.newParty.name && ($scope.newPartyImages && $scope.newPartyImages.length > 0)) {
       $scope.newParty.owner = $rootScope.currentUser._id;
 
-      console.log('$scope.newPartyImages', $scope.newPartyImages);
-
       // Link the images and the order to the new party
         $scope.newParty.images = [];
         _.forEach($scope.newPartyImages, ({image: {_id}, dimensions, articleDescription}) => {
@@ -47,7 +44,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       // Reset the form
       $scope.newPartyImages = [];
       $scope.newParty = {};
-      $window.location.reload();
+      // $window.location.reload();
     }
 
     else {
@@ -68,8 +65,6 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     $scope.parties.remove();
   };
 
-  console.log('$scope.parties', $scope.parties);
-
   $scope.users = $meteor.collection(Meteor.users, false).subscribe('users'); // hææ? skal denne være med?!?!?!?!?
 
   // Settings modal
@@ -85,8 +80,8 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       },
       scope: $scope
     });
-    let resolve = (result) => console.log(result);
-    let reject = (result) => console.log(result);
+    // let resolve = (result) => console.log(result);
+    // let reject = (result) => console.log(result);
 
     modalInstance.result.then(resolve, reject);
   };

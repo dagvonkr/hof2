@@ -1,5 +1,12 @@
 'use strict';
 angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
+
+  // Disableing button when uploading an image
+  $scope.isDisabled = false;
+  $scope.disableButton = function() {
+    $scope.isDisabled = true; 
+  }
+
   $scope.addImagesTallRectangle = function (files) {
     if (files.length > 0) {
       let reader = new FileReader();
@@ -13,6 +20,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
 
       reader.readAsDataURL(files[0]);
       $scope.images.save(files[0]);
+      $scope.isDisabled = false;
     }
     else {
       $scope.imgSrc = undefined;
@@ -33,9 +41,10 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
       reader.readAsDataURL(files[0]);
 
       $scope.images.save(files[0]).then(function (result) {
-        // console.log(result);
+        console.log(result);
         // window.kk = result;
       });
+      $scope.isDisabled = false;
 
     }
     else {
@@ -57,6 +66,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
 
       reader.readAsDataURL(files[0]);
       $scope.images.save(files[0]);
+      $scope.isDisabled = false;
     }
     else {
       $scope.imgSrc3 = undefined;

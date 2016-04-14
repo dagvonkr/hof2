@@ -55,6 +55,10 @@ a:hover {
     cursor: pointer;
 }
 
+a.editable-empty {
+    color: #999999;
+}
+
 .rectangle{
     width: 170px;
     height: 100px;
@@ -69,17 +73,17 @@ a:hover {
     width: 100px;
     height: 100px;
 }
- 
+
 .drop-box.dragover {
     border: 5px dashed blue;
 }
- 
+
 .drop-box.dragover-err {
     border: 5px dashed red;
 }
 
-.main-image-preview {
-    width: 50%;
+.main-image-preview img {
+    width: 20%;
     margin-left: 8%;
     margin-top: 20px;
 }
@@ -90,7 +94,7 @@ a:hover {
     max-height: 500px;
     width: auto;
 }
- 
+
 .ng-crop-container-tall-rectangle {
     width: 450px;
     height: 375px;
@@ -106,7 +110,7 @@ a:hover {
     width: 375px;
     height: 375px;
 }
-    
+
 .cropArea {
   background: #E4E4E4;
   overflow: hidden;
@@ -125,7 +129,7 @@ a:hover {
     display:none;
     position:absolute;
     font-size: 100px;
-    left:50%; 
+    left:50%;
     top:50%;
     margin:-25px 0 0 -50px;
     border-radius:5px;
@@ -150,18 +154,36 @@ textarea {
 }
 
 .post-wrapper {
-    display: flex; 
+    display: flex;
     flex-direction: row;
     justify-content: space-around;
     flex-wrap: wrap;
     flex-grow: 1;
     flex-shrink: 1;
+
 }
 
-.post{   
+
+.post{
+    margin-top: 25px;
     margin-bottom: 50px;
+
 }
 
+.post-frontpage{
+    margin-top: 25px;
+    margin-bottom: 50px;
+    max-width: 665px;
+    margin-left: 25px;
+    margin-right: 25px;
+
+}
+
+.main-image{
+    max-width: 100%;
+    max-height: 508px;
+
+}
 
 
 .post-header-pre {
@@ -196,8 +218,13 @@ textarea {
 }
 
 .add-btn {
-    margin-left: 25%;
+    margin-left: 22.5%;
     margin-top: 50px;
+    width: 135px;
+    height: 35px;
+    font-size: 16px;
+    border: none;
+    background-color: #ededed;
 }
 
 .settings-modal {
@@ -205,6 +232,7 @@ textarea {
     width: 100%;
     height: 160px;
     padding: 0px 20px 0px 20px;
+
 }
 
 .is-public input {
@@ -308,10 +336,11 @@ textarea {
 .menu-nav-hover:hover:after {
     text-decoration: none;
     content: url(/arrow.png);
+    transform: scale(.1);
     display: block;
     position: absolute;
-    left: -50px; 
-    top: 1px; 
+    left: -202px;
+    top: -41px;
 }
 
 
@@ -353,10 +382,7 @@ textarea {
 }
 
 
-.main-image {
-    max-width: 100%;
-    margin: 0px 10px 0px 10px;    
-}
+
 
 
 
@@ -383,6 +409,7 @@ textarea {
     font-family: 'gotham-medium';
     font-size: 20px;
     text-align: center;
+    border: 1px solid #efefef;
 }
 
 .header-detail-view {
@@ -399,7 +426,10 @@ textarea {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
 
+.header-edit {
+    border: 1px solid #efefef;
 }
 
 .image-detail-view{
@@ -414,7 +444,7 @@ textarea {
 }
 
 .image-detail {
-    width: 60%;
+    width: 50%;
     max-width: 90%;
 
 }
@@ -446,24 +476,42 @@ textarea {
     margin-bottom: 40px;
 }
 
-#map {
-    width: 100%;
-    height: 500px;
+.is-public-details-view {
+    margin-top: 50px;
+    text-align: center;
+    color: #23527C;
+}
+.update-post-button{
+    text-align: center;
 }
 
+.kontaktmanager {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 100px;
+}
 
-@media screen and (max-width : 720px) { 
+@media screen and (max-width : 720px) {
 
 .menu {
     position: relative;
     width: 100%;
+    margin: 20px 0px 0px 0px;
 }
 
 
-.menu-nav{
+/*.menu-nav{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}*/
+
+.menu-sub-view {
+    margin-top: 20px;
+}
+
+.houseoffam-menu {
+    text-align: center;
 }
 
 .nettbutikk{
@@ -471,7 +519,7 @@ textarea {
     display: inline-block;
     background-color: #f4f4f4;
     padding: 7px 10px 7px 10px;
-    font-size: 10px;
+    font-size: 8px;
     margin-top: 0px;
     margin-left: 0px;
 }
@@ -480,7 +528,7 @@ textarea {
     display: inline-block;
     background-color: #f4f4f4;
     padding: 7px 15px 7px 15px;
-    font-size: 10px;
+    font-size: 8px;
     margin-top: 0px;
     margin-left: 10px;
 }
@@ -489,7 +537,7 @@ textarea {
     display: inline-block;
     background-color: #f4f4f4;
     padding: 7px 20px 7px 20px;
-    font-size: 10px;
+    font-size: 8px;
     margin-top: 0px;
     margin-left: 20px;
 }
@@ -552,7 +600,7 @@ textarea {
     margin: 0 auto;
     text-align: center;
     width: 100%;
-    font-size: 35px;
+    font-size: 25px;
     letter-spacing: 2px;
     margin-top: 0px;
     margin-bottom: 20px;
@@ -564,15 +612,32 @@ textarea {
     background: #d4d4d4;
 }
 
+.post-frontpage{
+    margin-left: 0%;
+    margin-right: 0%;
+
+}
+
+.main-image {
+    margin: 0px 0px 0px 0px;
+}
+
 .post-header{
     font-size: 60px !important;
     top: 20px !important;
     left: 0px !important;
     text-align: center !important;
-    width: 320px !important;
+    width: 90% !important;
+
+}
+
+.description{
+    font-size: 12px;
+    text-align: center;
 }
 
 .image-detail {
+    max-width: 100%;
     width: 100%;
 }
 
@@ -598,5 +663,21 @@ textarea {
     margin-right: 10px;
 }
 
+}
+
+@media screen and (max-width : 520px) {
+
+.post-header{
+    word-wrap:break-word;
+    }
+}
+
+@media screen and (max-width : 420px) {
+
+.post-header{
+    font-size: 47px !important;
+    padding-left: 8% !important;
+    padding-right: 8% !important;
+}
 
 }

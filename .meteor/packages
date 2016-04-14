@@ -10,11 +10,10 @@ mongo                   # The database Meteor supports right now
 session                 # Client-side reactive dictionary for your app
 jquery                  # Helpful client-side library
 tracker                 # Meteor's client-side reactive programming library
-standard-minifiers      # JS/CSS minifiers run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
+angular
 angularui:angular-ui-router
 accounts-password
-urigo:angular-blaze-template
 accounts-facebook
 accounts-twitter
 tmeasday:publish-counts
@@ -37,5 +36,9 @@ dag:ngimgcropfullextended
 cfs:filesystem
 cfs:graphicsmagick
 cfs:ui
-angular@1.0.2
 netanelgilad:ng-infinite-scroll
+
+standard-minifier-css
+standard-minifier-js
+meteorhacks:kadira
+

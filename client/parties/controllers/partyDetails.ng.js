@@ -24,37 +24,27 @@
 //     $scope.mainImageUrl = $scope.images[0]; // FIXME: the first image is the main one, right?
 // =======
 angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams', '$meteor', function ($scope, $stateParams, $meteor) {
-  $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
+  $scope.$meteorSubscribe('parties');
 
-  $scope.$meteorSubscribe('parties').then(() => {
-    $scope.party = $meteor.object(Parties, $stateParams.partyId);
-    $scope.partyImages = $scope.party.images;
-  });
+    $scope.helpers({
+      party() {
+        return Parties.findOne($stateParams.partyId);
+      }
+      , images () {
+          const party = Parties.findOne($stateParams.partyId);
+          if(!party) {
+            return [];
+          }
 
-  $scope.$meteorSubscribe('images').then(() => {
-    $scope.images = $meteor.collection(() => {
-      var theseImageIds = _.map($scope.party.images, image => image.id);
-      var theImages = Images.find({
-        _id: {
-          $in: theseImageIds
-        }
-      });
-      return theImages;
+          const theseImageIds = _.map(party.images, image => image.id);
+          return Images.find({
+                  _id: {
+                    $in: theseImageIds
+                  }
+                }).fetch();
+      }
+
     });
-    // }).subscribe('images');
 
-    // $scope.mainImageUrl = $scope.images[0];
-
-// >>>>>>> 456cdaf85dc73d7ae69ee40d6426949eaccd7509
-  });
-  // this.subscribe('images', () => [this.getReactively('party')], () => {
-  //   const partyImages = $scope.getReactively('partyImages');
-  //   const partyImageIds = _.map(partyImages, ({id}) => id);
-  //   const images = Images.find().fetch();//_.filter(Images.find().fetch(), ({_id}) => _.contains(partyImageIds, _id));
-  //   $scope.images = images;//_.map(images, image => image.url());
-  //   $scope.mainImageUrl = $scope.images[0]; // FIXME: the first image is the main one, right?
-  // });
-
-
-
+  $scope.$meteorSubscribe('images');
 }]);

@@ -5,6 +5,7 @@ if (Meteor.isServer) {
     // gm(readStream, fileObj.name()).compress('JPEG').quality(0.3).stream().pipe(writeStream);
     // gm(readStream, fileObj.name()).compress('JPEG').stream().pipe(writeStream);
     gm(readStream, fileObj.name()).interlace('Line').quality(100).setFormat('jpg').stream().pipe(writeStream);
+    // gm(readStream, fileObj.name()).interlace('Line').setFormat('png').stream().pipe(writeStream);
 
     // console.log('compressImage ----->', fileObj);
 
@@ -19,11 +20,13 @@ if (Meteor.isServer) {
       return {
         extension: 'jpg',
         type: 'image/jpg'
+        // extension: 'png',
+        // type: 'image/png'
       };
     },
     transformWrite: compressImage,
-    accessKeyId: 'AKIAIYQP7KLRMJZZTKUQ',
-    secretAccessKey: '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',
+    accessKeyId: process.env.s3AccessKeyId,
+    secretAccessKey: process.env.s3SecretAccessKey,
     bucket: 'houseoffam2'
   });
 
@@ -54,18 +57,6 @@ if (Meteor.isServer) {
     },
     update: function (userId) {
       return userId;
-    }
-  });
-
-  Meteor.publish('images', function (party) {
-    if (!party) {
-      return Images.find({});
-    } else {
-      return Images.find({
-        _id: {
-          $in: party.images
-        }
-      });
     }
   });
 }
