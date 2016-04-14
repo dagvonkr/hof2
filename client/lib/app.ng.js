@@ -1,4 +1,4 @@
-angular.module('hof2',['angular-meteor', 'ui.router', 'ui.bootstrap', 'ngFileUpload', 'ngImgCrop', 'xeditable', 'angular-sortable-view', 'textAngular']);
+angular.module('hof2',['angular-meteor', 'ui.router', 'ui.bootstrap', 'ngFileUpload', 'ngImgCrop', 'angular-sortable-view', 'xeditable', 'textAngular']);
 
 function onReady() {
   angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 500);
@@ -24,25 +24,3 @@ function initializeGA () {
   });
   }
 }
-
-
-// elastic textarea
-// $(document).ready(function(){
-// 	$('textarea').elastic();
-// 	$('textarea').trigger('update');
-// });
-
-
-<<<<<<< HEAD
-$(document).ready(function() {
-	$('#settings-button').draggable({
-	    handle: '.settings-modal'
-	});
-});
-=======
-// $(document).ready(function() {
-// 	$("#settings-button").draggable({
-// 	    handle: ".settings-modal"
-// 	});
-// });
->>>>>>> staging
