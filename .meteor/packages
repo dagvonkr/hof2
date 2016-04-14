@@ -36,7 +36,9 @@ dag:ngimgcropfullextended
 cfs:filesystem
 cfs:graphicsmagick
 cfs:ui
+netanelgilad:ng-infinite-scroll
 
 standard-minifier-css
 standard-minifier-js
 meteorhacks:kadira
+

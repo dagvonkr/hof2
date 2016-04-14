@@ -5,56 +5,54 @@
 <!--   <h1 style="color:red; text-align:center;"> This is a test page. </h1> -->
 
 
-  <div class="menu">
-    <div class="houseoffam-logo-mobile">
-     <a href="/">HOUSE OF FAM</a>
+<div class="menu">
+  <div class="houseoffam-logo-mobile">
+   <a href="/">HOUSE OF FAM</a>
+  </div>
+  <div class="houseoffam-menu">
+    <div class="menu-nav nettbutikk">
+      <a href="http://fam-irvoll.myshopify.com/collections/frontpage" class="menu-nav-hover"> NETTBUTIKK </a>
     </div>
-    <div class="houseoffam-menu">
-      <div class="menu-nav nettbutikk">
-        <a href="http://fam-irvoll.myshopify.com/collections/frontpage" class="menu-nav-hover"> NETTBUTIKK </a>
-      </div>
-      <div class="menu-nav kontakt">
-        <a href="/kontakt" class="menu-nav-hover">
-          KONTAKT
-        </a>
-      </div>
-      <div class="menu-nav om">
-        <a href="/om" class="menu-nav-hover">
-          OM
-        </a>
-      </div>
+    <div class="menu-nav kontakt">
+      <a href="/kontakt" class="menu-nav-hover">
+        KONTAKT
+      </a>
     </div>
-    <div class="houseoffam-line"> </div>
-    <div class="houseoffam-logo">
-      <a href="/">HOUSE OF FAM</a>
+    <div class="menu-nav om">
+      <a href="/om" class="menu-nav-hover">
+        OM
+      </a>
     </div>
   </div>
-
+  <div class="houseoffam-line"> </div>
+  <div class="houseoffam-logo">
+    <a href="/">HOUSE OF FAM</a>
+  </div>
+</div>
 
 <div class="post-wrapper">
 
+  <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="isLoadingItems" infinite-scroll-distance="1">
+    <div class="post" ng-repeat="party in parties | orderBy: -createdAt ">
+      <a href="/posts/{{party._id}}">
 
-  <div class="post-frontpage" ng-repeat="party in parties | orderBy: '-createdAt' " total-items="partiesCount.count">
-    <a href="/posts/{{party._id}}">
-
-  <div class="post-header" ng-style="{
-          'top': party.style.header.top + 'px'|| '50px',
-          'left': party.style.header.left + 'px',
-          'width': party.style.header.width + 'px' || '400px',
-          'font-size': party.style.header.fontSize + 'px',
-          'color': party.style.header.color || '#2d2c2c',
-          'text-shadow' : party.style.header.textShadow,
-          'text-align': party.style.header.textAlign || 'center'
-          }">
-    <!-- <div class="post-header-rectangle" ng-if=""> -->
-          {{party.name}}
-    <!-- </div>  -->
-  </div>
-    </a>
+      	<div class="post-header" ng-style="{
+      	        'top': party.style.header.top + 'px'|| '50px',
+      	        'left': party.style.header.left + 'px',
+      	        'width': party.style.header.width + 'px' || '400px',
+      	        'font-size': party.style.header.fontSize + 'px',
+      	        'color': party.style.header.color || '#2d2c2c',
+                'text-shadow' : party.style.header.textShadow,
+      	        'text-align': party.style.header.textAlign || 'center'
+      	        }">
+      		<!-- <div class="post-header-rectangle" ng-if=""> -->
+      	        {{party.name}}
+      		<!-- </div>	 -->
+      	</div>
+      </a>
       <img ng-src="{{ getMainImage(party.images) }}" class="main-image">
-    <p class="description">{{party.description}}</p>
+      <p class="description">{{party.description}}</p>
+    </div>
   </div>
-
-
 </div> <!-- post-wrapper -->
 

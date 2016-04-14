@@ -1,6 +1,12 @@
-Meteor.publish('parties', function (options, searchString = '') {
+Meteor.publish('allParties', function (options, searchString = '') {
+  // Publishes all the parties posts.
+  const query = { owner: this.userId };
+  return Parties.find({ owner: this.userId }, {sort: { createdAt: -1 }});
+});
 
-  const someOptions = options || {};
+Meteor.publish('parties', function (options, searchString = '') {
+  // Publishes only the parties posts that are set as public and uses the sent options or searchString if any.
+  const someOptions = options || { sort: {createdAt: -1}};
   const query = {
     name: {
           $regex: `.*${searchString || ''}.*`,
