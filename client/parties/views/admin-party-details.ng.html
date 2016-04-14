@@ -54,6 +54,13 @@
 
 	<div class="article-description" text-angular ng-model="party.editorcontent" ta-toolbar="[['bold','italics'], ['insertLink']]" ng-blur="save()"> </div>
 
+  <input
+    type="text"
+    class="youtube-link"
+    placeholder="YouTube link"
+    ng-model="party.youtubeLink"
+    ng-blur="save()">
+
 	<div ng-repeat="image in images" class="image-detail-view">
 
 		<div class="image-detail-view-2">

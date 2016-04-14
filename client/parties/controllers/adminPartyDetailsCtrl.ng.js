@@ -29,6 +29,7 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
         , description: $scope.party.description
         , editorcontent: $scope.party.editorcontent
         , public: $scope.party.public
+        , youtubeLink: $scope.party.youtubeLink
       }
     });
   };

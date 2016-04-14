@@ -6,6 +6,7 @@ function onReady() {
   });
 
   initializeGA();
+
 }
 
 if (Meteor.isCordova)
