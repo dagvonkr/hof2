@@ -106,8 +106,8 @@
 <br>
 <div class="post-wrapper">
 
-  <div infinite-scroll="addMoreItems()">
-    <div class="post-frontpage" ng-repeat="party in parties | orderBy: '-createdAt' ">
+  <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="busy" infinite-scroll-distance="1">
+    <div class="post-frontpage" ng-repeat="party in parties">
 
         <button ng-click="remove(party)"><strong>SLETT</strong></button>
         <!-- Settings Modal -->
@@ -130,6 +130,7 @@
             </div>
         </a>
         <img ng-show="hasImagesOn(party)" ng-src="{{ getMainImageUrlOf(party) }}" class="main-image">
+        <h2>{{party.createdAt | date:'yyyy-MM-dd HH:mm:ss'}}</h2>
         <!-- <div ng-if="party.images && party.images.length > 0" ng-style="getMainImage(party.images)" class="main-image">
     </div> -->
         <p class="description">{{party.description}}</p>

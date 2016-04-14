@@ -1,4 +1,4 @@
-angular.module('hof2',['angular-meteor', 'ui.router', 'ui.bootstrap', 'ngFileUpload', 'ngImgCrop', 'angular-sortable-view', 'xeditable', 'textAngular']);
+angular.module('hof2',['angular-meteor', 'ui.router', 'ui.bootstrap', 'ngFileUpload', 'ngImgCrop', 'angular-sortable-view', 'xeditable', 'textAngular', 'infinite-scroll']);
 
 function onReady() {
   angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 500);

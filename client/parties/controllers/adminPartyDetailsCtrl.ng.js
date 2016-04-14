@@ -2,7 +2,7 @@
 angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$stateParams', '$meteor', '$filter', '$rootScope', '$state', '$reactive', function ($scope, $stateParams, $meteor, $filter, $rootScope, $state, $reactive) {
   $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
 
-  $scope.$meteorSubscribe('parties');
+  $scope.$meteorSubscribe('allParties');
 
     $scope.helpers({
       party() {
@@ -18,7 +18,7 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
                   _id: {
                     $in: theseImageIds
                   }
-                }).fetch();
+                },{sort: {uploadedAt: 1 }}).fetch();
       }
     });
 

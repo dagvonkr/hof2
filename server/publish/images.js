@@ -5,8 +5,8 @@ Meteor.publish('images', function (party) {
     return Images.find({
       _id: {
         $in: party.images
-      }
-    });
+      }}
+      , { sort: { uploadedAt: -1 } });
   }
 });
 

@@ -32,8 +32,8 @@
 
 <div class="post-wrapper">
 
-  <div infinite-scroll="getNextPage()" infinite-scroll-disabled="busy" infinite-scroll-distance="1">
-    <div class="post" ng-repeat="party in parties">
+  <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="busy" infinite-scroll-distance="1">
+    <div class="post" ng-repeat="party in parties | orderBy: -createdAt ">
       <a href="/posts/{{party._id}}">
 
       	<div class="post-header" ng-style="{

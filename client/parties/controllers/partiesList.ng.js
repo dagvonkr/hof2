@@ -1,5 +1,5 @@
 angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$filter', function ($scope, $meteor, $filter) {
-  $scope.$meteorSubscribe('parties');
+  $scope.$meteorSubscribe('parties', { sort: {createdAt: -1}});
   $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('mainImages');
 
   $scope.helpers({
@@ -15,5 +15,8 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
     }
   };
 
-  window.este = $scope;
+  $scope.addMoreItems = function () {
+    console.log('addMoreItems');
+  };
+
 }]);

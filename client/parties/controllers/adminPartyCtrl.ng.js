@@ -3,7 +3,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   // Dette er for å prø veå få til modal med data inni seg.
   let partyId = $meteor.object(Parties, $stateParams.partyId);
   $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
-  $scope.$meteorSubscribe('parties');
+  $scope.$meteorSubscribe('allParties', { sort: {createdAt: -1}});
 
   $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
 
@@ -16,14 +16,8 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
 
 
   $scope.newParty = {
-    'createdAt' : new Date ()
+    createdAt: new Date ()
   };
-  // if (!$scope.newParty.createdAt) {
-  //     $scope.newParty = {
-  //       'createdAt' : new Date()
-  //     }
-  //   }
-
 
   $scope.addNewParty = function () {
     if ($scope.newParty.name && ($scope.newPartyImages && $scope.newPartyImages.length > 0)) {
@@ -40,6 +34,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
         });
 
       // Saving the party to parties
+      $scope.newParty.createdAt = new Date;
       $scope.parties.push($scope.newParty);
       // Reset the form
       $scope.newPartyImages = [];
@@ -113,9 +108,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   $scope.orderProperty = '1';
 
   $scope.parties = $meteor.collection(function () {
-    return Parties.find({}, {
-      sort: $scope.getReactively('sort')
-    });
+    return Parties.find();
   });
 
   $meteor.autorun($scope, function () {
