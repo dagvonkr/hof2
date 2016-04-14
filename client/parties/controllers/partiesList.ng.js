@@ -1,23 +1,43 @@
 angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$filter', function ($scope, $meteor, $filter) {
-  $scope.$meteorSubscribe('parties', { sort: {createdAt: -1}});
-  // $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('mainImages');
-  $meteor.$meteorSubscribe('mainImages');
+  $scope.initialize = function () {
+    $scope.$meteorSubscribe('parties', { sort: {createdAt: -1}});
+    $scope.$meteorSubscribe('mainImages');
+    $scope.parties = [];
+    $scope.page = 0;
+    $scope.isLoadingItems = false;
+    $scope.addMoreItems();
+  };
 
   $scope.helpers({
     parties: function () {
-      return Parties.find();
+      return $scope.parties;
     }
   });
 
   $scope.getMainImage = function (images) {
     try {
-      return $filter('filter')($scope.images, {_id: images[0].id})[0].url();
-    } catch (error) {
-    }
+      return Images.find({_id: images[0].id}).fetch()[0].url();
+    } catch (error) { }
   };
 
   $scope.addMoreItems = function () {
-    console.log('addMoreItems');
+
+    if ($scope.isLoadingItems) return;
+
+    $scope.isLoadingItems = true;
+
+    const bunch = Parties.find({}, {
+      limit: Meteor.settings.public.perPage
+      , skip: (($scope.page - 1) * Meteor.settings.public.perPage)
+    }).fetch();
+
+    bunch.forEach( function (each) {
+      $scope.parties.push(each);
+     });
+
+    $scope.isLoadingItems = false;
+    $scope.page += 1;
   };
 
+  $scope.initialize();
 }]);

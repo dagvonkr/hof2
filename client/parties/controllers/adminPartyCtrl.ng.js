@@ -4,7 +4,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     $scope.$meteorSubscribe('allParties', { sort: {createdAt: -1}});
     $scope.$meteorSubscribe('mainImages');
     $scope.parties = [];
-    $scope.page = 1;
+    $scope.page = 0;
     $scope.isLoadingItems = false;
     $scope.resetNewParty();
     $scope.addMoreItems();
