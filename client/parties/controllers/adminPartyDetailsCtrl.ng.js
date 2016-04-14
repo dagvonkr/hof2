@@ -1,12 +1,17 @@
 'use strict';
 angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$stateParams', '$meteor', '$filter', '$rootScope', '$state', '$reactive', function ($scope, $stateParams, $meteor, $filter, $rootScope, $state, $reactive) {
   $scope.initialize = function () {
-    $scope.$meteorSubscribe('allParties');
     $scope.$meteorSubscribe('images');
+    $scope.$meteorSubscribe('allParties').then(function (){
+      $scope.addMoreItems();
+    });
+    $scope.reset();
+  };
+
+  $scope.reset = function () {
     $scope.images = [];
     $scope.page = 0;
     $scope.isLoadingItems = false;
-    $scope.addMoreItems();
   };
 
   $scope.helpers({

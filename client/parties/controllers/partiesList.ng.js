@@ -2,10 +2,14 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
   $scope.initialize = function () {
     $scope.$meteorSubscribe('parties', { sort: {createdAt: -1}});
     $scope.$meteorSubscribe('mainImages');
+    $scope.reset();
+    $scope.addMoreItems();
+  };
+
+  $scope.reset = function () {
     $scope.parties = [];
     $scope.page = 0;
     $scope.isLoadingItems = false;
-    $scope.addMoreItems();
   };
 
   $scope.helpers({

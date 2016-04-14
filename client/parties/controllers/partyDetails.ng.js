@@ -3,13 +3,17 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
   $scope.initialize = function () {
     // $scope.$meteorSubscribe('postImages', partyId);  to-do
     $scope.$meteorSubscribe('images');
-    $scope.$meteorSubscribe('parties');
+    $scope.$meteorSubscribe('parties').then(function (){
+      $scope.addMoreItems();
+    });
+    $scope.reset();
+  };
+
+  $scope.reset = function () {
     $scope.images = [];
     $scope.page = 0;
     $scope.isLoadingItems = false;
-    $scope.addMoreItems();
   };
-
 
   $scope.helpers({
     party() {

@@ -3,11 +3,15 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   $scope.initialize = function () {
     $scope.$meteorSubscribe('allParties', { sort: {createdAt: -1}});
     $scope.$meteorSubscribe('mainImages');
+    $scope.reset();
+    $scope.addMoreItems();
+  };
+
+  $scope.reset = function () {
     $scope.parties = [];
     $scope.page = 0;
     $scope.isLoadingItems = false;
     $scope.resetNewParty();
-    $scope.addMoreItems();
   };
 
   $scope.hasImagesOn = function (party) {
