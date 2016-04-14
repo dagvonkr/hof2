@@ -33,14 +33,16 @@
     <p class="description-details">{{party.description}}</p>
     <div class="image-detail-view-2">
 
-        <div class="article-description">
-          <div ta-bind="text" ng-model="party.editorcontent"></div>
-          <!-- {{party.editorcontent }} -->
+      <div class="article-description">
+        <div ta-bind="text" ng-model="party.editorcontent"></div>
+        <!-- {{party.editorcontent }} -->
 <!--           <span ng-bind-html="party.editorcontent | htmlToPlaintext"></span> -->
-        </div>
+      </div>
 
-      <div ng-repeat="image in images" class="image-detail-view">
-        <img ng-src="{{image.url()}}"  class="image-detail"/>
+      <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="isLoadingItems" infinite-scroll-distance="1">
+        <div ng-repeat="image in images" class="image-detail-view">
+          <img ng-src="{{image.url()}}"  class="image-detail"/>
+        </div>
       </div>
     </div>
   <!--   <div class="main-image">
