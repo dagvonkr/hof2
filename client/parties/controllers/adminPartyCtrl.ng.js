@@ -1,23 +1,35 @@
 'use strict';
 angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal) {
-  // Dette er for å prø veå få til modal med data inni seg.
-  let partyId = $meteor.object(Parties, $stateParams.partyId);
-  $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
-  $scope.$meteorSubscribe('allParties', { sort: {createdAt: -1}});
-
-  $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
+  $scope.initialize = function () {
+    // $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
+    $scope.$meteorSubscribe('allParties', { sort: {createdAt: -1}});
+    // $meteor.$meteorSubscribe('images');
+    $scope.$meteorSubscribe('mainImages');
+    $scope.parties = [];
+    $scope.page = 1;
+    $scope.isLoadingItems = false;
+    $scope.resetNewParty();
+    $scope.addMoreItems();
+  };
 
   $scope.hasImagesOn = function (party) {
     // Answers true if the given party has any images.
     return !_.isEmpty(party.images);
   };
 
-  $scope.newPartyImages = [];
+  $scope.resetNewParty = function () {
+    $scope.newPartyImages = [];
 
+    $scope.newParty = {
+      createdAt: new Date ()
+    };
+  }
 
-  $scope.newParty = {
-    createdAt: new Date ()
-  };
+  $scope.helpers({
+    parties: function () {
+      return $scope.parties;
+    }
+  });
 
   $scope.addNewParty = function () {
     if ($scope.newParty.name && ($scope.newPartyImages && $scope.newPartyImages.length > 0)) {
@@ -35,11 +47,8 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
 
       // Saving the party to parties
       $scope.newParty.createdAt = new Date;
-      $scope.parties.push($scope.newParty);
-      // Reset the form
-      $scope.newPartyImages = [];
-      $scope.newParty = {};
-      // $window.location.reload();
+      Parties.insert($scope.newParty);
+      $scope.resetNewParty();
     }
 
     else {
@@ -53,19 +62,18 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   };
 
   $scope.remove = function (party) {
-    $scope.parties.splice($scope.parties.indexOf(party), 1);
+    Parties.remove(party._id);
   };
 
-  $scope.removeAll = function () {
-    $scope.parties.remove();
-  };
-
-  $scope.users = $meteor.collection(Meteor.users, false).subscribe('users'); // hææ? skal denne være med?!?!?!?!?
+  // sas: This is dangerous, would permanently remove all posts without undo. Commenting it out
+  // $scope.removeAll = function () {
+  //   $scope.parties.remove();
+  // };
 
   // Settings modal
   $scope.openSettingsModal = function (party) {
     $scope.currentParty = party;
-    let modalInstance = $modal.open({
+    $modal.open({
       templateUrl: 'client/parties/views/admin-party-modal.ng.html',
       controller: 'adminPartyDetailsCtrl',
       resolve: {
@@ -75,16 +83,13 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       },
       scope: $scope
     });
-    // let resolve = (result) => console.log(result);
-    // let reject = (result) => console.log(result);
-    // modalInstance.result.then(resolve, reject);
   };
 
   // getting the main image
   $scope.getMainImageUrlOf = function (party) {
     // Answers the url of he first image of the given party, null otherwise.
     if (!_.isEmpty(party.images)) {
-      var filtered = $filter('filter')($scope.images, {_id: party.images[0].id});
+      var filtered = Images.find({_id: party.images[0].id}).fetch();
       var answer = null;
       // console.log('party.images about to filter and get the first URL', party);
 
@@ -101,33 +106,24 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     }
   };
 
-  // Pagination
-  // $scope.page = 1;  deprecated by infinite scroll
-  $scope.perPage = 10;
-  $scope.sort = {name: 1};
-  $scope.orderProperty = '1';
-
-  $scope.parties = $meteor.collection(function () {
-    return Parties.find();
-  });
-
-  $meteor.autorun($scope, function () {
-    $meteor.subscribe('parties', {
-      limit: parseInt($scope.getReactively('perPage')),
-      skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
-      sort: $scope.getReactively('sort')
-    }, $scope.getReactively('search')).then(function () {
-      $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
-    });
-  });
-
   $scope.addMoreItems = function () {
-    console.log('addMoreItems');
+    // console.log('addMoreItems');
+    if ($scope.isLoadingItems) return;
+
+    $scope.isLoadingItems = true;
+
+    const bunch = Parties.find({}, {
+      limit: Meteor.settings.public.perPage
+      , skip: (($scope.page - 1) * Meteor.settings.public.perPage)
+    }).fetch();
+    // console.log('for page '+$scope.page.toString()+' now is adding', bunch);
+    bunch.forEach( function (each) {
+      $scope.parties.push(each);
+     });
+    // console.log('resulted in', $scope.parties);
+    $scope.isLoadingItems = false;
+    $scope.page += 1;
   };
 
-  $scope.$watch('orderProperty', function () {
-    if ($scope.orderProperty) {
-      $scope.sort = {name: parseInt($scope.orderProperty)};
-    }
-  });
+  $scope.initialize();
 }]);

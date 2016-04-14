@@ -1,6 +1,7 @@
 angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$filter', function ($scope, $meteor, $filter) {
   $scope.$meteorSubscribe('parties', { sort: {createdAt: -1}});
-  $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('mainImages');
+  // $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('mainImages');
+  $meteor.$meteorSubscribe('mainImages');
 
   $scope.helpers({
     parties: function () {
