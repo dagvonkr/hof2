@@ -4,9 +4,7 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
 
   $scope.helpers({
     parties: function () {
-      return Parties.find({}, {
-        sort: {name: 1}
-      });
+      return Parties.find();
     }
   });
 
