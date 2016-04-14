@@ -7,7 +7,7 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
   };
 
   $scope.reset = function () {
-    $scope.parties = [];
+    $scope.parties = new Set;
     $scope.page = 0;
     $scope.isLoadingItems = false;
   };

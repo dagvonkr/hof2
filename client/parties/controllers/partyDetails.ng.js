@@ -10,7 +10,7 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
   };
 
   $scope.reset = function () {
-    $scope.images = [];
+    $scope.images = new Set;
     $scope.page = 0;
     $scope.isLoadingItems = false;
   };

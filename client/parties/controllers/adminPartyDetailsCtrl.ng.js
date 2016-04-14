@@ -9,7 +9,7 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
   };
 
   $scope.reset = function () {
-    $scope.images = [];
+    $scope.images = new Set;
     $scope.page = 0;
     $scope.isLoadingItems = false;
   };

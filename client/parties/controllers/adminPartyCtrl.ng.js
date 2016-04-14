@@ -8,7 +8,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   };
 
   $scope.reset = function () {
-    $scope.parties = [];
+    $scope.parties = new Set;
     $scope.page = 0;
     $scope.isLoadingItems = false;
     $scope.resetNewParty();
