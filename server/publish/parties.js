@@ -1,12 +1,13 @@
 Meteor.publish('parties', function (options, searchString = '') {
 
+  const someOptions = options || {};
   const query = {
     name: {
           $regex: `.*${searchString || ''}.*`,
           $options: 'i'
         }
 
-    , $or: [
+    , $and: [
       { public: true }
       , { owner: this.userId }
     ]
@@ -20,7 +21,7 @@ Meteor.publish('parties', function (options, searchString = '') {
 
   // console.log('About to publish parties with query:', query, options);
 
-  const parties = Parties.find(query, options);
+  const parties = Parties.find(query, someOptions);
 
   // const parties = Parties.find();
   // console.log('parties count:', parties.count());
