@@ -1,9 +1,7 @@
 'use strict';
 angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal) {
   $scope.initialize = function () {
-    // $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
     $scope.$meteorSubscribe('allParties', { sort: {createdAt: -1}});
-    // $meteor.$meteorSubscribe('images');
     $scope.$meteorSubscribe('mainImages');
     $scope.parties = [];
     $scope.page = 1;
@@ -91,7 +89,6 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     if (!_.isEmpty(party.images)) {
       var filtered = Images.find({_id: party.images[0].id}).fetch();
       var answer = null;
-      // console.log('party.images about to filter and get the first URL', party);
 
       try {
         answer = filtered[0].url();
@@ -107,7 +104,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   };
 
   $scope.addMoreItems = function () {
-    // console.log('addMoreItems');
+
     if ($scope.isLoadingItems) return;
 
     $scope.isLoadingItems = true;
@@ -116,11 +113,11 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       limit: Meteor.settings.public.perPage
       , skip: (($scope.page - 1) * Meteor.settings.public.perPage)
     }).fetch();
-    // console.log('for page '+$scope.page.toString()+' now is adding', bunch);
+
     bunch.forEach( function (each) {
       $scope.parties.push(each);
      });
-    // console.log('resulted in', $scope.parties);
+
     $scope.isLoadingItems = false;
     $scope.page += 1;
   };
