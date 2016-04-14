@@ -23,7 +23,6 @@
     </div>
   </div>
 
-
 <div class="post">
 
   <div class="update-post-button">
@@ -31,7 +30,6 @@
   </div>
 
   <div class="is-public-details-view">Bruk public knappen i "settings" intil videre. <br>
-
 
 <!--     <label>Post is public: </label>
     <input type="checkbox" ng-model="party.public" ng-blur="save()"> -->
@@ -52,16 +50,14 @@
 
 	<div class="article-description" text-angular ng-model="party.editorcontent" ta-toolbar="[['bold','italics'], ['insertLink']]" ng-blur="save()"> </div>
 
-	<div ng-repeat="image in images" class="image-detail-view">
-
-		<div class="image-detail-view-2">
-	      <img class="image-detail" ng-src="{{image.url()}}" />
-	    </div>
-
-	      <!-- <a href="#" editable-text="image.articleDescription" onbeforesave="updateDescription($data, image)" class="article-description-edit">{{ image.articleDescription || 'Click here to add text' }}</a> -->
-
-
+  <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="isLoadingItems" infinite-scroll-distance="1">
+  	<div ng-repeat="image in images" class="image-detail-view">
+  		<div class="image-detail-view-2">
+        <img class="image-detail" ng-src="{{image.url()}}" />
+      </div>
+  	      <!-- <a href="#" editable-text="image.articleDescription" onbeforesave="updateDescription($data, image)" class="article-description-edit">{{ image.articleDescription || 'Click here to add text' }}</a> -->
     </div>
+  </div>
 
 
 
