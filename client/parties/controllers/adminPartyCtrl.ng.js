@@ -82,8 +82,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     });
     // let resolve = (result) => console.log(result);
     // let reject = (result) => console.log(result);
-
-    modalInstance.result.then(resolve, reject);
+    // modalInstance.result.then(resolve, reject);
   };
 
   // getting the main image
