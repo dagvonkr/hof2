@@ -80,8 +80,8 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       },
       scope: $scope
     });
-    let resolve = (result) => console.log(result);
-    let reject = (result) => console.log(result);
+    // let resolve = (result) => console.log(result);
+    // let reject = (result) => console.log(result);
 
     modalInstance.result.then(resolve, reject);
   };
