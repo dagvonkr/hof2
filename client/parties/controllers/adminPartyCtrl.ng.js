@@ -83,6 +83,24 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     });
   };
 
+  $scope.updateSettings = function (aParty) {
+    // Something in the settings modal have chaged and we make that change persistent.
+    aParty.style = aParty.style || {};
+    aParty.style.header = aParty.style.header || {};
+    Parties.update(aParty._id, {
+        '$set': {
+          public: aParty.public
+          , 'style.header.top': aParty.style.header.top
+          , 'style.header.left': aParty.style.header.left
+          , 'style.header.width': aParty.style.header.width
+          , 'style.header.fontSize': aParty.style.header.fontSize
+          , 'style.header.color': aParty.style.header.color
+          , 'style.header.textShadow': aParty.style.header.textShadow
+          , 'style.header.textAlign': aParty.style.header.textAlign
+        }
+      });
+  };
+
   // getting the main image
   $scope.getMainImageUrlOf = function (party) {
     // Answers the url of he first image of the given party, null otherwise.
