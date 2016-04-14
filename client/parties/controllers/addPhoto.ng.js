@@ -4,7 +4,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   // Disableing button when uploading an image
   $scope.isDisabled = false;
   $scope.disableButton = function() {
-    $scope.isDisabled = true; 
+    $scope.isDisabled = true;
   }
 
   $scope.addImagesTallRectangle = function (files) {
@@ -41,7 +41,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
       reader.readAsDataURL(files[0]);
 
       $scope.images.save(files[0]).then(function (result) {
-        console.log(result);
+        // console.log(result);
         // window.kk = result;
       });
       $scope.isDisabled = false;
