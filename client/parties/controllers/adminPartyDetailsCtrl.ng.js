@@ -9,7 +9,7 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
   };
 
   $scope.reset = function () {
-    $scope.images = new Set;
+    $scope.images = [];
     $scope.page = 0;
     $scope.isLoadingItems = false;
   };
@@ -64,7 +64,9 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
     }).fetch();
 
     bunch.forEach( function (each) {
-      $scope.images.push(each);
+      if( !_($scope.images).find(function (maybeAdded){ return each.url() === maybeAdded.url()})) {
+        $scope.images.push(each);
+      }
      });
 
     $scope.isLoadingItems = false;

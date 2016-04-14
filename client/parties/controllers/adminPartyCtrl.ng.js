@@ -1,14 +1,15 @@
 'use strict';
 angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal) {
   $scope.initialize = function () {
-    $scope.$meteorSubscribe('allParties', { sort: {createdAt: -1}});
+    $scope.$meteorSubscribe('allParties', { sort: {createdAt: -1}}).then(function () {
+      $scope.addMoreItems();
+    });
     $scope.$meteorSubscribe('mainImages');
     $scope.reset();
-    $scope.addMoreItems();
   };
 
   $scope.reset = function () {
-    $scope.parties = new Set;
+    $scope.parties = [];
     $scope.page = 0;
     $scope.isLoadingItems = false;
     $scope.resetNewParty();
@@ -137,7 +138,9 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     }).fetch();
 
     bunch.forEach( function (each) {
-      $scope.parties.push(each);
+      if( !_($scope.parties).find(function (maybeAdded){ return each._id === maybeAdded._id})) {
+        $scope.parties.push(each);
+      }
      });
 
     $scope.isLoadingItems = false;

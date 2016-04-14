@@ -10,7 +10,7 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
   };
 
   $scope.reset = function () {
-    $scope.images = new Set;
+    $scope.images = [];
     $scope.page = 0;
     $scope.isLoadingItems = false;
   };
@@ -37,6 +37,7 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
     }
 
     const theseImageIds = _.map(party.images, image => image.id);
+
     const query = { _id: { $in: theseImageIds } };
     const bunch = Images.find(query, {
       limit: Meteor.settings.public.perPage
@@ -45,11 +46,14 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
     }).fetch();
 
     bunch.forEach( function (each) {
-      $scope.images.push(each);
+      if( !_($scope.images).find(function (maybeAdded){ return each.url() === maybeAdded.url()})) {
+        $scope.images.push(each);
+      }
      });
 
     $scope.isLoadingItems = false;
     $scope.page += 1;
+
   };
 
   $scope.initialize();

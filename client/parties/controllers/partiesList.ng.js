@@ -1,13 +1,14 @@
 angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$filter', function ($scope, $meteor, $filter) {
   $scope.initialize = function () {
-    $scope.$meteorSubscribe('parties', { sort: {createdAt: -1}});
+    $scope.$meteorSubscribe('parties', { sort: {createdAt: -1}}).then(function (){
+      $scope.addMoreItems();
+    });
     $scope.$meteorSubscribe('mainImages');
     $scope.reset();
-    $scope.addMoreItems();
   };
 
   $scope.reset = function () {
-    $scope.parties = new Set;
+    $scope.parties = [];
     $scope.page = 0;
     $scope.isLoadingItems = false;
   };
@@ -36,7 +37,9 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
     }).fetch();
 
     bunch.forEach( function (each) {
-      $scope.parties.push(each);
+      if( !_($scope.parties).find(function (maybeAdded){ return each._id === maybeAdded._id })) {
+        $scope.parties.push(each);
+      }
      });
 
     $scope.isLoadingItems = false;
