@@ -59,6 +59,12 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
 
   };
 
+  $scope.removeYoutubeLink = function () {
+    $scope.party.youtubeLink = null;
+    $scope.enteredYoutubeLink = null;
+    $scope.save();
+  };
+
   $scope.save = function () {
     Parties.update($scope.party._id, {
       '$set': {

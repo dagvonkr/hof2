@@ -59,6 +59,9 @@
     placeholder="YouTube link"
     ng-model="enteredYoutubeLink"
     ng-change="saveYoutubeLink()">
+  <div class="update-post-button">
+    <button ng-click="removeYoutubeLink()">Fern youtube link</button>
+  </div>
   <p>{{party.youtubeLink}}</p>
 
   <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="isLoadingItems" infinite-scroll-distance="1">
