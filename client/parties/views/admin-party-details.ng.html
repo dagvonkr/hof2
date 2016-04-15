@@ -53,7 +53,14 @@
 	<textarea style="overflow: visible" ng-model="party.description" class="article-text" ng-blur="save()">  </textarea>
 
 	<div class="article-description" text-angular ng-model="party.editorcontent" ta-toolbar="[['bold','italics'], ['insertLink']]" ng-blur="save()"> </div>
-
+  <p> Legg inn Youtube link her. Du vil ikke se videoen her (enda) men den vises i posten fra hovedsiden.</p>
+  <input
+    type="text"
+    class="youtube-link"
+    placeholder="YouTube link"
+    ng-model="enteredYoutubeLink"
+    ng-change="saveYoutubeLink()">
+  <p>{{party.youtubeLink}}</p>
 	<div ng-repeat="image in images" class="image-detail-view">
 
 		<div class="image-detail-view-2">
