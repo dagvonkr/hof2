@@ -8,11 +8,22 @@ angular.module('hof2').run(['$rootScope', '$state', function ($rootScope, $state
   });
 }]);
 
-angular.module('hof2').config(['$urlRouterProvider', '$stateProvider', '$locationProvider', function ($urlRouterProvider, $stateProvider, $locationProvider) {
+angular.module('hof2').config(['$urlRouterProvider', '$stateProvider', '$locationProvider', '$sceDelegateProvider', function ($urlRouterProvider, $stateProvider, $locationProvider, $sceDelegateProvider) {
   $locationProvider.html5Mode({
     enabled: true
     // , requireBase: false
   });
+
+  $sceDelegateProvider.resourceUrlWhitelist([
+    // Allow same origin resource loads.
+    'self',
+    'https://youtube.com/**',
+    '*://www.youtube.com/**',
+    '*://*.youtube.com/**',
+    '*://youtu.be/**',
+    '*://*.youtu.be/**'
+  ]);
+
 
   $stateProvider
     .state('parties', {

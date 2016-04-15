@@ -3,6 +3,7 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
   $scope.initialize = function () {
     $scope.$meteorSubscribe('images');
     $scope.$meteorSubscribe('allParties').then(function (){
+      $scope.enteredYoutubeLink = Parties.findOne($stateParams.partyId).youtubeLink;
       $scope.addMoreItems();
     });
     $scope.reset();
@@ -32,6 +33,32 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
     }
   });
 
+  $scope.saveYoutubeLink = function () {
+    // Saves the proper youtube link for an embed assuming it comes from a raw copy paste from the browser's URL.
+    if($scope.enteredYoutubeLink.match('/embed/')) {
+      return $scope.save();
+    }
+
+    if(_($scope.enteredYoutubeLink).isEmpty()) {
+      return
+    }
+
+    if($scope.enteredYoutubeLink.match('/watch')) {
+      try {
+        const parts = $scope.enteredYoutubeLink.split('/');
+        const watchPart = _(parts).find( function (each) {
+          return each.match('watch');
+        });
+        const videoId = _(watchPart.split('v=')).last();
+        $scope.party.youtubeLink = 'https://www.youtube.com/embed/'+videoId;
+        return $scope.save();
+      } catch (e) {
+        return;
+      }
+    }
+
+  };
+
   $scope.save = function () {
     Parties.update($scope.party._id, {
       '$set': {
@@ -39,6 +66,7 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
         , description: $scope.party.description
         , editorcontent: $scope.party.editorcontent
         , public: $scope.party.public
+        , youtubeLink: $scope.party.youtubeLink
       }
     });
   };

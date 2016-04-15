@@ -39,6 +39,10 @@
 <!--           <span ng-bind-html="party.editorcontent | htmlToPlaintext"></span> -->
       </div>
 
+      <div id="postVideo" class="image-detail-view" ng-show="party.youtubeLink">
+        <iframe width="560" height="315" ng-src="{{party.youtubeLink}}" frameborder="0" allowfullscreen></iframe>
+      </div>
+
       <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="isLoadingItems" infinite-scroll-distance="1">
         <div ng-repeat="image in images" class="image-detail-view">
           <img class="image-detail" ng-src="{{image.url()}}"/>

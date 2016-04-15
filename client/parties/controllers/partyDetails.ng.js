@@ -15,6 +15,12 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
     $scope.isLoadingItems = false;
   };
 
+  function hasVideo () {
+    // Answers true if this post has a youtube link.
+    const party = Parties.findOne($stateParams.partyId);
+    return !!party && !!party.youtubeLink;
+  };
+
   $scope.helpers({
     party() {
       return Parties.findOne($stateParams.partyId);
