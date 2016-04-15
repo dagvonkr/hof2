@@ -26,27 +26,7 @@
 angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams', '$meteor', function ($scope, $stateParams, $meteor) {
   $scope.initialize = function () {
     $scope.$meteorSubscribe('images');
-    $scope.$meteorSubscribe('parties').then(function () {
-      if(hasVideo()) {
-        const party = Parties.findOne($stateParams.partyId);
-        const attributes = {
-           'id': 'videoOfThisPost',
-           'class': 'video-js vjs-default-skin',
-           'width': '640',
-           'data-height': '264',
-           'controls': ' ',
-           'poster': 'http://video-js.zencoder.com/oceans-clip.jpg',
-           'preload': 'auto',
-           'data-setup': '{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "'+party.youtubeLink+'"}] }'
-         };
-        $('<video/>').attr(attributes)
-        // $('#postVideo').append('<video class="video-js vjs-default-skin" width="640" height="264" data-setup={ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "'+party.youtubeLink+'"}] }></video>');
-        // Meteor.setTimeout(function() {
-        //   $('#postVideo').append('<video class="video-js vjs-default-skin" width="640" height="264" data-setup', '{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "'+party.youtubeLink+'"}] }></video>');
-        // }, 3000);
-      }
-    });
-
+    $scope.$meteorSubscribe('parties');
   };
 
   function hasVideo () {
