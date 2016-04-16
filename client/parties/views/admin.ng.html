@@ -107,7 +107,7 @@
 
 <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="isLoadingItems" infinite-scroll-distance="1">
   <div class="post-wrapper">
-    <div class="post-frontpage" ng-repeat="party in parties | orderBy: -createdAt" total-items="partiesCount.count">
+    <div class="post-frontpage" ng-repeat="party in parties" total-items="partiesCount.count">
 
         <button ng-click="remove(party)"><strong>SLETT</strong></button>
         <!-- Settings Modal -->
