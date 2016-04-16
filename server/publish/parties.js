@@ -1,3 +1,8 @@
+Meteor.publish('party', function (partyId) {
+  // Publishes only the party corresponding to partyId if any. Null otherwise.
+  return Parties.find({_id: partyId});
+});
+
 Meteor.publish('allParties', function (options, searchString = '') {
   // Publishes all the parties posts.
   const query = { owner: this.userId };
