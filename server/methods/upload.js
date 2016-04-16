@@ -1,5 +1,15 @@
-function onFinish(files) {
+var path = Npm.require('path');
+var fs = Npm.require('fs');
+
+function onReceived(files) {
   console.log('------------->  We have some files!', files);
+  const tempDir = path.resolve(process.cwd(), 'temp');
+  console.log('temp dir is: ', tempDir);
+
+  const fileName = Random.id();
+  const filenameWithPath = path.join(tempDir, fileName);
+  fs.writeFileSync( filenameWithPath, files[0].data );
+  console.log(' I think is there');
 };
 
 Meteor.method('upload', function (aRequest) {
@@ -9,7 +19,7 @@ Meteor.method('upload', function (aRequest) {
   let image = {};
 
   let busboy = new Busboy({ headers: aRequest.headers });
-  busboy.on("file", function (fieldname, file, filename, encoding, mimetype) {
+  busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
       image.mimeType = mimetype;
       image.encoding = encoding;
       image.filename = filename;
@@ -35,7 +45,7 @@ Meteor.method('upload', function (aRequest) {
   busboy.on('finish', function () {
       // Pass the file array together with the request
       aRequest.files = files;
-      onFinish(files);
+      onReceived(files);
   });
   // Pass request to busboy
   aRequest.pipe(busboy);
@@ -43,7 +53,7 @@ Meteor.method('upload', function (aRequest) {
 }, {
   url: 'upload'
   , getArgsFromRequest: function (request) {
-    console.log('------------->  getArgsFromRequest Hitting upload!', request);
+    console.log('------------->  getArgsFromRequest Hitting upload!');
     return [request];
   }
   , httpMethod: 'POST'
