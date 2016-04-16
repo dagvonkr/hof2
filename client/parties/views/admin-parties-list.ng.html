@@ -10,6 +10,15 @@
         <br>
         <div class="image-upload">
 
+          <div class="well my-drop-zone" nv-file-over="" uploader="uploader">
+            Base drop zone
+          </div>
+           <input type="file" nv-file-select="" uploader="uploader" multiple  /><br/>
+
+          <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+              <span class="glyphicon glyphicon-upload"></span> Upload all
+          </button>
+
             <!-- Image drop tall rectangle -->
             <div ng-hide="imgSrc" ngf-drop ngf-select ngf-change="addImagesTallRectangle($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box tall-rectangle" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
                 <div class="drop-image-tall-rectangle" ng-show="dropAvailable"></div>

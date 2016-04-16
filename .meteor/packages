@@ -18,27 +18,23 @@ accounts-facebook
 accounts-twitter
 tmeasday:publish-counts
 check
-cfs:standard-packages
-cfs:gridfs
-danialfarid:ng-file-upload
 vitalets:angular-xeditable
 netanelgilad:angular-sortable-view
 linto:jquery-ui
 peppelg:bootstrap-3-modal
 underscore
-cfs:s3
 chrismbeckett:toastr
 ian:accounts-ui-bootstrap-3
 twbs:bootstrap
 fraywing:text-angular
 angularui:angular-ui-bootstrap@0.13.0
 dag:ngimgcropfullextended
-cfs:filesystem
-cfs:graphicsmagick
-cfs:ui
 netanelgilad:ng-infinite-scroll
 
 standard-minifier-css
 standard-minifier-js
 meteorhacks:kadira
 
+netanelgilad:angular-file-upload
+simple:rest
+shammar13:busboy

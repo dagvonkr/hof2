@@ -1,6 +1,9 @@
 'use strict';
-angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal) {
+angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', 'FileUploader', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal, FileUploader) {
   $scope.initialize = function () {
+    $scope.uploader = new FileUploader({
+      url: 'upload'
+    });
     $scope.$meteorSubscribe('allParties', { sort: {createdAt: -1}}).then(function () {
       $scope.$meteorSubscribe('mainImages').then(function () {
         $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');

@@ -1,3 +1,5 @@
+Images = new Meteor.Collection('images');
+
 if (Meteor.isServer) {
 
   var compressImage = function (fileObj, readStream, writeStream) {
@@ -14,36 +16,38 @@ if (Meteor.isServer) {
 
   // console.log('compressImage -------> ', compressImage);
 
-  const serverImageStore = new FS.Store.S3('original', {
-    beforeWrite: function (fileObj) {
-      // console.log('FS.Collection images beforeWrite -------> ', fileObj);
-      return {
-        extension: 'jpg',
-        type: 'image/jpg'
-        // extension: 'png',
-        // type: 'image/png'
-      };
-    },
-    transformWrite: compressImage,
-    accessKeyId: process.env.s3AccessKeyId,
-    secretAccessKey: process.env.s3SecretAccessKey,
-    bucket: 'houseoffam2'
-  });
+  // const serverImageStore = new FS.Store.S3('original', {
+  //   beforeWrite: function (fileObj) {
+  //     // console.log('FS.Collection images beforeWrite -------> ', fileObj);
+  //     return {
+  //       extension: 'jpg',
+  //       type: 'image/jpg'
+  //       // extension: 'png',
+  //       // type: 'image/png'
+  //     };
+  //   },
+  //   transformWrite: compressImage,
+  //   accessKeyId: process.env.s3AccessKeyId,
+  //   secretAccessKey: process.env.s3SecretAccessKey,
+  //   bucket: 'houseoffam2'
+  // });
 
-  // console.log( 'FS.TempStore --------->', FS.TempStore);
-  FS.TempStore.Storage = new FS.Store.FileSystem('_tempstore', { internal: true });
+  // // console.log( 'FS.TempStore --------->', FS.TempStore);
+  // FS.TempStore.Storage = new FS.Store.FileSystem('_tempstore', { internal: true });
 
-  Images = new FS.Collection('images', {
-    stores: [serverImageStore]
-    , filter: {
-      allow: {
-        maxSize: 6 * 1024 * 1024,  // 6MB in [Bytes]
-        allow: {
-          contentTypes: ['image/*']
-        }
-      }
-    }
-  });
+  // Images = new FS.Collection('images', {
+  //   stores: [serverImageStore]
+  //   , filter: {
+  //     allow: {
+  //       maxSize: 6 * 1024 * 1024,  // 6MB in [Bytes]
+  //       allow: {
+  //         contentTypes: ['image/*']
+  //       }
+  //     }
+  //   }
+  // });
+
+
 
   Images.allow({
     insert: function (userId) {
@@ -52,9 +56,6 @@ if (Meteor.isServer) {
     remove: function (userId) {
       return userId;
     },
-    download: function () {
-      return true;
-    },
     update: function (userId) {
       return userId;
     }
@@ -62,19 +63,19 @@ if (Meteor.isServer) {
 }
 
 if (Meteor.isClient) {
-  const clientImageStore = new FS.Store.S3('original');
-  Images = new FS.Collection('images', {
-    stores: [clientImageStore],
-    filter: {
-      allow: {
-        maxSize: 786432,  // 6MB in [Bytes]
-        allow: {
-          contentTypes: ['image/*']
-        }
-      }
-    }
-    , onInvalid: function (message) {
-      toastr.error(message);
-    }
-  });
+  // const clientImageStore = new FS.Store.S3('original');
+  // Images = new FS.Collection('images', {
+  //   stores: [clientImageStore],
+  //   filter: {
+  //     allow: {
+  //       maxSize: 786432,  // 6MB in [Bytes]
+  //       allow: {
+  //         contentTypes: ['image/*']
+  //       }
+  //     }
+  //   }
+  //   , onInvalid: function (message) {
+  //     toastr.error(message);
+  //   }
+  // });
 }

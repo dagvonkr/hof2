@@ -686,10 +686,13 @@ textarea {
 
 @media screen and (max-width : 420px) {
 
-.post-header{
-    font-size: 47px !important;
-    padding-left: 8% !important;
-    padding-right: 8% !important;
+  .post-header{
+      font-size: 47px !important;
+      padding-left: 8% !important;
+      padding-right: 8% !important;
+  }
 }
 
-}
+.my-drop-zone { border: dotted 3px lightgray; }
+.nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+.another-file-over-class { border: dotted 3px green; }
