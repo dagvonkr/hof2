@@ -3,7 +3,12 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
   $scope.initialize = function () {
     $scope.$meteorSubscribe('images');
     $scope.$meteorSubscribe('allParties').then(function (){
-      $scope.enteredYoutubeLink = Parties.findOne($stateParams.partyId).youtubeLink;
+      if(!!$scope.currentParty) {
+        $scope.enteredYoutubeLink = $scope.currentParty.youtubeLink;
+      } else {
+        $scope.enteredYoutubeLink = Parties.findOne($stateParams.partyId).youtubeLink;
+      }
+
       $scope.addMoreItems();
     });
     $scope.reset();
