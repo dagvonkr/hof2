@@ -1,9 +1,10 @@
 angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$filter', function ($scope, $meteor, $filter) {
   $scope.initialize = function () {
     $scope.$meteorSubscribe('parties', { sort: {createdAt: -1}}).then(function (){
-      $scope.addMoreItems();
+      $scope.$meteorSubscribe('mainImages').then(function () {
+        $scope.addMoreItems();
+      });
     });
-    $scope.$meteorSubscribe('mainImages');
     $scope.reset();
   };
 

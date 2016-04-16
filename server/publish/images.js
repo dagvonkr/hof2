@@ -1,13 +1,18 @@
-Meteor.publish('images', function (party) {
-  if (!party) {
+Meteor.publish('images', function (partyId) {
+  if (!partyId) {
     return Images.find({});
   } else {
-    return Images.find({
-      _id: {
-        $in: party.images
-      }}
-      , { sort: { uploadedAt: -1 } });
-  }
+    const party = Parties.findOne(partyId);
+    if (!party) {
+      return [];
+    } else {
+      return Images.find({
+        _id: {
+          $in: _(party.images).map(function (each) { return each.id })
+        }}
+        , { sort: { uploadedAt: -1 } });
+      }
+    }
 });
 
 

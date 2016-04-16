@@ -104,8 +104,11 @@
     </div>
 </div>
 <br>
-<div class="post-wrapper">
-    <div class="post-frontpage" ng-repeat="party in parties | orderBy: '-createdAt' " total-items="partiesCount.count">
+
+<div infinite-scroll="addMoreItems()" infinite-scroll-disabled="isLoadingItems" infinite-scroll-distance="1">
+  <div class="post-wrapper">
+    <div class="post-frontpage" ng-repeat="party in parties" total-items="partiesCount.count">
+
         <button ng-click="remove(party)"><strong>SLETT</strong></button>
         <!-- Settings Modal -->
         <button id="settings-button" ng-click="openSettingsModal(party)" class="settings-button">
@@ -131,4 +134,9 @@
     </div> -->
         <p class="description">{{party.description}}</p>
     </div>
+  </div>
+</div>
+
+<div class="spinner" style="text-align:center; margin: 40px 0px;" ng-show="isLoadingItems">
+  <img ng-src="/spinner.gif" style="width: 32px">
 </div>

@@ -1,11 +1,12 @@
 'use strict';
 angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams', '$meteor', function ($scope, $stateParams, $meteor) {
   $scope.initialize = function () {
-    // $scope.$meteorSubscribe('postImages', partyId);  to-do
-    $scope.$meteorSubscribe('images');
-    $scope.$meteorSubscribe('parties').then(function (){
-      $scope.addMoreItems();
+    $scope.$meteorSubscribe('party',$stateParams.partyId).then(function (){
+      $scope.$meteorSubscribe('images',$stateParams.partyId).then(function () {
+        $scope.addMoreItems();
+      });
     });
+
     $scope.reset();
   };
 
@@ -31,12 +32,11 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
   });
 
   $scope.addMoreItems = function () {
-
     if ($scope.isLoadingItems) return;
 
     $scope.isLoadingItems = true;
 
-    const party = Parties.findOne($stateParams.partyId);
+    const party = Parties.findOne();
     if(!party) {
       $scope.isLoadingItems = false;
       return [];

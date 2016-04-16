@@ -34,7 +34,8 @@
 
 <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="isLoadingItems" infinite-scroll-distance="1">
   <div class="post-wrapper">
-    <div class="post-frontpage" ng-repeat="party in parties | orderBy: -createdAt ">
+
+    <div class="post-frontpage" ng-repeat="party in parties">
       <a href="/posts/{{party._id}}">
 
       	<div class="post-header" ng-style="{
@@ -58,3 +59,6 @@
 
 </div>
 
+<div class="spinner" style="text-align:center; margin: 40px 0px;" ng-show="isLoadingItems">
+  <img ng-src="/spinner.gif" style="width: 32px">
+</div>
