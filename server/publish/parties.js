@@ -1,3 +1,8 @@
+Meteor.publish('party', function (partyId) {
+  // Publishes only the party corresponding to partyId if any. Null otherwise.
+  return Parties.find({_id: partyId});
+});
+
 Meteor.publish('allParties', function (options, searchString = '') {
   // Publishes all the parties posts.
   const query = { owner: this.userId };
@@ -8,14 +13,15 @@ Meteor.publish('parties', function (options, searchString = '') {
   // Publishes only the parties posts that are set as public and uses the sent options or searchString if any.
   const someOptions = options || { sort: {createdAt: -1}};
   const query = {
-    name: {
-          $regex: `.*${searchString || ''}.*`,
-          $options: 'i'
-        }
-
-    , $and: [
+    $or: [
       { public: true }
-      , { owner: this.userId }
+      , { $and: [
+          { name: {
+                  $regex: `.*${searchString || ''}.*`
+                  , $options: 'i'
+                } }
+        , { public: true }
+      ] }
     ]
   };
 

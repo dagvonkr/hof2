@@ -52,14 +52,19 @@
 
 	<div class="article-description" text-angular ng-model="party.editorcontent" ta-toolbar="[['bold','italics'], ['insertLink']]" ng-blur="save()"> </div>
 
-  <p> Legg inn Youtube link her. Du vil ikke se videoen her (enda) men den vises i posten fra hovedsiden.</p>
-  <input
-    type="text"
-    class="youtube-link"
-    placeholder="YouTube link"
-    ng-model="enteredYoutubeLink"
-    ng-change="saveYoutubeLink()">
-  <p>{{party.youtubeLink}}</p>
+  <div class="post-youtube-wrapper">
+    <p> Legg inn Youtube link her. Videoen vil vises inne i bloggposten fra hovedsiden.</p>
+    <input
+      type="text"
+      class="youtube-link"
+      placeholder="YouTube link"
+      ng-model="enteredYoutubeLink"
+      ng-change="saveYoutubeLink()">
+    <div class="update-post-button">
+      <button ng-click="removeYoutubeLink()">Fern youtube link</button>
+    </div>
+    <p><strong>Youtube film som er lagt til: </strong> {{party.youtubeLink}}</p>
+  </div>
 
   <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="isLoadingItems" infinite-scroll-distance="1">
   	<div ng-repeat="image in images" class="image-detail-view">
