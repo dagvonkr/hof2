@@ -1,5 +1,6 @@
 var path = Npm.require('path');
 var fs = Npm.require('fs');
+var Fiber = Npm.require('fibers');
 
 function onReceived(files) {
   console.log('------------->  We have some files!', files);
@@ -9,7 +10,16 @@ function onReceived(files) {
   const fileName = Random.id();
   const filenameWithPath = path.join(tempDir, fileName);
   fs.writeFileSync( filenameWithPath, files[0].data );
-  console.log(' I think is there');
+  const imageRecord = {
+    mimeType: files[0].mimeType
+    , filename: files[0].filename
+    , encoding: files[0].encoding
+    , size: files[0].data.length
+  };
+  Fiber(function () {
+    const answer = Images.insert(imageRecord);
+    console.log('after insert: ', answer);
+  }).run();
 };
 
 Meteor.method('upload', function (aRequest) {

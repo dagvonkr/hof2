@@ -6,7 +6,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     });
     $scope.$meteorSubscribe('allParties', { sort: {createdAt: -1}}).then(function () {
       $scope.$meteorSubscribe('mainImages').then(function () {
-        $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
+        // $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
         $scope.addMoreItems();
         });
       });
