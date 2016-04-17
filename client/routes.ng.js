@@ -1,4 +1,6 @@
 angular.module('hof2').run(['$rootScope', '$state', function ($rootScope, $state) {
+  Blaze.$rootScope = $rootScope; // heretic hack to bridge angular with the Blaze world
+
   $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
     // We can catch the error thrown when the $requireUser promise is rejected
     // and redirect the user back to the main page

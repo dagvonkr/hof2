@@ -8,10 +8,11 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
       } else {
         $scope.enteredYoutubeLink = Parties.findOne($stateParams.partyId).youtubeLink;
       }
-
       $scope.addMoreItems();
     });
+
     $scope.reset();
+
   };
 
   $scope.reset = function () {
