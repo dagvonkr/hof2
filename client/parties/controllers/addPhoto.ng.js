@@ -60,6 +60,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
       var addedImageId = Images.insert(imageDoc);
       $scope.newPartyImages.push(addedImageId);
       uploader.unbind('fileuploaddone', onDone);
+      $scope.$digest();
     };
 
     uploader.bind('fileuploaddone', onDone);
