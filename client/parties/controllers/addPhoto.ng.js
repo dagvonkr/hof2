@@ -21,8 +21,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
 
   };
 
-  $scope.addImagesTallRectangle = function (fileItem) {
-    if (!!fileItem) {
+  $scope.addImagesTallRectangle = function (files) {
+    if (!_(files).isEmpty()) {
       let reader = new FileReader();
 
       reader.onload = function (e) {
@@ -32,7 +32,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
         });
       };
 
-      reader.readAsDataURL(fileItem._file);
+      reader.readAsDataURL(files[0]);
       // $scope.images.save(files[0]);
       $scope.isDisabled = false;
     }
@@ -41,8 +41,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
     }
   };
 
-  $scope.addImagesRectangle = function (fileItem) {
-    if (!!fileItem) {
+  $scope.addImagesRectangle = function (files) {
+    if (!_(files).isEmpty()) {
       let reader = new FileReader();
 
       reader.onload = function (e) {
@@ -52,7 +52,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
         });
       };
 
-      reader.readAsDataURL(fileItem._file);
+      reader.readAsDataURL(files[0]);
 
       // $scope.images.save(files[0]).then(function (result) {
       // });
@@ -64,8 +64,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
     }
   };
 
-  $scope.addImagesSquare = function (fileItem) {
-    if (!!fileItem) {
+  $scope.addImagesSquare = function (files) {
+    if (!_(files).isEmpty()) {
       let reader = new FileReader();
       reader.onload = function (e) {
         $scope.$apply(function () {
@@ -73,7 +73,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
           $scope.myCroppedImage = '';
         });
       };
-      reader.readAsDataURL(fileItem._file);
+      reader.readAsDataURL(files[0]);
       // $scope.images.save(files[0]);
       $scope.isDisabled = false;
     }

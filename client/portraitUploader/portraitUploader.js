@@ -1,4 +1,4 @@
-var tpl = Template.blazeUploader;
+var tpl = Template.portraitUploader;
 
 tpl.onCreated(function () {
   // console.log('I am a blaze uploader that had IIIIIInstantiated');

@@ -18,7 +18,7 @@
           <!-- <drop-zone options="squareDropzone"></drop-zone> -->
 
           <p>below prints blaze</p>
-          <blaze-template name="blazeUploader"></blaze-template>
+          <blaze-template name="portraitUploader"></blaze-template>
           <p>above prints blaze</p>
 
           <p>square upload</p>
@@ -56,9 +56,9 @@
 
 
             <!-- Image drop rectangle -->
-<!--             <div ng-hide="imgSrc2" ngf-drop ngf-select ngf-change="addImagesRectangle($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box rectangle" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
+            <div ng-hide="imgSrc2" ngf-drop ngf-select ngf-change="addImagesRectangle($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box rectangle" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
                 <div class="drop-image-rectangle" ng-show="dropAvailable"></div>
-            </div> -->
+            </div>
             <div ng-show="imgSrc2" class="ng-crop-container-rectangle">
                 <button ng-click="saveRectangleImage() || disableButton()" ng-disabled="!imgSrc2 || isDisabled"> Save Image</button>
                 <img-crop image="imgSrc2" area-type="rectangle" aspect-ratio="1.75" result-image="myCroppedImage" result-image-size='{w: 972,h: 555}'> </img-crop>
