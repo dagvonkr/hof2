@@ -4,7 +4,6 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
 
     $scope.$meteorSubscribe('allParties', { sort: {createdAt: -1}}).then(function () {
       $scope.$meteorSubscribe('mainImages').then(function () {
-        // $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
         $scope.addMoreItems();
         });
       });
@@ -49,8 +48,6 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       // Link the images and the order to the new party
         $scope.newParty.images = [];
         _.forEach($scope.newPartyImages, function (object) {
-          // object{image: {_id}, dimensions, articleDescription}
-          debugger
           $scope.newParty.images.push({
             id: object._id,
             dimensions: object.dimensions,
