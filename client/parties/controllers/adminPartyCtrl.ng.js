@@ -115,18 +115,23 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   $scope.getMainImageUrlOf = function (party) {
     // Answers the url of he first image of the given party, null otherwise.
     if (!_.isEmpty(party.images)) {
-      var filtered = Images.find({_id: party.images[0].id}).fetch();
-      var answer = null;
-
+      var mainOne = Images.findOne(party.images[0]);
       try {
-        answer = filtered[0].url();
+        return $scope.getUrlFor(mainOne._id);
       } catch (anError) {
         // console.warn('Could not get url of the first image after filtering: ',filtered);
         return null;
       }
-
       return answer;
     } else {
+      return null;
+    }
+  };
+
+  $scope.imageUrlFor = function (anImageId) {
+    try {
+      return Meteor.absoluteUrl()+'/uploads/'+mainOne._id;
+    } catch (e) {
       return null;
     }
   };

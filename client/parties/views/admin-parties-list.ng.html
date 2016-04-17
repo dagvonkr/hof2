@@ -69,7 +69,7 @@
                     Image:
                 </div>
                 <div class="main-image" ng-show="$index === 0"></div>
-                <img draggable="false" ng-src="{{image.image.url()}}" />
+                <img draggable="false" ng-src="{{imageUrlFor(image)}}" />
                 <br>
                 <!-- Commented out this since it doesn't really have a purpose yet -->
                 <!-- <a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Klikk her for å legge inn spesifik informasjon om dette bilde' }}</a> -->
