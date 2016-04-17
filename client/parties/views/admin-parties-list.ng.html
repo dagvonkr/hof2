@@ -35,6 +35,9 @@
               <span class="glyphicon glyphicon-upload"></span> Upload landscape
           </button>
 
+          <div class="progress" style="">
+              <div class="progress-bar" role="progressbar" ng-style="{ 'width': squareUploader.progress + '%' }"></div>
+          </div>
             <!-- Image drop tall rectangle -->
 <!--             <div ng-hide="imgSrc" ngf-drop ngf-select ngf-change="addImagesTallRectangle($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box tall-rectangle" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
                 <div class="drop-image-tall-rectangle" ng-show="dropAvailable"></div>
