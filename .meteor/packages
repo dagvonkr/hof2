@@ -42,6 +42,6 @@ npm-container
 random
 mrt:graphicsmagick
 tomi:upload-server
-tomi:upload-jquery
 angular-with-blaze
 urigo:angular-blaze-template
+tomi:upload-jquery
