@@ -8,13 +8,21 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
     };
 
     $rootScope.$on('squareUpload', function (event, fileItem) {
-      // console.log('reacting to squareUpload!', event, fileItem);
       $scope.addImagesSquare(fileItem);
     });
+
+    $rootScope.$on('portraitUpload', function (event, fileItem) {
+      $scope.addImagesTallRectangle(fileItem);
+    });
+
+    $rootScope.$on('landscapeUpload', function (event, fileItem) {
+      $scope.addImagesRectangle(fileItem);
+    });
+
   };
 
-  $scope.addImagesTallRectangle = function (files) {
-    if (files.length > 0) {
+  $scope.addImagesTallRectangle = function (fileItem) {
+    if (!!fileItem) {
       let reader = new FileReader();
 
       reader.onload = function (e) {
@@ -24,8 +32,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
         });
       };
 
-      reader.readAsDataURL(files[0]);
-      $scope.images.save(files[0]);
+      reader.readAsDataURL(fileItem._file);
+      // $scope.images.save(files[0]);
       $scope.isDisabled = false;
     }
     else {
@@ -33,8 +41,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
     }
   };
 
-  $scope.addImagesRectangle = function (files) {
-    if (files.length > 0) {
+  $scope.addImagesRectangle = function (fileItem) {
+    if (!!fileItem) {
       let reader = new FileReader();
 
       reader.onload = function (e) {
@@ -44,12 +52,10 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
         });
       };
 
-      reader.readAsDataURL(files[0]);
+      reader.readAsDataURL(fileItem._file);
 
-      $scope.images.save(files[0]).then(function (result) {
-        // console.log(result);
-        // window.kk = result;
-      });
+      // $scope.images.save(files[0]).then(function (result) {
+      // });
       $scope.isDisabled = false;
 
     }
@@ -78,7 +84,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
 
   $scope.saveTallRectangleImage = function () {
     if ($scope.myCroppedImage !== '') {
-      console.log('wanna crop');
+      console.log('portrait wanna crop');
 
       // $scope.images.save($scope.myCroppedImage).then(function (result) {
       //   $scope.newPartyImages.push({
@@ -97,7 +103,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
 
   $scope.saveRectangleImage = function () {
     if ($scope.myCroppedImage !== '') {
-      console.log('wanna crop');
+      console.log('landscape wanna crop');
 
       // $scope.images.save($scope.myCroppedImage).then(function (result) {
       //   $scope.newPartyImages.push({
@@ -116,7 +122,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
 
   $scope.saveSquareImage = function () {
     if ($scope.myCroppedImage !== '') {
-      console.log('wanna crop');
+      console.log('square wanna crop');
       // $scope.images.save($scope.myCroppedImage).then(function (result) {
       //   $scope.newPartyImages.push({
       //     image: result[0]._id,

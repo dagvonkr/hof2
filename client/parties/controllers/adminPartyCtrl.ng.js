@@ -24,6 +24,16 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       $rootScope.$emit('squareUpload', fileItem);
     };
 
+    $scope.portraitUploader.onAfterAddingFile = function (fileItem) {
+      console.info('portrait uploader onAfterAddingFile', fileItem);
+      $rootScope.$emit('portraitUpload', fileItem);
+    };
+
+    $scope.landscapeUploader.onAfterAddingFile = function (fileItem) {
+      console.info('landscape uploader onAfterAddingFile', fileItem);
+      $rootScope.$emit('landscapeUpload', fileItem);
+    };
+
   };
 
   $scope.reset = function () {
