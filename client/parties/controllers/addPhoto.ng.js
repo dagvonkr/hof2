@@ -94,6 +94,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
     uploader.fileupload({formData: imageDoc});
     // uploader.fileupload({formData: imageDoc});
     uploader.fileupload('send', {files: [blob]});
+
   };
 
   $scope.addImagesTallRectangle = function (files) {
@@ -161,54 +162,15 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
   };
 
   $scope.saveTallRectangleImage = function () {
-      saveImageFor($scope.portraitFile, 'imgSrc');
+    saveImageFor($scope.portraitFile, 'imgSrc');
   };
 
   $scope.saveRectangleImage = function () {
-    if ($scope.myCroppedImage !== '') {
-      var blob = getBinaryBlobFromBase64($scope.myCroppedImage);
-      var uploader = $('input[type=file].jqUploadclass');
-      var onUploadStart = function (e, data) {
-        data.formData = getMetadataOn($scope.landscapeFile);
-        var addedImageId = Images.insert(data.formData);
-        $scope.newPartyImages.push(addedImageId);
-      };
-      var onDone = function (e, data) {
-        $scope.imgSrc2 = undefined;
-        $scope.myCroppedImage = '';
-        uploader
-          .unbind('fileuploadsend', onUploadStart)
-          .unbind('fileuploaddone', onDone);
-      };
-      uploader
-        .bind('fileuploadsend', onUploadStart)
-        .bind('fileuploaddone', onDone);
-      uploader.fileupload('send', {files: [blob]});
-    }
+    saveImageFor($scope.landscapeFile, 'imgSrc2');
   };
 
   $scope.saveSquareImage = function () {
-    if ($scope.myCroppedImage !== '') {
-      var blob = getBinaryBlobFromBase64($scope.myCroppedImage);
-      var uploader = $('input[type=file].jqUploadclass');
-      var onUploadStart = function (e, data) {
-        data.formData = getMetadataOn($scope.squareFile);
-        var addedImageId = Images.insert(data.formData);
-        $scope.newPartyImages.push(addedImageId);
-      };
-      var onDone = function (e, data) {
-        $scope.imgSrc3 = undefined;
-        $scope.myCroppedImage = '';
-        uploader
-          .unbind('fileuploadsend', onUploadStart)
-          .unbind('fileuploaddone', onDone);
-      };
-
-      uploader
-        .bind('fileuploadsend', onUploadStart)
-        .bind('fileuploaddone', onDone);
-      uploader.fileupload('send', {files: [blob]});
-    }
+    saveImageFor($scope.squareFile, 'imgSrc3');
   };
 
   // $scope.deletePreviewImage = function (image) {
