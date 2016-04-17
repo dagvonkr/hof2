@@ -7,4 +7,11 @@ Meteor.startup(function () {
     console.log('creating temp path: ', tempDir);
     fs.mkdirSync(tempDir);
   }
+
+  const processedDir = process.cwd()+'/temp/processed';
+  if (!fs.existsSync(processedDir)){
+    console.log('creating processed path: ', processedDir);
+    fs.mkdirSync(processedDir);
+  }
+
 });

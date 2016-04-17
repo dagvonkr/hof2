@@ -76,6 +76,7 @@ modules-runtime@0.6.2
 mongo@1.1.6
 mongo-id@1.0.3
 mongo-livedata@1.0.11
+mrt:graphicsmagick@1.12.2
 natestrauser:font-awesome@4.3.0
 netanelgilad:angular-file-upload@1.1.5
 netanelgilad:angular-sortable-view@0.0.13_1
