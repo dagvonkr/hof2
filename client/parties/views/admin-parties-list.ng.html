@@ -17,38 +17,19 @@
 
           <!-- <drop-zone options="squareDropzone"></drop-zone> -->
 
-          <p>below prints blaze</p>
-          <blaze-template name="portraitUploader"></blaze-template>
-          <p>above prints blaze</p>
-
-          <p>square upload</p>
-          <input type="file" nv-file-select="" uploader="squareUploader" multiple  /><br/>
-
-          <p>portrait upload</p>
-          <input type="file" nv-file-select="" uploader="portraitUploader" multiple  /><br/>
-
-          <p>landscape upload</p>
-          <input type="file" nv-file-select="" uploader="landscapeUploader" multiple  /><br/>
-
-          <button type="button" class="btn btn-success btn-s" ng-click="squareUploader.uploadAll()" ng-disabled="!squareUploader.getNotUploadedItems().length">
-              <span class="glyphicon glyphicon-upload"></span> Upload square
-          </button>
-
-          <button type="button" class="btn btn-success btn-s" ng-click="portraitUploader.uploadAll()" ng-disabled="!portraitUploader.getNotUploadedItems().length">
-              <span class="glyphicon glyphicon-upload"></span> Upload portrait
-          </button>
-
-          <button type="button" class="btn btn-success btn-s" ng-click="landscapeUploader.uploadAll()" ng-disabled="!landscapeUploader.getNotUploadedItems().length">
-              <span class="glyphicon glyphicon-upload"></span> Upload landscape
-          </button>
-
+          <blaze-template name="blazeUploader"></blaze-template>
+<!--           <blaze-template name="landscapeUploader"></blaze-template>
+          <blaze-template name="squareUploader"></blaze-template>
+ -->
           <div class="progress" style="">
               <div class="progress-bar" role="progressbar" ng-style="{ 'width': squareUploader.progress + '%' }"></div>
           </div>
+
             <!-- Image drop tall rectangle -->
-<!--             <div ng-hide="imgSrc" ngf-drop ngf-select ngf-change="addImagesTallRectangle($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box tall-rectangle" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
+            <div ng-hide="imgSrc" ngf-drop ngf-select ngf-change="addImagesTallRectangle($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box tall-rectangle" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
                 <div class="drop-image-tall-rectangle" ng-show="dropAvailable"></div>
-            </div> -->
+            </div>
+
             <div ng-show="imgSrc" class="ng-crop-container-tall-rectangle">
                 <button ng-click="saveTallRectangleImage() || disableButton()" ng-disabled="!imgSrc || isDisabled"> Save Image</button>
                 <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.85" result-image="myCroppedImage" result-image-size='{w: 648,h: 766}'> </img-crop>
@@ -59,6 +40,7 @@
             <div ng-hide="imgSrc2" ngf-drop ngf-select ngf-change="addImagesRectangle($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box rectangle" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
                 <div class="drop-image-rectangle" ng-show="dropAvailable"></div>
             </div>
+
             <div ng-show="imgSrc2" class="ng-crop-container-rectangle">
                 <button ng-click="saveRectangleImage() || disableButton()" ng-disabled="!imgSrc2 || isDisabled"> Save Image</button>
                 <img-crop image="imgSrc2" area-type="rectangle" aspect-ratio="1.75" result-image="myCroppedImage" result-image-size='{w: 972,h: 555}'> </img-crop>
@@ -66,10 +48,9 @@
 
 
             <!-- Image drop square -->
-           <!--  <div ng-hide="imgSrc3" ngf-drop ngf-select ngf-change="addImagesSquare($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box square" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
+            <div ng-hide="imgSrc3" ngf-drop ngf-select ngf-change="addImagesSquare($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box square" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
                 <div class="drop-image-square" ng-show="dropAvailable"></div>
-            </div> -->
-
+            </div>
 
             <div ng-show="imgSrc3" class="ng-crop-container-square">
                 <button ng-click="saveSquareImage() || disableButton()" ng-disabled="!imgSrc3 || isDisabled"> Save Image</button>
