@@ -13,8 +13,6 @@ tracker                 # Meteor's client-side reactive programming library
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 angularui:angular-ui-router
 accounts-password
-accounts-facebook
-accounts-twitter
 tmeasday:publish-counts
 check
 vitalets:angular-xeditable

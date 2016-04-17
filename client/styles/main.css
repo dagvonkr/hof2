@@ -47,6 +47,7 @@ a:hover {
 }
 
 .drop-box {
+    margin-top: 30px;
     background: #F8F8F8;
     border: 5px dashed #DDD;
 
@@ -94,6 +95,42 @@ a.editable-empty {
     max-height: 500px;
     width: auto;
 }
+
+.progressInner {
+
+    margin-bottom: 20px !important;
+    background-color: #fff !important;
+}
+
+.progress-bar-success {
+    background-color: #FBFDFD !important;
+}
+
+
+.btn-primary {
+    display: none !important;
+}
+
+.btn-info {
+    display: none !important;
+}
+
+.glyphicon  {
+    display: none !important;
+}
+.glyphicon-ok {
+    display: none !important;
+}
+
+.btn-default {
+    border: none !important;
+    background-color: #FBFDFD;
+}
+/*.done {
+    display: none !important
+}*/
+
+
 
 .ng-crop-container-tall-rectangle {
     width: 450px;
@@ -202,7 +239,7 @@ textarea {
     border: none;
     height: 105px;
     margin-left: 8%;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .description-pre {
