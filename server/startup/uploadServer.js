@@ -4,7 +4,6 @@ Meteor.startup(function () {
     tmpDir: tempDir,
     uploadDir: tempDir + '/uploads/',
     checkCreateDirectories: true,
-
     getDirectory: function(fileInfo, formData) {
       if (formData && formData.directoryName != null) {
         return formData.directoryName;
@@ -20,7 +19,7 @@ Meteor.startup(function () {
     finished: function(fileInfo, formData) {
       console.log('just finished, fileInfo:', fileInfo);
       if (formData && formData._id != null) {
-        console.log('We can haz big uploadz');
+        console.log('We can haz big uploadz with formData');
         // Items.update({_id: formData._id}, { $push: { uploads: fileInfo }});
       }
     }

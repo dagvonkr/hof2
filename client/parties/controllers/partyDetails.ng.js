@@ -18,7 +18,7 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
 
   function hasVideo () {
     // Answers true if this post has a youtube link.
-    const party = Parties.findOne($stateParams.partyId);
+    var party = Parties.findOne($stateParams.partyId);
     return !!party && !!party.youtubeLink;
   };
 
@@ -36,16 +36,16 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
 
     $scope.isLoadingItems = true;
 
-    const party = Parties.findOne();
+    var party = Parties.findOne();
     if(!party) {
       $scope.isLoadingItems = false;
       return [];
     }
 
-    const theseImageIds = _.map(party.images, image => image.id);
+    var theseImageIds = _.map(party.images, function (image) { image.id });
 
-    const query = { _id: { $in: theseImageIds } };
-    const bunch = Images.find(query, {
+    var query = { _id: { $in: theseImageIds } };
+    var bunch = Images.find(query, {
       limit: Meteor.settings.public.perPage
       , skip: (($scope.page - 1) * Meteor.settings.public.perPage)
       , sort: {uploadedAt: 1 }

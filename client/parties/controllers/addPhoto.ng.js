@@ -7,23 +7,28 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
       $scope.isDisabled = true;
     };
 
-    $rootScope.$on('squareUpload', function (event, fileItem) {
-      $scope.addImagesSquare(fileItem);
+    $rootScope.$on('renderedUploader', function (e, templateContext) {
+      $scope.uploader = templateContext;
     });
 
-    $rootScope.$on('portraitUpload', function (event, fileItem) {
-      $scope.addImagesTallRectangle(fileItem);
-    });
+    // $rootScope.$on('squareUpload', function (event, fileItem) {
+    //   $scope.addImagesSquare(fileItem);
+    // });
 
-    $rootScope.$on('landscapeUpload', function (event, fileItem) {
-      $scope.addImagesRectangle(fileItem);
-    });
+    // $rootScope.$on('portraitUpload', function (event, fileItem) {
+    //   $scope.addImagesTallRectangle(fileItem);
+    // });
+
+    // $rootScope.$on('landscapeUpload', function (event, fileItem) {
+    //   $scope.addImagesRectangle(fileItem);
+    // });
 
   };
 
   $scope.addImagesTallRectangle = function (files) {
     if (!_(files).isEmpty()) {
-      let reader = new FileReader();
+      $scope.portraitFile = files[0];
+      var reader = new FileReader();
 
       reader.onload = function (e) {
         $scope.$apply(function () {
@@ -43,7 +48,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
 
   $scope.addImagesRectangle = function (files) {
     if (!_(files).isEmpty()) {
-      let reader = new FileReader();
+      $scope.landscapeFile = files[0];
+      var reader = new FileReader();
 
       reader.onload = function (e) {
         $scope.$apply(function () {
@@ -66,7 +72,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
 
   $scope.addImagesSquare = function (files) {
     if (!_(files).isEmpty()) {
-      let reader = new FileReader();
+      $scope.squaredFile = files[0];
+      var reader = new FileReader();
       reader.onload = function (e) {
         $scope.$apply(function () {
           $scope.imgSrc3 = e.target.result;
@@ -84,7 +91,16 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
 
   $scope.saveTallRectangleImage = function () {
     if ($scope.myCroppedImage !== '') {
-      console.log('portrait wanna crop');
+      var raw = $scope.myCroppedImage;
+      raw = raw.replace(/^data:image\/png;base64,/, '');
+      console.log('portrait wanna crop', raw);
+      var blob = new Blob([raw], { type: $scope.portraitFile.type });
+      // var fileOfBlob = new File([blob], $scope.portraitFile.name);
+      var wrapped = {
+        files: [blob]
+      };
+      $('input[type=file].jqUploadclass').fileupload('send', wrapped);
+
 
       // $scope.images.save($scope.myCroppedImage).then(function (result) {
       //   $scope.newPartyImages.push({

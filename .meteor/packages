@@ -41,8 +41,8 @@ meteorhacks:npm
 npm-container
 random
 mrt:graphicsmagick
-tomi:upload-server
 angular-with-blaze
 urigo:angular-blaze-template
 tomi:upload-jquery
 danialfarid:ng-file-upload
+tomi:upload-server

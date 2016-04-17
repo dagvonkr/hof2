@@ -26,11 +26,11 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
       return Parties.findOne($stateParams.partyId);
     }
     , images () {
-        const party = Parties.findOne($stateParams.partyId);
+        var party = Parties.findOne($stateParams.partyId);
         if(!party) {
           return [];
         }
-        const theseImageIds = _.map(party.images, image => image.id);
+        var theseImageIds = _.map(party.images, function (image) { image.id });
         return Images.find({
                 _id: {
                   $in: theseImageIds
@@ -51,11 +51,11 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
 
     if($scope.enteredYoutubeLink.match('/watch')) {
       try {
-        const parts = $scope.enteredYoutubeLink.split('/');
-        const watchPart = _(parts).find( function (each) {
+        var parts = $scope.enteredYoutubeLink.split('/');
+        var watchPart = _(parts).find( function (each) {
           return each.match('watch');
         });
-        const videoId = _(watchPart.split('v=')).last();
+        var videoId = _(watchPart.split('v=')).last();
         $scope.party.youtubeLink = 'https://www.youtube.com/embed/'+videoId;
         return $scope.save();
       } catch (e) {
@@ -89,15 +89,15 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
 
     $scope.isLoadingItems = true;
 
-    const party = Parties.findOne($stateParams.partyId);
+    var party = Parties.findOne($stateParams.partyId);
     if(!party) {
       $scope.isLoadingItems = false;
       return [];
     }
 
-    const theseImageIds = _.map(party.images, image => image.id);
-    const query = { _id: { $in: theseImageIds } };
-    const bunch = Images.find(query, {
+    var theseImageIds = _.map(party.images, function (image) { image.id });
+    var query = { _id: { $in: theseImageIds } };
+    var bunch = Images.find(query, {
       limit: Meteor.settings.public.perPage
       , skip: (($scope.page - 1) * Meteor.settings.public.perPage)
       , sort: {uploadedAt: 1 }

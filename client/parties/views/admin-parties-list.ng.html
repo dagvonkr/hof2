@@ -31,7 +31,7 @@
             </div>
 
             <div ng-show="imgSrc" class="ng-crop-container-tall-rectangle">
-                <button ng-click="saveTallRectangleImage() || disableButton()" ng-disabled="!imgSrc || isDisabled"> Save Image</button>
+                <button ng-click="saveTallRectangleImage($files) || disableButton()" ng-disabled="!imgSrc || isDisabled"> Save Image</button>
                 <img-crop image="imgSrc" area-type="rectangle" aspect-ratio="0.85" result-image="myCroppedImage" result-image-size='{w: 648,h: 766}'> </img-crop>
             </div>
 

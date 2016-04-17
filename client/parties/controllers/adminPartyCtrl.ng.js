@@ -69,7 +69,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     $scope.newParty = {
       createdAt: new Date ()
     };
-  }
+  };
 
   $scope.helpers({
     parties: function () {
@@ -83,11 +83,13 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
 
       // Link the images and the order to the new party
         $scope.newParty.images = [];
-        _.forEach($scope.newPartyImages, ({image: {_id}, dimensions, articleDescription}) => {
+        _.forEach($scope.newPartyImages, function (object) {
+          // object{image: {_id}, dimensions, articleDescription}
+          debugger
           $scope.newParty.images.push({
-            id: _id,
-            dimensions,
-            articleDescription
+            id: object._id,
+            dimensions: object.dimensions,
+            articleDescription: object.articleDescription
           });
         });
 
@@ -95,9 +97,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       $scope.newParty.createdAt = new Date;
       Parties.insert($scope.newParty);
       $scope.resetNewParty();
-    }
-
-    else {
+    } else {
       alert('Du må vente på at jeg har lastet opp bilde. Eller så har du ikke skrevet noe overskrift')
     }
 
@@ -175,7 +175,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
 
     $scope.isLoadingItems = true;
 
-    const bunch = Parties.find({}, {
+    var bunch = Parties.find({}, {
       limit: Meteor.settings.public.perPage
       , skip: (($scope.page - 1) * Meteor.settings.public.perPage)
     }).fetch();
