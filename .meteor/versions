@@ -91,6 +91,7 @@ observe-sequence@1.0.10
 ordered-dict@1.0.6
 pbastowski:angular-babel@1.0.9
 peppelg:bootstrap-3-modal@1.0.4
+pfafman:multer@0.1.0
 promise@0.6.6
 random@1.0.8
 rate-limit@1.0.3
@@ -102,7 +103,6 @@ routepolicy@1.0.9
 service-configuration@1.0.8
 session@1.1.4
 sha@1.0.6
-shammar13:busboy@1.0.1
 simple:json-routes@2.1.0
 simple:rest@1.1.1
 spacebars@1.0.10

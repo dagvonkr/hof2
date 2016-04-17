@@ -2,6 +2,8 @@ var path = Npm.require('path');
 var fs = Npm.require('fs');
 var Fiber = Npm.require('fibers');
 
+// var multer  = Npm.require('multer');
+
 
 function processImage (aFilename) {
   // Processes and saves filenameWithPath image file into a web friendly format/quality.
@@ -88,10 +90,21 @@ function onReceived(file, shape) {
 //   }
 // };
 
+
 function onUploadReceived (aRequest, shape) {
   console.log('onUploadReceived', shape);
-  let files = []; // Store files in an array and then pass them to request.
-  let image = {};
+
+  const tempDir = path.resolve(process.cwd(), 'temp');
+  var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      tempDir
+    },
+    filename: function (req, file, cb) {
+
+    }
+  });
+  var upload = multer({ storage: storage }).array('images');
+
 
   let busboy = new Busboy({ headers: aRequest.headers });
 try {
@@ -101,9 +114,10 @@ try {
       image.filename = filename;
       console.log('onUploadReceived metadata', image);
 
-      const tempDir = path.resolve(process.cwd(), 'temp');
       let fstream = fs.createWriteStream( path.resolve(tempDir, filename) );
+      // fstream.pipe(aRequest)
       file.pipe(fstream);
+
       // buffer the read chunks
       // let buffers = [];
 
@@ -140,6 +154,63 @@ try {
   console.log('Did not go well: ', err);
 }
 };
+
+
+
+// function onUploadReceived (aRequest, shape) {
+//   console.log('onUploadReceived', shape);
+//   let files = []; // Store files in an array and then pass them to request.
+//   let image = {};
+
+//   let busboy = new Busboy({ headers: aRequest.headers });
+// try {
+//   busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
+//       image.mimeType = mimetype;
+//       image.encoding = encoding;
+//       image.filename = filename;
+//       console.log('onUploadReceived metadata', image);
+
+//       const tempDir = path.resolve(process.cwd(), 'temp');
+//       let fstream = fs.createWriteStream( path.resolve(tempDir, filename) );
+//       // fstream.pipe(aRequest)
+//       file.pipe(fstream);
+
+//       // buffer the read chunks
+//       // let buffers = [];
+
+//       // file.on('data', function(data) {
+//       //   console.log('onUploadReceived got data');
+//       //   console.log('File [' + filename + '] got ' + data.length + ' bytes');
+//       //   buffers.push(data);
+//       // });
+
+//       // file.resume();
+
+//       file.on('end', function() {
+//           console.log('onUploadReceived end');
+//           // concat the chunks
+//           // image.data = Buffer.concat(buffers);
+//           // push the image object to the file array
+//           files.push(image);
+//           // console.log('onUploadReceived finished concatenating data');
+//       });
+//   });
+
+//   busboy.on('field', function(fieldname, value) {
+//       aRequest.body[fieldname] = value;
+//   });
+
+//   busboy.on('finish', function () {
+//       // Pass the file array together with the request
+//       aRequest.files = files;
+//       onReceived(files[0], shape);
+//   });
+//   // Pass request to busboy
+//   aRequest.pipe(busboy);
+// } catch (err) {
+//   console.log('Did not go well: ', err);
+// }
+// };
 
 Meteor.method('squareUpload', function (aRequest) {
   console.log('------------->  squareUpload Hitting received stuff!');
