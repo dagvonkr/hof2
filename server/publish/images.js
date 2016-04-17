@@ -17,7 +17,7 @@ Meteor.publish('images', function (partyId) {
 
 
 Meteor.publish('mainImages', function () {
-  let mainImagesIds = _(Parties.find().fetch()).map(function (each){
+  var mainImagesIds = _(Parties.find().fetch()).map(function (each){
     if(!_(each.images).isEmpty()) {
       return each.images[0].id
     } else {

@@ -1,6 +1,12 @@
 'use strict';
 angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', 'FileUploader', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal, FileUploader) {
   $scope.initialize = function () {
+
+    $scope.squareDropzone = {
+      // url: 'squareUpload'
+    };
+
+
     $scope.squareUploader = new FileUploader({
       url: 'squareUpload'
     });

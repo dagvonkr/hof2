@@ -2,7 +2,7 @@ var path = Npm.require('path');
 var fs = Npm.require('fs');
 var Fiber = Npm.require('fibers');
 
-var multer  = Npm.require('multer');
+// var multer  = Npm.require('multer');
 
 
 function processImage (aFilename) {
@@ -105,17 +105,17 @@ function onUploadReceived (aRequest, shape) {
   //   }
   // });
   // var upload = multer({ storage: storage }).array('images');
-  var upload = multer({ dest: tempDir }).any();
+//   var upload = multer({ dest: tempDir }).any();
 
-  try {
-    console.log('onUploadReceived about to multer');
-    upload(aRequest, null, function (err) {
-      console.log('multer has done something? err:', err);
-    });
-  } catch (err) {
-    console.log('Did not go well: ', err);
-  }
-};
+//   try {
+//     console.log('onUploadReceived about to multer');
+//     upload(aRequest, null, function (err) {
+//       console.log('multer has done something? err:', err);
+//     });
+//   } catch (err) {
+//     console.log('Did not go well: ', err);
+//   }
+// };
 
 
 
@@ -172,7 +172,7 @@ function onUploadReceived (aRequest, shape) {
 // } catch (err) {
 //   console.log('Did not go well: ', err);
 // }
-// };
+};
 
 Meteor.method('squareUpload', function (aRequest) {
   console.log('------------->  squareUpload Hitting received stuff!');
@@ -209,5 +209,3 @@ Meteor.method('landscapeUpload', function (aRequest) {
   }
   , httpMethod: 'POST'
 });
-
-

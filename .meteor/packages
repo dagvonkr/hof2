@@ -11,7 +11,6 @@ session                 # Client-side reactive dictionary for your app
 jquery                  # Helpful client-side library
 tracker                 # Meteor's client-side reactive programming library
 es5-shim                # ECMAScript 5 compatibility for older browsers.
-angular
 angularui:angular-ui-router
 accounts-password
 accounts-facebook
@@ -44,3 +43,8 @@ npm-container
 random
 danialfarid:ng-file-upload
 mrt:graphicsmagick
+tomi:upload-server
+tomi:upload-jquery
+tgienger:angular-dropzone
+angular-with-blaze
+urigo:angular-blaze-template

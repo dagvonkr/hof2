@@ -5,7 +5,7 @@ Meteor.publish('users', function () {
 Meteor.startup(function () {
   if ((Meteor.users.find().count() === 0) && Meteor.settings.initial) {
     Accounts.createUser({
-      ...Meteor.settings.initial.user
+      // ...Meteor.settings.initial.user
     });
   }
 });

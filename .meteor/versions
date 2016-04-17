@@ -5,8 +5,10 @@ accounts-password@1.1.7
 accounts-twitter@1.0.8
 allow-deny@1.0.3
 angular@1.3.9_2
+angular-blaze-templates-compiler@0.0.1
 angular-meteor-data@1.3.9_2
 angular-templates@1.0.2
+angular-with-blaze@1.3.9_2
 angular:angular@1.4.8
 angularjs:angular@1.3.15
 angularjs:angular-sanitize@1.3.15
@@ -20,6 +22,7 @@ base64@1.0.7
 benjamine:jsondiffpatch@0.1.38_1
 binary-heap@1.0.7
 blaze@2.1.6
+blaze-html-templates@1.0.3
 blaze-tools@1.0.7
 boilerplate-generator@1.0.7
 caching-compiler@1.0.3
@@ -112,13 +115,17 @@ standard-minifier-js@1.0.5
 stylus@2.511.4
 templating@1.1.8
 templating-tools@1.0.3
+tgienger:angular-dropzone@0.1.2
 timdown:rangy@1.2.3
 tmeasday:publish-counts@0.7.3
+tomi:upload-jquery@2.4.0
+tomi:upload-server@1.3.4
 tracker@1.0.12
 twbs:bootstrap@3.3.6
 twitter@1.1.8
 ui@1.0.10
 underscore@1.0.7
+urigo:angular-blaze-template@0.3.0
 url@1.0.8
 vitalets:angular-xeditable@0.1.9
 webapp@1.2.7
