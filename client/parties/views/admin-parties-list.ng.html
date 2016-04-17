@@ -24,7 +24,15 @@
           <input type="file" nv-file-select="" uploader="landscapeUploader" multiple  /><br/>
 
           <button type="button" class="btn btn-success btn-s" ng-click="squareUploader.uploadAll()" ng-disabled="!squareUploader.getNotUploadedItems().length">
-              <span class="glyphicon glyphicon-upload"></span> Upload all
+              <span class="glyphicon glyphicon-upload"></span> Upload square
+          </button>
+
+          <button type="button" class="btn btn-success btn-s" ng-click="portraitUploader.uploadAll()" ng-disabled="!portraitUploader.getNotUploadedItems().length">
+              <span class="glyphicon glyphicon-upload"></span> Upload portrait
+          </button>
+
+          <button type="button" class="btn btn-success btn-s" ng-click="landscapeUploader.uploadAll()" ng-disabled="!landscapeUploader.getNotUploadedItems().length">
+              <span class="glyphicon glyphicon-upload"></span> Upload landscape
           </button>
 
             <!-- Image drop tall rectangle -->

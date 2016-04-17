@@ -2,7 +2,7 @@ var path = Npm.require('path');
 var fs = Npm.require('fs');
 var Fiber = Npm.require('fibers');
 
-function onReceived(files) {
+function onReceived(files, shape) {
   console.log('------------->  We have some files!', files);
   const tempDir = path.resolve(process.cwd(), 'temp');
   console.log('temp dir is: ', tempDir);
@@ -11,10 +11,13 @@ function onReceived(files) {
   const filenameWithPath = path.join(tempDir, fileName);
   fs.writeFileSync( filenameWithPath, files[0].data );
   const imageRecord = {
-    mimeType: files[0].mimeType
+    _id: fileName
+    , mimeType: files[0].mimeType
     , filename: files[0].filename
     , encoding: files[0].encoding
     , size: files[0].data.length
+    , shape: shape
+    , uploadedAt: new Date
   };
   Fiber(function () {
     const answer = Images.insert(imageRecord);
@@ -22,9 +25,7 @@ function onReceived(files) {
   }).run();
 };
 
-Meteor.method('squareUpload', function (aRequest) {
-  console.log('------------->  squareUpload Hitting received stuff!');
-
+function onUploadReceived (aRequest, shape) {
   let files = []; // Store files in an array and then pass them to request.
   let image = {};
 
@@ -55,16 +56,46 @@ Meteor.method('squareUpload', function (aRequest) {
   busboy.on('finish', function () {
       // Pass the file array together with the request
       aRequest.files = files;
-      onReceived(files);
+      onReceived(files, shape);
   });
   // Pass request to busboy
   aRequest.pipe(busboy);
+};
 
+Meteor.method('squareUpload', function (aRequest) {
+  console.log('------------->  squareUpload Hitting received stuff!');
+  onUploadReceived(aRequest, 'square');
 }, {
-  url: 'upload'
+  url: 'squareUpload'
   , getArgsFromRequest: function (request) {
     console.log('------------->  getArgsFromRequest Hitting upload!');
     return [request];
   }
   , httpMethod: 'POST'
 });
+
+Meteor.method('portraitUpload', function (aRequest) {
+  console.log('------------->  portraitUpload Hitting received stuff!');
+  onUploadReceived(aRequest, 'portrait');
+}, {
+  url: 'portraitUpload'
+  , getArgsFromRequest: function (request) {
+    console.log('------------->  getArgsFromRequest Hitting upload!');
+    return [request];
+  }
+  , httpMethod: 'POST'
+});
+
+Meteor.method('landscapeUpload', function (aRequest) {
+  console.log('------------->  landscapeUpload Hitting received stuff!');
+  onUploadReceived(aRequest, 'landscape');
+}, {
+  url: 'landscapeUpload'
+  , getArgsFromRequest: function (request) {
+    console.log('------------->  getArgsFromRequest Hitting upload!');
+    return [request];
+  }
+  , httpMethod: 'POST'
+});
+
+
