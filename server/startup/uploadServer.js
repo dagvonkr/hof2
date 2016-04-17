@@ -18,6 +18,7 @@ Meteor.startup(function () {
       return fileInfo.name;
     },
     finished: function(fileInfo, formData) {
+      console.log('just finished, fileInfo:', fileInfo);
       if (formData && formData._id != null) {
         console.log('We can haz big uploadz');
         // Items.update({_id: formData._id}, { $push: { uploads: fileInfo }});

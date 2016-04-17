@@ -7,4 +7,10 @@ tpl.onCreated(function () {
 
 tpl.onRendered(function () {
   // console.log('I am a blaze uploader that had RRRRRRendered');
-})
+});
+
+tpl.events({
+  'click .progress-label': function (e, t) {
+    console.log('changed progress-label in', t, e);
+  }
+});

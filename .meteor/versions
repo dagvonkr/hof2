@@ -31,7 +31,6 @@ callback-hook@1.0.7
 check@1.1.3
 chrismbeckett:toastr@2.1.2_1
 dag:ngimgcropfullextended@0.0.1
-danialfarid:ng-file-upload@5.0.9
 dburles:mongo-collection-instances@0.3.4
 ddp@1.2.4
 ddp-client@1.2.4
@@ -81,7 +80,6 @@ mongo-id@1.0.3
 mongo-livedata@1.0.11
 mrt:graphicsmagick@1.12.2
 natestrauser:font-awesome@4.3.0
-netanelgilad:angular-file-upload@1.1.5
 netanelgilad:angular-sortable-view@0.0.13_1
 netanelgilad:ng-infinite-scroll@1.2.0_1
 npm-bcrypt@0.7.8_2
@@ -115,7 +113,6 @@ standard-minifier-js@1.0.5
 stylus@2.511.4
 templating@1.1.8
 templating-tools@1.0.3
-tgienger:angular-dropzone@0.1.2
 timdown:rangy@1.2.3
 tmeasday:publish-counts@0.7.3
 tomi:upload-jquery@2.4.0

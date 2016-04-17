@@ -1,21 +1,21 @@
 'use strict';
-angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', 'FileUploader', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal, FileUploader) {
+angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal) {
   $scope.initialize = function () {
 
-    $scope.squareDropzone = {
-      // url: 'squareUpload'
-    };
+    // $scope.squareDropzone = {
+    //   // url: 'squareUpload'
+    // };
 
 
-    $scope.squareUploader = new FileUploader({
-      url: 'squareUpload'
-    });
-    $scope.portraitUploader = new FileUploader({
-      url: 'portraitUpload'
-    });
-    $scope.landscapeUploader = new FileUploader({
-      url: 'landscapeUpload'
-    });
+    // $scope.squareUploader = new FileUploader({
+    //   url: 'squareUpload'
+    // });
+    // $scope.portraitUploader = new FileUploader({
+    //   url: 'portraitUpload'
+    // });
+    // $scope.landscapeUploader = new FileUploader({
+    //   url: 'landscapeUpload'
+    // });
 
     $scope.$meteorSubscribe('allParties', { sort: {createdAt: -1}}).then(function () {
       $scope.$meteorSubscribe('mainImages').then(function () {
@@ -25,20 +25,20 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       });
     $scope.reset();
 
-    $scope.squareUploader.onAfterAddingFile = function (fileItem) {
-      console.info('square uploader onAfterAddingFile', fileItem);
-      $rootScope.$emit('squareUpload', fileItem);
-    };
+    // $scope.squareUploader.onAfterAddingFile = function (fileItem) {
+    //   console.info('square uploader onAfterAddingFile', fileItem);
+    //   $rootScope.$emit('squareUpload', fileItem);
+    // };
 
-    $scope.portraitUploader.onAfterAddingFile = function (fileItem) {
-      console.info('portrait uploader onAfterAddingFile', fileItem);
-      $rootScope.$emit('portraitUpload', fileItem);
-    };
+    // $scope.portraitUploader.onAfterAddingFile = function (fileItem) {
+    //   console.info('portrait uploader onAfterAddingFile', fileItem);
+    //   $rootScope.$emit('portraitUpload', fileItem);
+    // };
 
-    $scope.landscapeUploader.onAfterAddingFile = function (fileItem) {
-      console.info('landscape uploader onAfterAddingFile', fileItem);
-      $rootScope.$emit('landscapeUpload', fileItem);
-    };
+    // $scope.landscapeUploader.onAfterAddingFile = function (fileItem) {
+    //   console.info('landscape uploader onAfterAddingFile', fileItem);
+    //   $rootScope.$emit('landscapeUpload', fileItem);
+    // };
 
   };
 

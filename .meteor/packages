@@ -34,17 +34,14 @@ standard-minifier-css
 standard-minifier-js
 meteorhacks:kadira
 
-netanelgilad:angular-file-upload
 simple:rest
 meteorhacks:npm
 
 
 npm-container
 random
-danialfarid:ng-file-upload
 mrt:graphicsmagick
 tomi:upload-server
 tomi:upload-jquery
-tgienger:angular-dropzone
 angular-with-blaze
 urigo:angular-blaze-template
