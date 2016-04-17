@@ -121,27 +121,21 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
         $scope.myCroppedImage = '';
         uploader.unbind('fileuploaddone', onDone);
       };
-      uploader.bind('fileuploaddone', onDone)
-
-      // $scope.images.save($scope.myCroppedImage).then(function (result) {
-      //   $scope.newPartyImages.push({
-      //     image: result[0]._id,
-      //     dimensions: {
-      //       height: 432,
-      //       width: 508
-      //     },
-      //     articleDescription: ''
-      //   });
-      //   $scope.imgSrc = undefined;
-      //   $scope.myCroppedImage = '';
-      // });
+      uploader.bind('fileuploaddone', onDone);
     }
   };
 
   $scope.saveRectangleImage = function () {
     if ($scope.myCroppedImage !== '') {
-      console.log('landscape wanna crop');
-
+      var blob = getBinaryBlobFromBase64($scope.myCroppedImage);
+      var uploader = $('input[type=file].jqUploadclass');
+      uploader.fileupload('send', {files: [blob]});
+      var onDone = function (e, data) {
+        $scope.imgSrc2 = undefined;
+        $scope.myCroppedImage = '';
+        uploader.unbind('fileuploaddone', onDone);
+      };
+      uploader.bind('fileuploaddone', onDone);
       // $scope.images.save($scope.myCroppedImage).then(function (result) {
       //   $scope.newPartyImages.push({
       //     image: result[0]._id,
@@ -159,7 +153,15 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
 
   $scope.saveSquareImage = function () {
     if ($scope.myCroppedImage !== '') {
-      console.log('square wanna crop');
+      var blob = getBinaryBlobFromBase64($scope.myCroppedImage);
+      var uploader = $('input[type=file].jqUploadclass');
+      uploader.fileupload('send', {files: [blob]});
+      var onDone = function (e, data) {
+        $scope.imgSrc3 = undefined;
+        $scope.myCroppedImage = '';
+        uploader.unbind('fileuploaddone', onDone);
+      };
+      uploader.bind('fileuploaddone', onDone);
       // $scope.images.save($scope.myCroppedImage).then(function (result) {
       //   $scope.newPartyImages.push({
       //     image: result[0]._id,
