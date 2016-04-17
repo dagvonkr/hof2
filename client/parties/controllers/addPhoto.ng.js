@@ -25,6 +25,28 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
 
   };
 
+  function getBinaryBlobFromBase64 (based64String) {
+    // Answers a new block fibinary data corresponding to based64String
+
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (based64String.split(',')[0].indexOf('base64') >= 0)
+      byteString = atob(based64String.split(',')[1]);
+    else
+      byteString = unescape(based64String.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = based64String.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ia], {type:mimeString});
+  };
+
   $scope.addImagesTallRectangle = function (files) {
     if (!_(files).isEmpty()) {
       $scope.portraitFile = files[0];
@@ -91,15 +113,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
 
   $scope.saveTallRectangleImage = function () {
     if ($scope.myCroppedImage !== '') {
-      var raw = $scope.myCroppedImage;
-      raw = raw.replace(/^data:image\/png;base64,/, '');
-      console.log('portrait wanna crop', raw);
-      var blob = new Blob([raw], { type: $scope.portraitFile.type });
-      // var fileOfBlob = new File([blob], $scope.portraitFile.name);
-      var wrapped = {
-        files: [blob]
-      };
-      $('input[type=file].jqUploadclass').fileupload('send', wrapped);
+      var blob = getBinaryBlobFromBase64($scope.myCroppedImage);
+      $('input[type=file].jqUploadclass').fileupload('send', {files: [blob]});
 
 
       // $scope.images.save($scope.myCroppedImage).then(function (result) {
