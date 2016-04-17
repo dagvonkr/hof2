@@ -7,8 +7,9 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
       $scope.isDisabled = true;
     };
 
-    $rootScope.$on('squareUpload', function (event) {
-      console.log('reacting to squareUpload!', event);
+    $rootScope.$on('squareUpload', function (event, fileItem) {
+      // console.log('reacting to squareUpload!', event, fileItem);
+      $scope.addImagesSquare(fileItem);
     });
   };
 
@@ -57,19 +58,16 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
     }
   };
 
-  $scope.addImagesSquare = function (files) {
-    if (files.length > 0) {
-
+  $scope.addImagesSquare = function (fileItem) {
+    if (!!fileItem) {
       let reader = new FileReader();
-
       reader.onload = function (e) {
         $scope.$apply(function () {
           $scope.imgSrc3 = e.target.result;
           $scope.myCroppedImage = '';
         });
       };
-
-      reader.readAsDataURL(files[0]);
+      reader.readAsDataURL(fileItem._file);
       // $scope.images.save(files[0]);
       $scope.isDisabled = false;
     }

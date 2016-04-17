@@ -21,7 +21,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
 
     $scope.squareUploader.onAfterAddingFile = function (fileItem) {
       console.info('square uploader onAfterAddingFile', fileItem);
-      $rootScope.$emit('squareUpload', [fileItem]);
+      $rootScope.$emit('squareUpload', fileItem);
     };
 
   };
