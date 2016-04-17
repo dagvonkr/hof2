@@ -10,12 +10,20 @@
         <br>
         <div class="image-upload">
 
-          <div class="well my-drop-zone" nv-file-over="" uploader="uploader">
+<!--           <div class="well my-drop-zone" nv-file-over="" uploader="uploader">
             Base drop zone
           </div>
-           <input type="file" nv-file-select="" uploader="uploader" multiple  /><br/>
+ -->
+          <p>square upload</p>
+          <input type="file" nv-file-select="" uploader="squareUploader" multiple  /><br/>
 
-          <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+          <p>portrait upload</p>
+          <input type="file" nv-file-select="" uploader="portraitUploader" multiple  /><br/>
+
+          <p>landscape upload</p>
+          <input type="file" nv-file-select="" uploader="landscapeUploader" multiple  /><br/>
+
+          <button type="button" class="btn btn-success btn-s" ng-click="squareUploader.uploadAll()" ng-disabled="!squareUploader.getNotUploadedItems().length">
               <span class="glyphicon glyphicon-upload"></span> Upload all
           </button>
 
@@ -40,9 +48,11 @@
 
 
             <!-- Image drop square -->
-            <div ng-hide="imgSrc3" ngf-drop ngf-select ngf-change="addImagesSquare($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box square" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
+           <!--  <div ng-hide="imgSrc3" ngf-drop ngf-select ngf-change="addImagesSquare($files)" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box square" ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
                 <div class="drop-image-square" ng-show="dropAvailable"></div>
-            </div>
+            </div> -->
+
+
             <div ng-show="imgSrc3" class="ng-crop-container-square">
                 <button ng-click="saveSquareImage() || disableButton()" ng-disabled="!imgSrc3 || isDisabled"> Save Image</button>
                 <img-crop image="imgSrc3" area-type="square" aspect-ratio="1" result-image="myCroppedImage" result-image-size='{w: 648,h: 648}'> </img-crop>

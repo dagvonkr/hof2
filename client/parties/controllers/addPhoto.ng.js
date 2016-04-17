@@ -1,11 +1,16 @@
 'use strict';
-angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
+angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+  $scope.initialize = function () {
+    // Disableing button when uploading an image
+    $scope.isDisabled = false;
+    $scope.disableButton = function() {
+      $scope.isDisabled = true;
+    };
 
-  // Disableing button when uploading an image
-  $scope.isDisabled = false;
-  $scope.disableButton = function() {
-    $scope.isDisabled = true;
-  }
+    $rootScope.$on('squareUpload', function (event) {
+      console.log('reacting to squareUpload!', event);
+    });
+  };
 
   $scope.addImagesTallRectangle = function (files) {
     if (files.length > 0) {
@@ -65,7 +70,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
       };
 
       reader.readAsDataURL(files[0]);
-      $scope.images.save(files[0]);
+      // $scope.images.save(files[0]);
       $scope.isDisabled = false;
     }
     else {
@@ -75,56 +80,59 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
 
   $scope.saveTallRectangleImage = function () {
     if ($scope.myCroppedImage !== '') {
-      $scope.images.save($scope.myCroppedImage).then(function (result) {
-        $scope.newPartyImages.push({
-          image: result[0]._id,
-          dimensions: {
-            height: 432,
-            width: 508
-          },
-          articleDescription: ''
-        });
-        $scope.imgSrc = undefined;
-        $scope.myCroppedImage = '';
-      });
+      console.log('wanna crop');
+
+      // $scope.images.save($scope.myCroppedImage).then(function (result) {
+      //   $scope.newPartyImages.push({
+      //     image: result[0]._id,
+      //     dimensions: {
+      //       height: 432,
+      //       width: 508
+      //     },
+      //     articleDescription: ''
+      //   });
+      //   $scope.imgSrc = undefined;
+      //   $scope.myCroppedImage = '';
+      // });
     }
   };
 
   $scope.saveRectangleImage = function () {
     if ($scope.myCroppedImage !== '') {
-      $scope.images.save($scope.myCroppedImage).then(function (result) {
-        $scope.newPartyImages.push({
-          image: result[0]._id,
-          dimensions: {
-            height: 432,
-            width: 247
-          },
-          articleDescription: ''
-        });
-        $scope.imgSrc2 = undefined;
-        $scope.myCroppedImage = '';
-      });
+      console.log('wanna crop');
+
+      // $scope.images.save($scope.myCroppedImage).then(function (result) {
+      //   $scope.newPartyImages.push({
+      //     image: result[0]._id,
+      //     dimensions: {
+      //       height: 432,
+      //       width: 247
+      //     },
+      //     articleDescription: ''
+      //   });
+      //   $scope.imgSrc2 = undefined;
+      //   $scope.myCroppedImage = '';
+      // });
     }
   };
 
   $scope.saveSquareImage = function () {
     if ($scope.myCroppedImage !== '') {
-      $scope.images.save($scope.myCroppedImage).then(function (result) {
-        $scope.newPartyImages.push({
-          image: result[0]._id,
-          dimensions: {
-            height: 432,
-            width: 432
-          },
-          articleDescription: ''
-        });
-        $scope.imgSrc3 = undefined;
-        $scope.myCroppedImage = '';
-      });
+      console.log('wanna crop');
+      // $scope.images.save($scope.myCroppedImage).then(function (result) {
+      //   $scope.newPartyImages.push({
+      //     image: result[0]._id,
+      //     dimensions: {
+      //       height: 432,
+      //       width: 432
+      //     },
+      //     articleDescription: ''
+      //   });
+      //   $scope.imgSrc3 = undefined;
+      //   $scope.myCroppedImage = '';
+      // });
     }
   };
-
-
 
   // $scope.deletePreviewImage = function (image) {
   //   $scope.images.remove($scope.myCroppedImage).then(function (result) {
@@ -132,7 +140,6 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', function ($scope) {
   //   });
   // };
 
-
-
+  $scope.initialize();
 }]);
 

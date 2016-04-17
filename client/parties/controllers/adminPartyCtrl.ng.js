@@ -1,9 +1,16 @@
 'use strict';
 angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', 'FileUploader', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal, FileUploader) {
   $scope.initialize = function () {
-    $scope.uploader = new FileUploader({
-      url: 'upload'
+    $scope.squareUploader = new FileUploader({
+      url: 'squareUpload'
     });
+    $scope.portraitUploader = new FileUploader({
+      url: 'portraitUpload'
+    });
+    $scope.landscapeUploader = new FileUploader({
+      url: 'landscapeUpload'
+    });
+
     $scope.$meteorSubscribe('allParties', { sort: {createdAt: -1}}).then(function () {
       $scope.$meteorSubscribe('mainImages').then(function () {
         // $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
@@ -11,6 +18,12 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
         });
       });
     $scope.reset();
+
+    $scope.squareUploader.onAfterAddingFile = function (fileItem) {
+      console.info('square uploader onAfterAddingFile', fileItem);
+      $rootScope.$emit('squareUpload', [fileItem]);
+    };
+
   };
 
   $scope.reset = function () {

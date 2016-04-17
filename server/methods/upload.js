@@ -22,8 +22,8 @@ function onReceived(files) {
   }).run();
 };
 
-Meteor.method('upload', function (aRequest) {
-  console.log('------------->  Hitting received stuff!');
+Meteor.method('squareUpload', function (aRequest) {
+  console.log('------------->  squareUpload Hitting received stuff!');
 
   let files = []; // Store files in an array and then pass them to request.
   let image = {};
