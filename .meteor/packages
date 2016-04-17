@@ -37,7 +37,6 @@ meteorhacks:kadira
 
 netanelgilad:angular-file-upload
 simple:rest
-shammar13:busboy
 meteorhacks:npm
 
 
@@ -45,3 +44,4 @@ npm-container
 random
 danialfarid:ng-file-upload
 mrt:graphicsmagick
+vpalos:multiparty
