@@ -11,18 +11,6 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
       $scope.uploader = templateContext;
     });
 
-    // $rootScope.$on('squareUpload', function (event, fileItem) {
-    //   $scope.addImagesSquare(fileItem);
-    // });
-
-    // $rootScope.$on('portraitUpload', function (event, fileItem) {
-    //   $scope.addImagesTallRectangle(fileItem);
-    // });
-
-    // $rootScope.$on('landscapeUpload', function (event, fileItem) {
-    //   $scope.addImagesRectangle(fileItem);
-    // });
-
   };
 
   function getBinaryBlobFromBase64 (base64String) {
@@ -66,35 +54,18 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
     var imageDoc = getMetadataOn(shapedImageMetadata);
     var blob = getBinaryBlobFromBase64($scope.myCroppedImage);
     var uploader = $('input[type=file].jqUploadclass');
-    var onUploadSubmit = function (e, data) {
-      data.formData = imageDoc;
-      console.log('onUploadSubmit', data.formData);
-    };
-    var onUploadStart = function (e, data) {
-      console.log('saveTallRectangleImage',data);
-      data.formData = imageDoc;
-    };
     var onDone = function (e, data) {
       $scope[selector] = undefined;
       $scope.myCroppedImage = '';
       var addedImageId = Images.insert(imageDoc);
       $scope.newPartyImages.push(addedImageId);
-      uploader
-        .unbind('fileuploadsubmit', onUploadSubmit)
-        .unbind('fileuploadsend', onUploadStart)
-        .unbind('fileuploaddone', onDone);
+      uploader.unbind('fileuploaddone', onDone);
     };
 
-    uploader
-      .bind('fileuploadsubmit', onUploadSubmit)
-      .bind('fileuploadsend', onUploadStart)
-      .bind('fileuploaddone', onDone);
-    // uploader.fileupload({formData: {example: 'test'}});
-    console.log('using imageDoc instead of example test', imageDoc);
-    uploader.fileupload({formData: imageDoc});
-    // uploader.fileupload({formData: imageDoc});
-    uploader.fileupload('send', {files: [blob]});
+    uploader.bind('fileuploaddone', onDone);
 
+    uploader.fileupload({formData: imageDoc});
+    uploader.fileupload('send', {files: [blob]});
   };
 
   $scope.addImagesTallRectangle = function (files) {
