@@ -102,6 +102,7 @@ routepolicy@1.0.9
 service-configuration@1.0.8
 session@1.1.4
 sha@1.0.6
+shammar13:busboy@1.0.1
 simple:json-routes@2.1.0
 simple:rest@1.1.1
 spacebars@1.0.10
@@ -121,6 +122,5 @@ ui@1.0.10
 underscore@1.0.7
 url@1.0.8
 vitalets:angular-xeditable@0.1.9
-vpalos:multiparty@1.0.0
 webapp@1.2.7
 webapp-hashing@1.0.8

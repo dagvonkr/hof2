@@ -45,98 +45,101 @@ function onReceived(file, shape) {
   }).run();
 };
 
-function onUploadReceived (aRequest, shape) {
-  console.log('onUploadReceived on multiparty', shape);
-  let files = []; // Store files in an array and then pass them to request.
-  let image = {};
-
-  let form = new multiparty.Form({
-    uploadDir: path.resolve(process.cwd(), 'temp')
-  });
-  let size = '';
-  let fileName = '';
-
-  try {
-
-    form.on('part', function (part) {
-      console.log('received part: ', part.filename);
-      fileName = part.filename;
-      size = part.byteCount;
-      // part.resume();
-    });
-
-    form.on('file', function (name, file) {
-      console.log(file.path);
-      console.log('filename: ' + fileName);
-      console.log('fileSize: '+ (size / 1024));
-      var tmpPath = file.path;
-      // const tempDir = path.resolve(process.cwd(), 'temp');
-
-    });
-
-    form.on('close', function () {
-        // Pass the file array together with the request
-        aRequest.files = files;
-        console.log('yay closed!');
-        // onReceived(files[0], shape);
-    });
-
-    form.parse(aRequest);
-
-  } catch (err) {
-    console.log('Did not go well: ', err);
-  }
-};
-
 // function onUploadReceived (aRequest, shape) {
-//   console.log('onUploadReceived', shape);
+//   console.log('onUploadReceived on multiparty', shape);
 //   let files = []; // Store files in an array and then pass them to request.
 //   let image = {};
 
-//   let busboy = new Busboy({ headers: aRequest.headers });
-// try {
-//   busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
-//       image.mimeType = mimetype;
-//       image.encoding = encoding;
-//       image.filename = filename;
-//       console.log('onUploadReceived metadata', image);
-//       // buffer the read chunks
-//       let buffers = [];
-
-//       file.on('data', function(data) {
-//         console.log('onUploadReceived got data');
-//         console.log('File [' + filename + '] got ' + data.length + ' bytes');
-//         buffers.push(data);
-//         data.resume();
-//       });
-
-//       // file.resume();
-
-//       file.on('end', function() {
-//           console.log('onUploadReceived started concatenating data');
-//           // concat the chunks
-//           image.data = Buffer.concat(buffers);
-//           // push the image object to the file array
-//           files.push(image);
-//           console.log('onUploadReceived finished concatenating data');
-//       });
+//   let form = new multiparty.Form({
+//     uploadDir: path.resolve(process.cwd(), 'temp')
 //   });
+//   let size = '';
+//   let fileName = '';
 
-//   busboy.on('field', function(fieldname, value) {
-//       aRequest.body[fieldname] = value;
-//   });
+//   try {
 
-//   busboy.on('finish', function () {
-//       // Pass the file array together with the request
-//       aRequest.files = files;
-//       onReceived(files[0], shape);
-//   });
-//   // Pass request to busboy
-//   aRequest.pipe(busboy);
-// } catch (err) {
-//   console.log('Did not go well: ', err);
-// }
+//     form.on('part', function (part) {
+//       console.log('received part: ', part.filename);
+//       fileName = part.filename;
+//       size = part.byteCount;
+//       // part.resume();
+//     });const tempDir = path.resolve(process.cwd(), 'temp');
+
+//     form.on('file', function (name, file) {
+//       console.log(file.path);
+//       console.log('filename: ' + fileName);
+//       console.log('fileSize: '+ (size / 1024));
+//       var tmpPath = file.path;
+//       //
+
+//     });
+
+//     form.on('close', function () {
+//         // Pass the file array together with the request
+//         aRequest.files = files;
+//         console.log('yay closed!');
+//         // onReceived(files[0], shape);
+//     });
+
+//     form.parse(aRequest);
+
+//   } catch (err) {
+//     console.log('Did not go well: ', err);
+//   }
 // };
+
+function onUploadReceived (aRequest, shape) {
+  console.log('onUploadReceived', shape);
+  let files = []; // Store files in an array and then pass them to request.
+  let image = {};
+
+  let busboy = new Busboy({ headers: aRequest.headers });
+try {
+  busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
+      image.mimeType = mimetype;
+      image.encoding = encoding;
+      image.filename = filename;
+      console.log('onUploadReceived metadata', image);
+
+      const tempDir = path.resolve(process.cwd(), 'temp');
+      let fstream = fs.createWriteStream( path.resolve(tempDir, filename) );
+      file.pipe(fstream);
+      // buffer the read chunks
+      // let buffers = [];
+
+      // file.on('data', function(data) {
+      //   console.log('onUploadReceived got data');
+      //   console.log('File [' + filename + '] got ' + data.length + ' bytes');
+      //   buffers.push(data);
+      // });
+
+      // file.resume();
+
+      file.on('end', function() {
+          console.log('onUploadReceived end');
+          // concat the chunks
+          // image.data = Buffer.concat(buffers);
+          // push the image object to the file array
+          files.push(image);
+          // console.log('onUploadReceived finished concatenating data');
+      });
+  });
+
+  busboy.on('field', function(fieldname, value) {
+      aRequest.body[fieldname] = value;
+  });
+
+  busboy.on('finish', function () {
+      // Pass the file array together with the request
+      aRequest.files = files;
+      onReceived(files[0], shape);
+  });
+  // Pass request to busboy
+  aRequest.pipe(busboy);
+} catch (err) {
+  console.log('Did not go well: ', err);
+}
+};
 
 Meteor.method('squareUpload', function (aRequest) {
   console.log('------------->  squareUpload Hitting received stuff!');
