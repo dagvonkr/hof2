@@ -25,18 +25,18 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
 
   };
 
-  function getBinaryBlobFromBase64 (based64String) {
+  function getBinaryBlobFromBase64 (base64String) {
     // Answers a new block fibinary data corresponding to based64String
 
     // convert base64/URLEncoded data component to raw binary data held in a string
     var byteString;
-    if (based64String.split(',')[0].indexOf('base64') >= 0)
-      byteString = atob(based64String.split(',')[1]);
+    if (base64String.split(',')[0].indexOf('base64') >= 0)
+      byteString = atob(base64String.split(',')[1]);
     else
-      byteString = unescape(based64String.split(',')[1]);
+      byteString = unescape(base64String.split(',')[1]);
 
     // separate out the mime component
-    var mimeString = based64String.split(',')[0].split(':')[1].split(';')[0];
+    var mimeString = base64String.split(',')[0].split(':')[1].split(';')[0];
 
     // write the bytes of the string to a typed array
     var ia = new Uint8Array(byteString.length);
@@ -44,7 +44,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
         ia[i] = byteString.charCodeAt(i);
     }
 
-    return new Blob([ia], {type:mimeString});
+    return new Blob([ia], { type: mimeString });
   };
 
   $scope.addImagesTallRectangle = function (files) {
@@ -114,8 +114,14 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
   $scope.saveTallRectangleImage = function () {
     if ($scope.myCroppedImage !== '') {
       var blob = getBinaryBlobFromBase64($scope.myCroppedImage);
-      $('input[type=file].jqUploadclass').fileupload('send', {files: [blob]});
-
+      var uploader = $('input[type=file].jqUploadclass');
+      uploader.fileupload('send', {files: [blob]});
+      var onDone = function (e, data) {
+        $scope.imgSrc = undefined;
+        $scope.myCroppedImage = '';
+        uploader.unbind('fileuploaddone', onDone);
+      };
+      uploader.bind('fileuploaddone', onDone)
 
       // $scope.images.save($scope.myCroppedImage).then(function (result) {
       //   $scope.newPartyImages.push({
