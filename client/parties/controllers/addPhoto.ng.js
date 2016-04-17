@@ -47,6 +47,17 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
     return new Blob([ia], { type: mimeString });
   };
 
+  function getMetadataOn (file) {
+    return {
+      _id: Random.id()
+      , filename: file.name
+      , size: file.x
+      , mimeType: file.type
+      , uploadedAt: new Date
+      , uploadedBy: Meteor.userId()
+    };
+  }
+
   $scope.addImagesTallRectangle = function (files) {
     if (!_(files).isEmpty()) {
       $scope.portraitFile = files[0];
@@ -94,7 +105,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
 
   $scope.addImagesSquare = function (files) {
     if (!_(files).isEmpty()) {
-      $scope.squaredFile = files[0];
+      $scope.squareFile = files[0];
       var reader = new FileReader();
       reader.onload = function (e) {
         $scope.$apply(function () {
@@ -112,16 +123,38 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
   };
 
   $scope.saveTallRectangleImage = function () {
+    var imageDoc = getMetadataOn($scope.portraitFile);
     if ($scope.myCroppedImage !== '') {
       var blob = getBinaryBlobFromBase64($scope.myCroppedImage);
       var uploader = $('input[type=file].jqUploadclass');
-      uploader.fileupload('send', {files: [blob]});
+      var onUploadSubmit = function (e, data) {
+        data.formData = imageDoc;
+        console.log('onUploadSubmit', data.formData);
+      };
+      var onUploadStart = function (e, data) {
+        console.log('saveTallRectangleImage',data);
+        data.formData = imageDoc;
+      };
       var onDone = function (e, data) {
         $scope.imgSrc = undefined;
         $scope.myCroppedImage = '';
-        uploader.unbind('fileuploaddone', onDone);
+        var addedImageId = Images.insert(imageDoc);
+        $scope.newPartyImages.push(addedImageId);
+        uploader
+          .unbind('fileuploadsubmit', onUploadSubmit)
+          .unbind('fileuploadsend', onUploadStart)
+          .unbind('fileuploaddone', onDone);
       };
-      uploader.bind('fileuploaddone', onDone);
+
+      uploader
+        .bind('fileuploadsubmit', onUploadSubmit)
+        .bind('fileuploadsend', onUploadStart)
+        .bind('fileuploaddone', onDone);
+      // uploader.fileupload({formData: {example: 'test'}});
+      console.log('using imageDoc instead of example test', imageDoc);
+      uploader.fileupload({formData: imageDoc});
+      // uploader.fileupload({formData: imageDoc});
+      uploader.fileupload('send', {files: [blob]});
     }
   };
 
@@ -129,25 +162,22 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
     if ($scope.myCroppedImage !== '') {
       var blob = getBinaryBlobFromBase64($scope.myCroppedImage);
       var uploader = $('input[type=file].jqUploadclass');
-      uploader.fileupload('send', {files: [blob]});
+      var onUploadStart = function (e, data) {
+        data.formData = getMetadataOn($scope.landscapeFile);
+        var addedImageId = Images.insert(data.formData);
+        $scope.newPartyImages.push(addedImageId);
+      };
       var onDone = function (e, data) {
         $scope.imgSrc2 = undefined;
         $scope.myCroppedImage = '';
-        uploader.unbind('fileuploaddone', onDone);
+        uploader
+          .unbind('fileuploadsend', onUploadStart)
+          .unbind('fileuploaddone', onDone);
       };
-      uploader.bind('fileuploaddone', onDone);
-      // $scope.images.save($scope.myCroppedImage).then(function (result) {
-      //   $scope.newPartyImages.push({
-      //     image: result[0]._id,
-      //     dimensions: {
-      //       height: 432,
-      //       width: 247
-      //     },
-      //     articleDescription: ''
-      //   });
-      //   $scope.imgSrc2 = undefined;
-      //   $scope.myCroppedImage = '';
-      // });
+      uploader
+        .bind('fileuploadsend', onUploadStart)
+        .bind('fileuploaddone', onDone);
+      uploader.fileupload('send', {files: [blob]});
     }
   };
 
@@ -155,25 +185,23 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
     if ($scope.myCroppedImage !== '') {
       var blob = getBinaryBlobFromBase64($scope.myCroppedImage);
       var uploader = $('input[type=file].jqUploadclass');
-      uploader.fileupload('send', {files: [blob]});
+      var onUploadStart = function (e, data) {
+        data.formData = getMetadataOn($scope.squareFile);
+        var addedImageId = Images.insert(data.formData);
+        $scope.newPartyImages.push(addedImageId);
+      };
       var onDone = function (e, data) {
         $scope.imgSrc3 = undefined;
         $scope.myCroppedImage = '';
-        uploader.unbind('fileuploaddone', onDone);
+        uploader
+          .unbind('fileuploadsend', onUploadStart)
+          .unbind('fileuploaddone', onDone);
       };
-      uploader.bind('fileuploaddone', onDone);
-      // $scope.images.save($scope.myCroppedImage).then(function (result) {
-      //   $scope.newPartyImages.push({
-      //     image: result[0]._id,
-      //     dimensions: {
-      //       height: 432,
-      //       width: 432
-      //     },
-      //     articleDescription: ''
-      //   });
-      //   $scope.imgSrc3 = undefined;
-      //   $scope.myCroppedImage = '';
-      // });
+
+      uploader
+        .bind('fileuploadsend', onUploadStart)
+        .bind('fileuploaddone', onDone);
+      uploader.fileupload('send', {files: [blob]});
     }
   };
 
