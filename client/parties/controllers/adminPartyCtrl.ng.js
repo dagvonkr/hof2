@@ -36,7 +36,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
 
   $scope.helpers({
     parties: function () {
-      return $scope.parties;
+      return Parties.find();
     }
   });
 
@@ -68,7 +68,6 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   };
 
   $scope.updateDescription = function ($data, image) {
-    debugger
     Images.update(image.image._id, {$set: {'metadata.description': $data}});
   };
 
