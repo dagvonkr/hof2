@@ -48,6 +48,16 @@ angular.module('hof2').config(['$urlRouterProvider', '$stateProvider', '$locatio
         }
       }
     })
+    .state('also-admin', {
+      url: '/admin/',
+      templateUrl: 'client/parties/views/admin-parties-list.ng.html',
+      controller: 'adminPartyCtrl',
+      resolve: {
+        'currentUser': function($meteor) {
+          return $meteor.requireUser();
+        }
+      }
+    })
     .state('admin-details', {
       url: '/admin/:partyId',
       templateUrl: 'client/parties/views/admin-party-details.ng.html',
