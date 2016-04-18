@@ -1,6 +1,8 @@
 'use strict';
 angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$stateParams', '$meteor', '$filter', '$rootScope', '$state', '$reactive', function ($scope, $stateParams, $meteor, $filter, $rootScope, $state, $reactive) {
   $scope.initialize = function () {
+    window.kk=$scope;
+    console.log('initializing adminPartyDetailsCtrl');
     $scope.$meteorSubscribe('allParties').then(function (){
       $scope.$meteorSubscribe('images').then(function () {
         $scope.addMoreItems();
@@ -29,10 +31,11 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
     , images () {
 
         var party = Parties.findOne($stateParams.partyId) || $scope.party;
-        if(!party && $scope.party) {
+        if(!party && !$scope.party) {
           console.log('we do not have a party!');
           return [];
         }
+
         var theseImageIds = _.map(party.images, function (image) { return image._id });
         return Images.find({
                 _id: {
@@ -73,8 +76,8 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
   };
 
   $scope.removeYoutubeLink = function () {
-    $scope.party.youtubeLink = null;
-    $scope.enteredYoutubeLink = null;
+    $scope.party.youtubeLink = '';
+    $scope.enteredYoutubeLink = '';
     $scope.save();
   };
 
