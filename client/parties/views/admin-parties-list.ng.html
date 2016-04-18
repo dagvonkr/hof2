@@ -64,16 +64,20 @@
         <div class="main-image-preview" sv-root sv-part="newPartyImage">
             <div sv-element ng-repeat="image in newPartyImages">
                 <!--         <button ng-click="deletePreviewImage(image)"> X </button> -->
-                <br>
-                <div style = "margin-left: 110px;">
-                    Image:
+                <div>
+                  <br>
+                  <div style = "margin-left: 110px;">
+                      Image added to processing queue: {{imageUrlFor(image._id)}}
+                  </div>
+                  <div ng-show="processedAt">
+                    <div class="main-image" ng-show="$index === 0"></div>
+                    <img draggable="false" ng-src="{{imageUrlFor(image._id)}}" />
+                  </div>
+                  <!-- <p>the image is {{image}} and imageUrlFor(image) is {{imageUrlFor(image)}}</p> -->
+                  <br>
+                  <!-- Commented out this since it doesn't really have a purpose yet -->
+                  <!-- <a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Klikk her for å legge inn spesifik informasjon om dette bilde' }}</a> -->
                 </div>
-                <div class="main-image" ng-show="$index === 0"></div>
-                <img draggable="false" ng-src="{{imageUrlFor(image)}}" />
-                <!-- <p>the image is {{image}} and imageUrlFor(image) is {{imageUrlFor(image)}}</p> -->
-                <br>
-                <!-- Commented out this since it doesn't really have a purpose yet -->
-                <!-- <a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Klikk her for å legge inn spesifik informasjon om dette bilde' }}</a> -->
             </div>
         </div>
     </div>

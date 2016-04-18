@@ -1,6 +1,7 @@
 Meteor.startup(function () {
   var mkdirp =  Npm.require('mkdirp');
   var path =  Npm.require('path');
+  var Fiber =  Npm.require('fibers');
 
   console.log('getTempDir resolved to: ', getTempDir());
   console.log('getUploadedDir resolved to: ', getUploadedDir());
@@ -50,6 +51,12 @@ Meteor.startup(function () {
     }
   };
 
+  function onImageProcessed (anImageId) {
+    Fiber(function () {
+      Images.update(anImageId, { $set: { processedAt: new Date } });
+    }).run();
+  };
+
   function processImage (aFilename) {
     // Processes and saves filenameWithPath image file into a web friendly format/quality.
     console.log('About to process: ', aFilename);
@@ -61,6 +68,7 @@ Meteor.startup(function () {
       .setFormat('jpg')
       .write(path.resolve(processedPath+'/'+aFilename), function (error) {
         if(!error) {
+          onImageProcessed(aFilename);
           return console.log('Processed: ', aFilename);
         } else {
           return console.log('Problem processing: ', sourcePath+'/'+aFilename, error);
