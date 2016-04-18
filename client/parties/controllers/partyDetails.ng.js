@@ -18,7 +18,7 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
 
   function hasVideo () {
     // Answers true if this post has a youtube link.
-    const party = Parties.findOne($stateParams.partyId);
+    var party = Parties.findOne($stateParams.partyId);
     return !!party && !!party.youtubeLink;
   };
 
@@ -27,32 +27,36 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
       return Parties.findOne($stateParams.partyId);
     }
     , images () {
-        return $scope.images;
+      return $scope.images;
     }
   });
+
+  $scope.getImageUrlOf = function (anImage) {
+    return Meteor.absoluteUrl()+'images/'+anImage._id;
+  };
 
   $scope.addMoreItems = function () {
     if ($scope.isLoadingItems) return;
 
     $scope.isLoadingItems = true;
 
-    const party = Parties.findOne();
-    if(!party) {
+    var party = Parties.findOne($stateParams.partyId) || $scope.party;
+    if(!party && !$scope.party) {
+      console.log('we do not have a party!');
       $scope.isLoadingItems = false;
       return [];
     }
 
-    const theseImageIds = _.map(party.images, image => image.id);
-
-    const query = { _id: { $in: theseImageIds } };
-    const bunch = Images.find(query, {
+    var theseImageIds = _.map(party.images, function (image) { return image._id });
+    var query = { _id: { $in: theseImageIds } };
+    var bunch = Images.find(query, {
       limit: Meteor.settings.public.perPage
       , skip: (($scope.page - 1) * Meteor.settings.public.perPage)
       , sort: {uploadedAt: 1 }
     }).fetch();
 
     bunch.forEach( function (each) {
-      if( !_($scope.images).find(function (maybeAdded){ return each.url() === maybeAdded.url()})) {
+      if( !_($scope.images).find(function (maybeAdded){ return each._id === maybeAdded._id})) {
         $scope.images.push(each);
       }
      });
@@ -60,6 +64,9 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
     $scope.isLoadingItems = false;
     $scope.page += 1;
 
+    if(!$scope.$$phase) {
+      $scope.$digest();
+    }
   };
 
   $scope.initialize();

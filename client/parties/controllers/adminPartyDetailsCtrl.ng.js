@@ -1,16 +1,20 @@
 'use strict';
 angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$stateParams', '$meteor', '$filter', '$rootScope', '$state', '$reactive', function ($scope, $stateParams, $meteor, $filter, $rootScope, $state, $reactive) {
   $scope.initialize = function () {
-    $scope.$meteorSubscribe('images');
+    window.kk=$scope;
+    console.log('initializing adminPartyDetailsCtrl');
     $scope.$meteorSubscribe('allParties').then(function (){
+      $scope.$meteorSubscribe('images').then(function () {
+        $scope.addMoreItems();
+      });
+
       if(!!$scope.currentParty) {
         $scope.enteredYoutubeLink = $scope.currentParty.youtubeLink;
       } else {
         $scope.enteredYoutubeLink = Parties.findOne($stateParams.partyId).youtubeLink;
       }
-
-      $scope.addMoreItems();
     });
+
     $scope.reset();
   };
 
@@ -25,11 +29,14 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
       return Parties.findOne($stateParams.partyId);
     }
     , images () {
-        const party = Parties.findOne($stateParams.partyId);
-        if(!party) {
+
+        var party = Parties.findOne($stateParams.partyId) || $scope.party;
+        if(!party && !$scope.party) {
+          console.log('we do not have a party!');
           return [];
         }
-        const theseImageIds = _.map(party.images, image => image.id);
+
+        var theseImageIds = _.map(party.images, function (image) { return image._id });
         return Images.find({
                 _id: {
                   $in: theseImageIds
@@ -37,6 +44,10 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
               },{sort: {uploadedAt: 1 }}).fetch();
     }
   });
+
+  $scope.getImageUrlOf = function (anImage) {
+    return Meteor.absoluteUrl()+'images/'+anImage._id;
+  };
 
   $scope.saveYoutubeLink = function () {
     // Saves the proper youtube link for an embed assuming it comes from a raw copy paste from the browser's URL.
@@ -50,11 +61,11 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
 
     if($scope.enteredYoutubeLink.match('/watch')) {
       try {
-        const parts = $scope.enteredYoutubeLink.split('/');
-        const watchPart = _(parts).find( function (each) {
+        var parts = $scope.enteredYoutubeLink.split('/');
+        var watchPart = _(parts).find( function (each) {
           return each.match('watch');
         });
-        const videoId = _(watchPart.split('v=')).last();
+        var videoId = _(watchPart.split('v=')).last();
         $scope.party.youtubeLink = 'https://www.youtube.com/embed/'+videoId;
         return $scope.save();
       } catch (e) {
@@ -65,8 +76,8 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
   };
 
   $scope.removeYoutubeLink = function () {
-    $scope.party.youtubeLink = null;
-    $scope.enteredYoutubeLink = null;
+    $scope.party.youtubeLink = '';
+    $scope.enteredYoutubeLink = '';
     $scope.save();
   };
 
@@ -88,22 +99,23 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
 
     $scope.isLoadingItems = true;
 
-    const party = Parties.findOne($stateParams.partyId);
-    if(!party) {
+    var party = Parties.findOne($stateParams.partyId) || $scope.party;
+    if(!party && !$scope.party) {
+      console.log('we do not have a party!');
       $scope.isLoadingItems = false;
       return [];
     }
 
-    const theseImageIds = _.map(party.images, image => image.id);
-    const query = { _id: { $in: theseImageIds } };
-    const bunch = Images.find(query, {
+    var theseImageIds = _.map(party.images, function (image) { return image._id });
+    var query = { _id: { $in: theseImageIds } };
+    var bunch = Images.find(query, {
       limit: Meteor.settings.public.perPage
       , skip: (($scope.page - 1) * Meteor.settings.public.perPage)
       , sort: {uploadedAt: 1 }
     }).fetch();
 
     bunch.forEach( function (each) {
-      if( !_($scope.images).find(function (maybeAdded){ return each.url() === maybeAdded.url()})) {
+      if( !_($scope.images).find(function (maybeAdded){ return each._id === maybeAdded._id})) {
         $scope.images.push(each);
       }
      });

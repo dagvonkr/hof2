@@ -53,7 +53,7 @@
 	<div class="article-description" text-angular ng-model="party.editorcontent" ta-toolbar="[['bold','italics'], ['insertLink']]" ng-blur="save()"> </div>
 
   <div class="post-youtube-wrapper">
-    <p> Legg inn Youtube link her. Videoen vil vises inne i bloggposten fra hovedsiden.</p>
+    <p> Legg inn Youtube link her:</p>
     <input
       type="text"
       class="youtube-link"
@@ -64,18 +64,25 @@
       <button ng-click="removeYoutubeLink()">Fern youtube link</button>
     </div>
     <p><strong>Youtube film som er lagt til: </strong> {{party.youtubeLink}}</p>
+
+    <div id="postVideo" class="image-detail-view" ng-show="party.youtubeLink">
+      <iframe width="560" height="315" ng-src="{{party.youtubeLink}}" frameborder="0" allowfullscreen></iframe>
+    </div>
+
   </div>
 
-  <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="isLoadingItems" infinite-scroll-distance="1">
+
+  <!-- <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="isLoadingItems" infinite-scroll-distance="1"> -->
   	<div ng-repeat="image in images" class="image-detail-view">
 
   		<div class="image-detail-view-2">
-	      <img class="image-detail" ng-src="{{image.url()}}" />
-	    </div>
+	      <img class="image-detail" ng-src="{{ getImageUrlOf(image) }}"/>
+<!--         <p>the url of the image: {{image}} {{ getImageUrlOf(image) }}</p>
+ -->	    </div>
 
 	      <!-- <a href="#" editable-text="image.articleDescription" onbeforesave="updateDescription($data, image)" class="article-description-edit">{{ image.articleDescription || 'Click here to add text' }}</a> -->
     </div>
-  </div>
+  <!-- </div> -->
 
   <div class="spinner" style="text-align:center; margin: 40px 0px;" ng-show="isLoadingItems">
     <img ng-src="/spinner.gif" style="width: 32px">

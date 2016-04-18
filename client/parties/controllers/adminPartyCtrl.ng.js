@@ -1,17 +1,21 @@
 'use strict';
 angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal) {
   $scope.initialize = function () {
-    $scope.$meteorSubscribe('allParties', { sort: {createdAt: -1}}).then(function () {
+
+    $scope.$meteorSubscribe('allParties').then(function () {
       $scope.$meteorSubscribe('mainImages').then(function () {
-        $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
         $scope.addMoreItems();
         });
       });
     $scope.reset();
+
+    $rootScope.$on('fileSelected', function (event, fileItem) {
+      console.log('fileSelected on input', fileItem);
+    });
   };
 
   $scope.reset = function () {
-    $scope.parties = [];
+    // $scope.parties = [];
     $scope.page = 0;
     $scope.isLoadingItems = false;
     $scope.resetNewParty();
@@ -28,11 +32,11 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     $scope.newParty = {
       createdAt: new Date ()
     };
-  }
+  };
 
   $scope.helpers({
     parties: function () {
-      return $scope.parties;
+      return Parties.find();
     }
   });
 
@@ -41,22 +45,23 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       $scope.newParty.owner = $rootScope.currentUser._id;
 
       // Link the images and the order to the new party
-        $scope.newParty.images = [];
-        _.forEach($scope.newPartyImages, ({image: {_id}, dimensions, articleDescription}) => {
-          $scope.newParty.images.push({
-            id: _id,
-            dimensions,
-            articleDescription
-          });
+      $scope.newParty.images = [];
+      _.forEach($scope.newPartyImages, function (object) {
+        $scope.newParty.images.push({
+          _id: object._id
+          , articleDescription: object.articleDescription
+          , mimeType: object.mimeType
+          , size: object.size
+          , uploadedAt: object.uploadedAt
+          , uploadedBy: object.uploadedBy
         });
+      });
 
       // Saving the party to parties
       $scope.newParty.createdAt = new Date;
       Parties.insert($scope.newParty);
       $scope.resetNewParty();
-    }
-
-    else {
+    } else {
       alert('Du må vente på at jeg har lastet opp bilde. Eller så har du ikke skrevet noe overskrift')
     }
 
@@ -112,18 +117,22 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   $scope.getMainImageUrlOf = function (party) {
     // Answers the url of he first image of the given party, null otherwise.
     if (!_.isEmpty(party.images)) {
-      var filtered = Images.find({_id: party.images[0].id}).fetch();
-      var answer = null;
-
       try {
-        answer = filtered[0].url();
+        return $scope.imageUrlFor(party.images[0]._id);
       } catch (anError) {
         // console.warn('Could not get url of the first image after filtering: ',filtered);
         return null;
       }
-
       return answer;
     } else {
+      return null;
+    }
+  };
+
+  $scope.imageUrlFor = function (anImageId) {
+    try {
+      return Meteor.absoluteUrl()+'images/'+anImageId;
+    } catch (e) {
       return null;
     }
   };
@@ -134,7 +143,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
 
     $scope.isLoadingItems = true;
 
-    const bunch = Parties.find({}, {
+    var bunch = Parties.find({}, {
       limit: Meteor.settings.public.perPage
       , skip: (($scope.page - 1) * Meteor.settings.public.perPage)
     }).fetch();
