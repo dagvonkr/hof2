@@ -31,10 +31,11 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
     , images () {
 
         var party = Parties.findOne($stateParams.partyId) || $scope.party;
-        if(!party && $scope.party) {
+        if(!party && !$scope.party) {
           console.log('we do not have a party!');
           return [];
         }
+
         var theseImageIds = _.map(party.images, function (image) { return image._id });
         return Images.find({
                 _id: {
