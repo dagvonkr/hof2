@@ -43,7 +43,7 @@ random
 mrt:graphicsmagick
 angular-with-blaze
 urigo:angular-blaze-template
-tomi:upload-jquery
 danialfarid:ng-file-upload
-tomi:upload-server
 williamledoux:static-server
+tomi:upload-jquery
+tomi:upload-server
