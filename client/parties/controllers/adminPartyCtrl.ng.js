@@ -2,7 +2,7 @@
 angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$rootScope', '$state', '$stateParams', '$filter', '$modal', function ($scope, $meteor, $rootScope, $state, $stateParams, $filter, $modal) {
   $scope.initialize = function () {
 
-    $scope.$meteorSubscribe('allParties', { sort: {createdAt: -1}}).then(function () {
+    $scope.$meteorSubscribe('allParties').then(function () {
       $scope.$meteorSubscribe('mainImages').then(function () {
         $scope.addMoreItems();
         });
