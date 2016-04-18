@@ -33,20 +33,26 @@
     <p class="description-details">{{party.description}}</p>
     <div class="image-detail-view-2">
 
-        <div class="article-description">
-          <div ta-bind="text" ng-model="party.editorcontent"></div>
-          <!-- {{party.editorcontent }} -->
+      <div class="article-description">
+        <div ta-bind="text" ng-model="party.editorcontent"></div>
+        <!-- {{party.editorcontent }} -->
 <!--           <span ng-bind-html="party.editorcontent | htmlToPlaintext"></span> -->
-        </div>
-
-        <div id="postVideo" class="image-detail-view" ng-show="party.youtubeLink">
-          <iframe width="560" height="315" ng-src="{{party.youtubeLink}}" frameborder="0" allowfullscreen></iframe>
-        </div>
-
-      <div ng-repeat="image in images" class="image-detail-view">
-        <img ng-src="{{image.url()}}"  class="image-detail"/>
-
       </div>
+
+      <div id="postVideo" class="image-detail-view" ng-show="party.youtubeLink">
+        <iframe width="560" height="315" ng-src="{{party.youtubeLink}}" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="isLoadingItems" infinite-scroll-distance="1">
+        <div ng-repeat="image in images" class="image-detail-view">
+          <img class="image-detail" ng-src="{{ getImageUrlOf(image) }}"/>
+          <!-- <p>the url of the image: {{image}} {{ getImageUrlOf(image) }}</p> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="spinner" style="text-align:center; margin: 40px 0px;" ng-show="isLoadingItems">
+      <img ng-src="/spinner.gif" style="width: 32px">
     </div>
   <!--   <div class="main-image">
       <img ng-src="{{mainImageUrl}}" alt="" />

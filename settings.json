@@ -1,5 +1,6 @@
 {
   "public": {
+    "perPage": 3,
     "ga": {
       "account" : "UA-74818861-2"
   	}

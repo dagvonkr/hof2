@@ -2,27 +2,27 @@
   <br>
   <label>PUBLIC</label>
   <label class="is-public">
-    <input type="checkbox" ng-model="currentParty.public">
+    <input type="checkbox" ng-model="currentParty.public" ng-change="updateSettings(currentParty)">
     <span> </span>
   </label>
   <div class="cms">
-    Top: <input ng-model="currentParty.style.header.top" id="top" type="text" placeholder="50">
+    Top: <input ng-model="currentParty.style.header.top" id="top" type="text" placeholder="50" ng-change="updateSettings(currentParty)">
   </div>
   <div class="cms">
-    Left: <input ng-model="currentParty.style.header.left" id="left" type="text" placeholder="0">
+    Left: <input ng-model="currentParty.style.header.left" id="left" type="text" placeholder="0" ng-change="updateSettings(currentParty)">
   </div>
   <div class="cms">
-    Width: <input ng-model="currentParty.style.header.width" id="width" type="text" placeholder="400">
+    Width: <input ng-model="currentParty.style.header.width" id="width" type="text" placeholder="400" ng-change="updateSettings(currentParty)">
   </div>
   <div class="cms">
-    Font-size: <input ng-model="currentParty.style.header.fontSize" id="fontSize" type="text" placeholder="50">
+    Font-size: <input ng-model="currentParty.style.header.fontSize" id="fontSize" type="text" placeholder="50" ng-change="updateSettings(currentParty)">
   </div>
 <!--   <div class="cms">
-    Rotate: <input ng-model="currentParty.style.header.rotate" id="rotate" type="text"> 
+    Rotate: <input ng-model="currentParty.style.header.rotate" id="rotate" type="text">
   </div> -->
 
   <div class="cms color-button">
-    Color: <select ng-model="currentParty.style.header.color" id="color" type="text"> 
+    Color: <select ng-model="currentParty.style.header.color" id="color" type="text" ng-change="updateSettings(currentParty)">
       <option value="#d7548">Orange</option>
       <option selected="selected" value="#2d2c2c">Black</option>
       <option value="#5b5b5b">Grey</option>
@@ -31,16 +31,16 @@
     </select>
   </div>
 
-  
+
   <div class="cms color-button">
-    Font-shadow: <select ng-model="currentParty.style.header.textShadow" id="shadow" type="text">
+    Font-shadow: <select ng-model="currentParty.style.header.textShadow" id="shadow" type="text" ng-change="updateSettings(currentParty)">
       <option value="none">None</option>
       <option value="3px 3px #2e312e">Black</option>
     </select>
   </div>
 
   <div class="cms">
-    Text-align: <select ng-model="currentParty.style.header.textAlign" id="color" type="text"> 
+    Text-align: <select ng-model="currentParty.style.header.textAlign" id="color" type="text" ng-change="updateSettings(currentParty)">
       <option value="left"> Left </option>
       <option value="center" selected="selected"> Center </option>
       <option value="right"> Right </option>

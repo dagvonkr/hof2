@@ -1,37 +1,24 @@
 'use strict';
-// <<<<<<< HEAD
-// angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$reactive', '$stateParams', function ($scope, $reactive, $stateParams) {
-//   $reactive(this).attach($scope);
-
-//   this.subscribe('users');
-//   this.subscribe('parties', () => [], () => {
-//     $scope.party = Parties.findOne({
-//       _id: $stateParams.partyId
-//     });
-//     $scope.partyImages = _.isObject($scope.party) ? $scope.party.images : [];
-//     $scope.name = $scope.party.name;
-//     $scope.description = $scope.party.description;
-//     $scope.editorcontent = $scope.party.editorcontent;
-//   });
-
-//   this.subscribe('images', () => [this.getReactively('party')], () => {
-//     const partyImages = $scope.getReactively('partyImages');
-
-//     const partyImageIds = _.map(partyImages, ({id}) => id);
-//     const images = _.filter(Images.find().fetch(), ({_id}) => _.contains(partyImageIds, _id));
-
-//     $scope.images = _.map(images, image => image.url());
-//     $scope.mainImageUrl = $scope.images[0]; // FIXME: the first image is the main one, right?
-// =======
 angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams', '$meteor', function ($scope, $stateParams, $meteor) {
   $scope.initialize = function () {
-    $scope.$meteorSubscribe('images');
-    $scope.$meteorSubscribe('parties');
+    $scope.$meteorSubscribe('party',$stateParams.partyId).then(function (){
+      $scope.$meteorSubscribe('images',$stateParams.partyId).then(function () {
+        $scope.addMoreItems();
+      });
+    });
+
+    $scope.reset();
+  };
+
+  $scope.reset = function () {
+    $scope.images = [];
+    $scope.page = 0;
+    $scope.isLoadingItems = false;
   };
 
   function hasVideo () {
     // Answers true if this post has a youtube link.
-    const party = Parties.findOne($stateParams.partyId);
+    var party = Parties.findOne($stateParams.partyId);
     return !!party && !!party.youtubeLink;
   };
 
@@ -40,20 +27,47 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
       return Parties.findOne($stateParams.partyId);
     }
     , images () {
-        const party = Parties.findOne($stateParams.partyId);
-        if(!party) {
-          return [];
-        }
+      return $scope.images;
+    }
+  });
 
-        const theseImageIds = _.map(party.images, image => image.id);
-        return Images.find({
-                _id: {
-                  $in: theseImageIds
-                }
-              }).fetch();
+  $scope.getImageUrlOf = function (anImage) {
+    return Meteor.absoluteUrl()+'images/'+anImage._id;
+  };
+
+  $scope.addMoreItems = function () {
+    if ($scope.isLoadingItems) return;
+
+    $scope.isLoadingItems = true;
+
+    var party = Parties.findOne($stateParams.partyId) || $scope.party;
+    if(!party && !$scope.party) {
+      console.log('we do not have a party!');
+      $scope.isLoadingItems = false;
+      return [];
     }
 
-  });
+    var theseImageIds = _.map(party.images, function (image) { return image._id });
+    var query = { _id: { $in: theseImageIds } };
+    var bunch = Images.find(query, {
+      limit: Meteor.settings.public.perPage
+      , skip: (($scope.page - 1) * Meteor.settings.public.perPage)
+      , sort: {uploadedAt: 1 }
+    }).fetch();
+
+    bunch.forEach( function (each) {
+      if( !_($scope.images).find(function (maybeAdded){ return each._id === maybeAdded._id})) {
+        $scope.images.push(each);
+      }
+     });
+
+    $scope.isLoadingItems = false;
+    $scope.page += 1;
+
+    if(!$scope.$$phase) {
+      $scope.$digest();
+    }
+  };
 
   $scope.initialize();
 }]);

@@ -11,10 +11,9 @@ coverage
 
 
 # Directories:
-
-public
+backups
 mup.json
-
 
 node_modules
 
+assets/dev

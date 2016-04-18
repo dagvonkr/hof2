@@ -1,6 +1,8 @@
-angular.module('hof2',['angular-meteor', 'ui.router', 'ui.bootstrap', 'ngFileUpload', 'ngImgCrop', 'xeditable', 'angular-sortable-view', 'textAngular']);
+angular.module('hof2',['angular-meteor', 'ui.router', 'ui.bootstrap', 'ngImgCrop', 'angular-sortable-view', 'xeditable', 'textAngular', 'infinite-scroll', 'ngFileUpload']);
 
 function onReady() {
+  angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 500);
+
   angular.bootstrap(document, ['hof2'], {
     strictDi: true
   });
@@ -10,7 +12,7 @@ function onReady() {
 }
 
 if (Meteor.isCordova)
-  angular.element(document).on("deviceready", onReady);
+  angular.element(document).on('deviceready', onReady);
 else
   angular.element(document).ready(onReady);
 
@@ -23,17 +25,3 @@ function initializeGA () {
   });
   }
 }
-
-
-// elastic textarea
-// $(document).ready(function(){
-// 	$('textarea').elastic();
-// 	$('textarea').trigger('update');
-// });
-
-
-// $(document).ready(function() {
-// 	$("#settings-button").draggable({
-// 	    handle: ".settings-modal"
-// 	});
-// });

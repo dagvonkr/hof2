@@ -1,20 +1,25 @@
-Meteor.publish('images', function (party) {
-  if (!party) {
+Meteor.publish('images', function (partyId) {
+  if (!partyId) {
     return Images.find({});
   } else {
-    return Images.find({
-      _id: {
-        $in: party.images
+    const party = Parties.findOne(partyId);
+    if (!party) {
+      return [];
+    } else {
+      return Images.find({
+        _id: {
+          $in: _(party.images).map(function (each) { return each._id })
+        }}
+        , { sort: { uploadedAt: -1 } });
       }
-    });
-  }
+    }
 });
 
 
 Meteor.publish('mainImages', function () {
-  let mainImagesIds = _(Parties.find().fetch()).map(function (each){
+  var mainImagesIds = _(Parties.find().fetch()).map(function (each){
     if(!_(each.images).isEmpty()) {
-      return each.images[0].id
+      return each.images[0]._id
     } else {
       return null
     }
