@@ -29,7 +29,7 @@ Meteor.startup(function () {
 
   function getTempDir () {
     if( isDeployed() ) {
-      return path.resolve(process.cwd()+'/temp/');
+      return path.resolve(process.cwd()+'/../../../temp/');
     } else {
       return path.resolve(process.cwd()+'/../../../../../assets/dev/temp/');
     }
@@ -37,7 +37,7 @@ Meteor.startup(function () {
 
   function getUploadedDir () {
     if( isDeployed() ) {
-      return path.resolve(process.cwd()+'/uploaded/');
+      return path.resolve(process.cwd()+'/../../../uploaded/');
     } else {
       return path.resolve(process.cwd()+'/../../../../../assets/dev/uploaded/');
     }
@@ -45,7 +45,7 @@ Meteor.startup(function () {
 
   function getPublishedDir () {
     if( isDeployed() ) {
-      return path.resolve(process.cwd()+'/published/');
+      return path.resolve(process.cwd()+'/../../../published/');
     } else {
       return path.resolve(process.cwd()+'/../../../../../assets/dev/published/');
     }
