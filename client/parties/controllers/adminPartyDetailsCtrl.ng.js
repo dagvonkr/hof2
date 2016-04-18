@@ -1,8 +1,6 @@
 'use strict';
 angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$stateParams', '$meteor', '$filter', '$rootScope', '$state', '$reactive', function ($scope, $stateParams, $meteor, $filter, $rootScope, $state, $reactive) {
   $scope.initialize = function () {
-    window.kk=$scope;
-    console.log('initializing adminPartyDetailsCtrl');
     $scope.$meteorSubscribe('allParties').then(function (){
       $scope.$meteorSubscribe('images').then(function () {
         $scope.addMoreItems();
