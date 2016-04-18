@@ -8,7 +8,7 @@ Meteor.publish('images', function (partyId) {
     } else {
       return Images.find({
         _id: {
-          $in: _(party.images).map(function (each) { return each.id })
+          $in: _(party.images).map(function (each) { return each._id })
         }}
         , { sort: { uploadedAt: -1 } });
       }
@@ -19,7 +19,7 @@ Meteor.publish('images', function (partyId) {
 Meteor.publish('mainImages', function () {
   var mainImagesIds = _(Parties.find().fetch()).map(function (each){
     if(!_(each.images).isEmpty()) {
-      return each.images[0].id
+      return each.images[0]._id
     } else {
       return null
     }

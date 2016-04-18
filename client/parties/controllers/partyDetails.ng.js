@@ -31,6 +31,10 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
     }
   });
 
+  $scope.getImageUrlOf = function (anImage) {
+    return Meteor.absoluteUrl()+'images/'+anImage._id;
+  };
+
   $scope.addMoreItems = function () {
     if ($scope.isLoadingItems) return;
 
@@ -42,8 +46,7 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
       return [];
     }
 
-    var theseImageIds = _.map(party.images, function (image) { image.id });
-
+    var theseImageIds = _.map(party.images, function (image) { return image._id });
     var query = { _id: { $in: theseImageIds } };
     var bunch = Images.find(query, {
       limit: Meteor.settings.public.perPage
@@ -52,7 +55,7 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
     }).fetch();
 
     bunch.forEach( function (each) {
-      if( !_($scope.images).find(function (maybeAdded){ return each.url() === maybeAdded.url()})) {
+      if( !_($scope.images).find(function (maybeAdded){ return each._id === maybeAdded._id})) {
         $scope.images.push(each);
       }
      });

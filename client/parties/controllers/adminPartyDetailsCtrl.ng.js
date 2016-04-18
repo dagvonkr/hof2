@@ -1,18 +1,19 @@
 'use strict';
 angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$stateParams', '$meteor', '$filter', '$rootScope', '$state', '$reactive', function ($scope, $stateParams, $meteor, $filter, $rootScope, $state, $reactive) {
   $scope.initialize = function () {
-    $scope.$meteorSubscribe('images');
     $scope.$meteorSubscribe('allParties').then(function (){
+      $scope.$meteorSubscribe('images').then(function () {
+        $scope.addMoreItems();
+      });
+
       if(!!$scope.currentParty) {
         $scope.enteredYoutubeLink = $scope.currentParty.youtubeLink;
       } else {
         $scope.enteredYoutubeLink = Parties.findOne($stateParams.partyId).youtubeLink;
       }
-      $scope.addMoreItems();
     });
 
     $scope.reset();
-
   };
 
   $scope.reset = function () {
@@ -30,7 +31,7 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
         if(!party) {
           return [];
         }
-        var theseImageIds = _.map(party.images, function (image) { image.id });
+        var theseImageIds = _.map(party.images, function (image) { image._id });
         return Images.find({
                 _id: {
                   $in: theseImageIds
@@ -38,6 +39,10 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
               },{sort: {uploadedAt: 1 }}).fetch();
     }
   });
+
+  $scope.getImageUrlOf = function (anImage) {
+    return Meteor.absoluteUrl()+'images/'+anImage._id;
+  };
 
   $scope.saveYoutubeLink = function () {
     // Saves the proper youtube link for an embed assuming it comes from a raw copy paste from the browser's URL.
@@ -95,7 +100,7 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
       return [];
     }
 
-    var theseImageIds = _.map(party.images, function (image) { image.id });
+    var theseImageIds = _.map(party.images, function (image) { return image._id });
     var query = { _id: { $in: theseImageIds } };
     var bunch = Images.find(query, {
       limit: Meteor.settings.public.perPage
@@ -104,7 +109,7 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
     }).fetch();
 
     bunch.forEach( function (each) {
-      if( !_($scope.images).find(function (maybeAdded){ return each.url() === maybeAdded.url()})) {
+      if( !_($scope.images).find(function (maybeAdded){ return each._id === maybeAdded._id})) {
         $scope.images.push(each);
       }
      });

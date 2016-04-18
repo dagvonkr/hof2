@@ -5,8 +5,8 @@ function processImage (aFilename) {
   // Processes and saves filenameWithPath image file into a web friendly format/quality.
   console.log('About to process: ', aFilename);
   const tempDir = path.resolve(process.cwd(), 'temp');
-  const sourcePath = path.resolve(tempDir, 'uploads');
-  const processedPath = path.resolve(tempDir, 'processed');
+  const sourcePath = path.resolve(process.cwd(), 'uploads');
+  const processedPath = path.resolve(process.cwd(), 'processed');
   gm(path.resolve(sourcePath, aFilename))
     .interlace('Line')
     .quality(100)
@@ -21,10 +21,10 @@ function processImage (aFilename) {
 };
 
 Meteor.startup(function () {
-  const tempDir = process.cwd()+'/temp';
+  const tempDir = path.resolve(process.cwd(),'temp');
   UploadServer.init({
     tmpDir: tempDir,
-    uploadDir: tempDir + '/uploads/',
+    uploadDir: path.resolve(process.cwd(), 'uploads'),
     checkCreateDirectories: true,
     getDirectory: function(fileInfo, formData) {
       // console.log('getDirectory', formData);
@@ -41,6 +41,5 @@ Meteor.startup(function () {
       Images.update(fileInfo.name, { $set: { size: fileInfo.size } });
       processImage(fileInfo.name);
     }
-
   });
 });
