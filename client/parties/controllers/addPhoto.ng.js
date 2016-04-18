@@ -39,7 +39,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
     return {
       _id: Random.id()
       , filename: file.name
-      , size: file.x
+      , size: file.size
       , mimeType: file.type
       , uploadedAt: new Date
       , uploadedBy: Meteor.userId()
@@ -57,8 +57,8 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
     var onDone = function (e, data) {
       $scope[selector] = undefined;
       $scope.myCroppedImage = '';
-      var addedImageId = Images.insert(imageDoc);
-      $scope.newPartyImages.push(addedImageId);
+      $scope.newPartyImages.push(imageDoc);
+      Images.insert(imageDoc);
       uploader.unbind('fileuploaddone', onDone);
       $scope.$digest();
     };

@@ -12,7 +12,6 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     $rootScope.$on('fileSelected', function (event, fileItem) {
       console.log('fileSelected on input', fileItem);
     });
-
   };
 
   $scope.reset = function () {
@@ -46,14 +45,17 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       $scope.newParty.owner = $rootScope.currentUser._id;
 
       // Link the images and the order to the new party
-        $scope.newParty.images = [];
-        _.forEach($scope.newPartyImages, function (object) {
-          $scope.newParty.images.push({
-            id: object._id,
-            dimensions: object.dimensions,
-            articleDescription: object.articleDescription
-          });
+      $scope.newParty.images = [];
+      _.forEach($scope.newPartyImages, function (object) {
+        $scope.newParty.images.push({
+          _id: object._id
+          , articleDescription: object.articleDescription
+          , mimeType: object.mimeType
+          , size: object.size
+          , uploadedAt: object.uploadedAt
+          , uploadedBy: object.uploadedBy
         });
+      });
 
       // Saving the party to parties
       $scope.newParty.createdAt = new Date;
@@ -66,6 +68,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   };
 
   $scope.updateDescription = function ($data, image) {
+    debugger
     Images.update(image.image._id, {$set: {'metadata.description': $data}});
   };
 
@@ -115,9 +118,8 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
   $scope.getMainImageUrlOf = function (party) {
     // Answers the url of he first image of the given party, null otherwise.
     if (!_.isEmpty(party.images)) {
-      var mainOne = Images.findOne(party.images[0]);
       try {
-        return $scope.getUrlFor(mainOne._id);
+        return $scope.imageUrlFor(party.images[0]._id);
       } catch (anError) {
         // console.warn('Could not get url of the first image after filtering: ',filtered);
         return null;
@@ -130,7 +132,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
 
   $scope.imageUrlFor = function (anImageId) {
     try {
-      return Meteor.absoluteUrl()+'/uploads/'+mainOne._id;
+      return Meteor.absoluteUrl()+'images/'+anImageId;
     } catch (e) {
       return null;
     }

@@ -20,9 +20,9 @@ angular.module('hof2').controller('PartiesListCtrl', ['$scope', '$meteor', '$fil
     }
   });
 
-  $scope.getMainImage = function (images) {
+  $scope.getMainImage = function (party) {
     try {
-      return Images.find({_id: images[0].id}).fetch()[0].url();
+      return  Meteor.absoluteUrl()+'images/'+party.images[0]._id;
     } catch (error) { }
   };
 

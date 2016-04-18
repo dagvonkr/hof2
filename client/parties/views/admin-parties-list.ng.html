@@ -70,6 +70,7 @@
                 </div>
                 <div class="main-image" ng-show="$index === 0"></div>
                 <img draggable="false" ng-src="{{imageUrlFor(image)}}" />
+                <!-- <p>the image is {{image}} and imageUrlFor(image) is {{imageUrlFor(image)}}</p> -->
                 <br>
                 <!-- Commented out this since it doesn't really have a purpose yet -->
                 <!-- <a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Klikk her for å legge inn spesifik informasjon om dette bilde' }}</a> -->
@@ -148,6 +149,7 @@
             </div>
         </a>
         <img ng-show="hasImagesOn(party)" ng-src="{{ getMainImageUrlOf(party) }}" class="main-image">
+        <!-- <p>the url of the main image: {{ getMainImageUrlOf(party) }}</p> -->
         <!-- <h2>{{party.createdAt | date:'yyyy-MM-dd HH:mm:ss'}}</h2> -->
         <!-- <div ng-if="party.images && party.images.length > 0" ng-style="getMainImage(party.images)" class="main-image">
     </div> -->
