@@ -67,11 +67,11 @@
                 <div>
                   <br>
                   <div style = "margin-left: 110px;">
-                      Image added to processing queue: {{imageUrlFor(image._id)}}
+                      Image added to processing queue: {{ getImageFilename(image) }}
                   </div>
                   <div ng-show="processedAt">
                     <div class="main-image" ng-show="$index === 0"></div>
-                    <img draggable="false" ng-src="{{imageUrlFor(image._id)}}" />
+                    <img draggable="false" ng-src="{{ imageUrlFor(image._id) }}" />
                   </div>
                   <!-- <p>the image is {{image}} and imageUrlFor(image) is {{imageUrlFor(image)}}</p> -->
                   <br>

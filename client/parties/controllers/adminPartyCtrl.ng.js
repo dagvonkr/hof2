@@ -129,6 +129,15 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     }
   };
 
+  $scope.getImageFilename = function (anImage) {
+    try {
+      return anImage.filename;
+    } catch (e) {
+      return null;
+    }
+  };
+
+
   $scope.imageUrlFor = function (anImageId) {
     try {
       return Meteor.absoluteUrl()+'images/'+anImageId;
