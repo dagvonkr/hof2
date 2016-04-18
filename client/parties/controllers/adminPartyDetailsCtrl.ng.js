@@ -27,8 +27,10 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
       return Parties.findOne($stateParams.partyId);
     }
     , images () {
-        var party = Parties.findOne($stateParams.partyId);
-        if(!party) {
+
+        var party = Parties.findOne($stateParams.partyId) || $scope.party;
+        if(!party && $scope.party) {
+          console.log('we do not have a party!');
           return [];
         }
         var theseImageIds = _.map(party.images, function (image) { return image._id });
@@ -94,8 +96,9 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
 
     $scope.isLoadingItems = true;
 
-    var party = Parties.findOne($stateParams.partyId);
-    if(!party) {
+    var party = Parties.findOne($stateParams.partyId) || $scope.party;
+    if(!party && !$scope.party) {
+      console.log('we do not have a party!');
       $scope.isLoadingItems = false;
       return [];
     }

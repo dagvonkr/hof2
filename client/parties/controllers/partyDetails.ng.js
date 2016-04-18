@@ -6,7 +6,7 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
         $scope.addMoreItems();
       });
     });
-    window.o=$scope;
+
     $scope.reset();
   };
 
@@ -40,8 +40,9 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
 
     $scope.isLoadingItems = true;
 
-    var party = Parties.findOne();
-    if(!party) {
+    var party = Parties.findOne($stateParams.partyId) || $scope.party;
+    if(!party && $scope.party) {
+      console.log('we do not have a party!');
       $scope.isLoadingItems = false;
       return [];
     }
