@@ -31,7 +31,7 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
         if(!party) {
           return [];
         }
-        var theseImageIds = _.map(party.images, function (image) { image._id });
+        var theseImageIds = _.map(party.images, function (image) { return image._id });
         return Images.find({
                 _id: {
                   $in: theseImageIds

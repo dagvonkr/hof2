@@ -6,7 +6,7 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
         $scope.addMoreItems();
       });
     });
-
+    window.o=$scope;
     $scope.reset();
   };
 
@@ -27,7 +27,7 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
       return Parties.findOne($stateParams.partyId);
     }
     , images () {
-        return $scope.images;
+      return $scope.images;
     }
   });
 
@@ -63,6 +63,9 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
     $scope.isLoadingItems = false;
     $scope.page += 1;
 
+    if(!$scope.$$phase) {
+      $scope.$digest();
+    }
   };
 
   $scope.initialize();
