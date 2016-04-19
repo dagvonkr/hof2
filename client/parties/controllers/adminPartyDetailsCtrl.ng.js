@@ -4,6 +4,7 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
     $scope.$meteorSubscribe('allParties').then(function (){
       $scope.$meteorSubscribe('images').then(function () {
         $scope.addMoreItems();
+        $scope.addMoreItems();
       });
 
       if(!!$scope.currentParty) {

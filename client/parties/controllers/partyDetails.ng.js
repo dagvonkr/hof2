@@ -4,6 +4,7 @@ angular.module('hof2').controller('PartyDetailsCtrl', ['$scope', '$stateParams',
     $scope.$meteorSubscribe('party',$stateParams.partyId).then(function (){
       $scope.$meteorSubscribe('images',$stateParams.partyId).then(function () {
         $scope.addMoreItems();
+        $scope.addMoreItems();
       });
     });
 
