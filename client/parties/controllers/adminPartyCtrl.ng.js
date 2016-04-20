@@ -9,6 +9,12 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
       });
     $scope.reset();
 
+    Parties.find().observeChanges({
+      addedBefore: function (id, doc) {
+        addParty(Parties.findOne(id));
+      }
+    });
+
     $rootScope.$on('fileSelected', function (event, fileItem) {
       console.log('fileSelected on input', fileItem);
     });
@@ -66,7 +72,6 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     } else {
       alert('Du må vente på at jeg har lastet opp bilde. Eller så har du ikke skrevet noe overskrift')
     }
-
   };
 
   $scope.updateDescription = function ($data, image) {
@@ -148,6 +153,13 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     }
   };
 
+  function addParty (aParty) {
+    // Adds aParty to the infinite scroll model ignoring repetitions.
+    if( !_($scope.parties).find(function (maybeAdded){ return aParty._id === maybeAdded._id})) {
+        $scope.parties.push(aParty);
+      }
+  };
+
   $scope.addMoreItems = function () {
 
     if ($scope.isLoadingItems) return;
@@ -160,9 +172,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     }).fetch();
 
     bunch.forEach( function (each) {
-      if( !_($scope.parties).find(function (maybeAdded){ return each._id === maybeAdded._id})) {
-        $scope.parties.push(each);
-      }
+      addParty(each);
      });
 
     $scope.isLoadingItems = false;
