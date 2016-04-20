@@ -19,6 +19,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     $scope.page = 0;
     $scope.isLoadingItems = false;
     $scope.resetNewParty();
+    $scope.previewImages = [];
   };
 
   $scope.hasImagesOn = function (party) {
