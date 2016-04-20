@@ -46,6 +46,11 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
     };
   };
 
+  function addPreview (base64Data) {
+    // Adds an element with the preview of the image of base64Data.
+    $scope.previewImages.push(base64Data);
+  };
+
   function saveImageFor (shapedImageMetadata, selector) {
     if (_($scope.myCroppedImage).isEmpty()) {
       return;
@@ -54,6 +59,7 @@ angular.module('hof2').controller('AddPhotoCtrl', ['$scope', '$rootScope', funct
     var imageDoc = getMetadataOn(shapedImageMetadata);
     var blob = getBinaryBlobFromBase64($scope.myCroppedImage);
     var uploader = $('input[type=file].jqUploadclass');
+    addPreview($scope.myCroppedImage);
     var onDone = function (e, data) {
       $scope[selector] = undefined;
       $scope.myCroppedImage = '';
