@@ -45,6 +45,7 @@ angular.module('hof2').controller('adminPartyCtrl', ['$scope', '$meteor', '$root
     if ($scope.newParty.name && ($scope.newPartyImages && $scope.newPartyImages.length > 0)) {
       $scope.newParty.owner = $rootScope.currentUser._id;
 
+      $scope.previewImages = []; // reset any preview images
       // Link the images and the order to the new party
       $scope.newParty.images = [];
       _.forEach($scope.newPartyImages, function (object) {

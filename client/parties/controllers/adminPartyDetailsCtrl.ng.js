@@ -81,7 +81,6 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
   };
 
   $scope.save = function () {
-    $scope.previewImages = []; // reset any preview images
     Parties.update($scope.party._id, {
       '$set': {
         name: $scope.party.name
