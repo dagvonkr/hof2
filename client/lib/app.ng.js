@@ -1,4 +1,4 @@
-angular.module('hof2',['angular-meteor', 'ui.router', 'ui.bootstrap', 'ngImgCrop', 'angular-sortable-view', 'xeditable', 'infinite-scroll', 'ngFileUpload']);
+angular.module('hof2',['angular-meteor', 'ui.router', 'ui.bootstrap', 'ngImgCrop', 'angular-sortable-view', 'xeditable', 'textAngular', 'infinite-scroll', 'ngFileUpload']);
 
 Meteor.GARecordPage = function (pageLocation) {
   ga('create', Meteor.settings.public.ga.account, 'auto');
