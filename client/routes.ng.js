@@ -1,4 +1,5 @@
 angular.module('hof2').run(['$rootScope', '$state', function ($rootScope, $state) {
+  angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 500);
   Blaze.$rootScope = $rootScope; // heretic hack to bridge angular with the Blaze world
 
   $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
