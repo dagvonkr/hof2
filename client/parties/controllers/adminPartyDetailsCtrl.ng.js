@@ -4,7 +4,6 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
     $scope.$meteorSubscribe('allParties').then(function (){
       $scope.$meteorSubscribe('images').then(function () {
         $scope.addMoreItems();
-        $scope.addMoreItems();
       });
 
       if(!!$scope.currentParty) {
@@ -28,19 +27,7 @@ angular.module('hof2').controller('adminPartyDetailsCtrl', ['$scope', '$statePar
       return Parties.findOne($stateParams.partyId);
     }
     , images () {
-
-        var party = Parties.findOne($stateParams.partyId) || $scope.party;
-        if(!party && !$scope.party) {
-          console.log('we do not have a party!');
-          return [];
-        }
-
-        var theseImageIds = _.map(party.images, function (image) { return image._id });
-        return Images.find({
-                _id: {
-                  $in: theseImageIds
-                }
-              },{sort: {uploadedAt: 1 }}).fetch();
+      return $scope.images;
     }
   });
 

@@ -72,7 +72,7 @@
   </div>
 
 
-  <!-- <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="isLoadingItems" infinite-scroll-distance="1"> -->
+  <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="isLoadingItems" infinite-scroll-distance="1">
   	<div ng-repeat="image in images" class="image-detail-view">
 
   		<div class="image-detail-view-2">
@@ -82,7 +82,7 @@
 
 	      <!-- <a href="#" editable-text="image.articleDescription" onbeforesave="updateDescription($data, image)" class="article-description-edit">{{ image.articleDescription || 'Click here to add text' }}</a> -->
     </div>
-  <!-- </div> -->
+  </div>
 
   <div class="spinner" style="text-align:center; margin: 40px 0px;" ng-show="isLoadingItems">
     <img ng-src="/spinner.gif" style="width: 32px">
