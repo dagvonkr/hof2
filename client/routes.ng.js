@@ -1,4 +1,7 @@
 angular.module('hof2').run(['$rootScope', '$state', function ($rootScope, $state) {
+  angular.module('infinite-scroll').value('THROTTLE_MILLISECONDS', 500);
+  Blaze.$rootScope = $rootScope; // heretic hack to bridge angular with the Blaze world
+
   $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
     // We can catch the error thrown when the $requireUser promise is rejected
     // and redirect the user back to the main page
@@ -38,6 +41,16 @@ angular.module('hof2').config(['$urlRouterProvider', '$stateProvider', '$locatio
     })
     .state('admin', {
       url: '/admin',
+      templateUrl: 'client/parties/views/admin-parties-list.ng.html',
+      controller: 'adminPartyCtrl',
+      resolve: {
+        'currentUser': function($meteor) {
+          return $meteor.requireUser();
+        }
+      }
+    })
+    .state('also-admin', {
+      url: '/admin/',
       templateUrl: 'client/parties/views/admin-parties-list.ng.html',
       controller: 'adminPartyCtrl',
       resolve: {

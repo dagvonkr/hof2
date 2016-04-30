@@ -35,7 +35,7 @@
 <div infinite-scroll="addMoreItems()" infinite-scroll-disabled="isLoadingItems" infinite-scroll-distance="1">
   <div class="post-wrapper">
 
-    <div class="post-frontpage" ng-repeat="party in parties">
+    <div class="post-frontpage" ng-repeat="party in parties | orderBy: '-createdAt' ">
       <a href="/posts/{{party._id}}">
 
       	<div class="post-header" ng-style="{
@@ -52,7 +52,7 @@
       		<!-- </div>	 -->
       	</div>
       </a>
-      <img ng-src="{{ getMainImage(party.images) }}" class="main-image">
+      <img ng-src="{{ getMainImage(party) }}" class="main-image">
       <p class="description">{{party.description}}</p>
     </div>
   </div><!-- post-wrapper -->
