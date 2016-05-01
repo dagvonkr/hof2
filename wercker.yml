@@ -33,7 +33,7 @@ build:
     - script :
         name : meteor build
         code : |
-            meteor build .
+            meteor build ./output
     - script:
         name: echo informations
         code: |
@@ -66,7 +66,7 @@ deploy:
         code: |
             pwd
             ls -la
-            scp -i $PRIVATEKEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no -r source.tar.gz prepare.sh $UNIX_USER@162.243.218.173:/home/$UNIX_USER/hof2
+            scp -i $PRIVATEKEY_PATH -o StrictHostKeyChecking=no -o UserKnownHostsFile=no -r output/source.tar.gz prepare.sh $UNIX_USER@162.243.218.173:/home/$UNIX_USER/hof2
             ssh -i $PRIVATEKEY_PATH -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $UNIX_USER@162.243.218.173 /home/$UNIX_USER/hof2/prepare.sh
     - script:
         name: start application
